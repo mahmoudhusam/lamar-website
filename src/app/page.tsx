@@ -1,14 +1,14 @@
-import Navbar from '@/components/public/Navbar'
-import HeroSection from '@/components/public/HeroSection'
-import TickerSection from '@/components/public/TickerSection'
-import ServicesSection from '@/components/public/ServicesSection'
-import AboutSection from '@/components/public/AboutSection'
-import ProcessSection from '@/components/public/ProcessSection'
-import GallerySection from '@/components/public/GallerySection'
-import TestimonialsSection from '@/components/public/TestimonialsSection'
-import ContactSection from '@/components/public/ContactSection'
-import Footer from '@/components/public/Footer'
-import RevealObserver from '@/components/public/RevealObserver'
+import Navbar from '@/components/public/Navbar';
+import HeroSection from '@/components/public/HeroSection';
+import TickerSection from '@/components/public/TickerSection';
+import ServicesSection from '@/components/public/ServicesSection';
+import AboutSection from '@/components/public/AboutSection';
+import ProcessSection from '@/components/public/ProcessSection';
+import GallerySection from '@/components/public/GallerySection';
+import TestimonialsSection from '@/components/public/TestimonialsSection';
+import ContactSection from '@/components/public/ContactSection';
+import Footer from '@/components/public/Footer';
+import RevealObserver from '@/components/public/RevealObserver';
 
 export default function Home() {
   return (
@@ -27,5 +27,5 @@ export default function Home() {
       <Footer />
       <RevealObserver />
     </>
-  )
+  );
 }

@@ -51,10 +51,10 @@ export default async function AboutSection() {
           style={{
             width: '100%',
             aspectRatio: '4/5',
+          backgroundColor: '#3A5A50',
             backgroundImage: `url('${P}/13067890/pexels-photo-13067890.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            background: 'linear-gradient(160deg,#3A8A7A 0%,#1A6050 45%,#0A2E22 100%)',
             borderRadius: 3,
             overflow: 'hidden',
             position: 'relative',

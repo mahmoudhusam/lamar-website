@@ -175,10 +175,10 @@ export default function HeroSection() {
           style={{
             position: 'absolute',
             inset: 0,
+            backgroundColor: '#2A5048',
             backgroundImage: `url('${P}/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            background: 'linear-gradient(155deg,#2A7A6E 0%,#1A5248 45%,#0A2820 100%)',
           }}
         />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, transparent 45%, var(--bg) 100%)' }} />
