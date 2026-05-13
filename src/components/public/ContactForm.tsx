@@ -1,0 +1,166 @@
+'use client'
+
+import { useState } from 'react'
+
+type Status = 'idle' | 'loading' | 'success' | 'error'
+
+const inputStyle: React.CSSProperties = {
+  background: 'transparent',
+  border: 'none',
+  borderBottom: '1px solid var(--border2)',
+  padding: '0.85rem 0',
+  width: '100%',
+  outline: 'none',
+  fontFamily: 'var(--font-outfit)',
+  fontSize: '0.95rem',
+  color: 'var(--white)',
+  fontWeight: 300,
+  transition: 'border-color 0.25s',
+}
+
+const labelStyle: React.CSSProperties = {
+  fontSize: '0.6rem',
+  letterSpacing: '0.18em',
+  textTransform: 'uppercase',
+  color: 'var(--white)',
+  fontFamily: 'var(--font-archivo)',
+  display: 'block',
+  marginBottom: '0.5rem',
+}
+
+export default function ContactForm() {
+  const [form, setForm] = useState({ name: '', phone: '', email: '', service: '', message: '' })
+  const [status, setStatus] = useState<Status>('idle')
+  const [errorMsg, setErrorMsg] = useState('')
+
+  const set = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setForm((f) => ({ ...f, [field]: e.target.value }))
+
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    e.currentTarget.style.borderBottomColor = 'var(--teal2)'
+  }
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    e.currentTarget.style.borderBottomColor = 'var(--border2)'
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    setStatus('loading')
+    setErrorMsg('')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error ?? 'Something went wrong.')
+      setStatus('success')
+    } catch (err) {
+      setErrorMsg(err instanceof Error ? err.message : 'Something went wrong.')
+      setStatus('error')
+    }
+  }
+
+  if (status === 'success') {
+    return (
+      <div style={{ padding: '3rem 0', textAlign: 'center' }}>
+        <div
+          style={{
+            width: 56,
+            height: 56,
+            borderRadius: '50%',
+            background: 'var(--teal)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: '0 auto 1.5rem',
+            fontSize: '1.5rem',
+          }}
+        >
+          ✓
+        </div>
+        <h3 style={{ fontFamily: 'var(--font-archivo)', fontWeight: 700, fontSize: '1.25rem', color: 'var(--white)', marginBottom: '0.75rem' }}>
+          Message Sent!
+        </h3>
+        <p style={{ fontSize: '0.95rem', color: 'var(--white2)', fontWeight: 300 }}>
+          Thank you for reaching out. We&apos;ll be in touch within 24 hours.
+        </p>
+      </div>
+    )
+  }
+
+  return (
+    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+        <div>
+          <label style={labelStyle}>Your Name</label>
+          <input style={inputStyle} type="text" placeholder="Jan de Vries" required value={form.name} onChange={set('name')} onFocus={handleFocus} onBlur={handleBlur} />
+        </div>
+        <div>
+          <label style={labelStyle}>Phone Number</label>
+          <input style={inputStyle} type="tel" placeholder="+31 00 000 0000" value={form.phone} onChange={set('phone')} onFocus={handleFocus} onBlur={handleBlur} />
+        </div>
+      </div>
+
+      <div>
+        <label style={labelStyle}>Email Address</label>
+        <input style={inputStyle} type="email" placeholder="jan@example.com" required value={form.email} onChange={set('email')} onFocus={handleFocus} onBlur={handleBlur} />
+      </div>
+
+      <div>
+        <label style={labelStyle}>Service Needed</label>
+        <input style={inputStyle} type="text" placeholder="Gypsum, Decoration, Painting..." value={form.service} onChange={set('service')} onFocus={handleFocus} onBlur={handleBlur} />
+      </div>
+
+      <div>
+        <label style={labelStyle}>Tell Us About Your Project</label>
+        <textarea
+          style={{ ...inputStyle, minHeight: 100, resize: 'none' }}
+          placeholder="Describe your space and what you have in mind..."
+          value={form.message}
+          onChange={set('message')}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+        />
+      </div>
+
+      {status === 'error' && (
+        <p style={{ fontSize: '0.85rem', color: '#f87171', marginTop: '-0.5rem' }}>{errorMsg}</p>
+      )}
+
+      <button
+        type="submit"
+        disabled={status === 'loading'}
+        style={{
+          background: 'var(--white)',
+          color: 'var(--bg)',
+          padding: '0.875rem 2rem',
+          fontFamily: 'var(--font-outfit)',
+          fontSize: '0.8rem',
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
+          fontWeight: 500,
+          borderRadius: 2,
+          border: 'none',
+          cursor: status === 'loading' ? 'not-allowed' : 'pointer',
+          opacity: status === 'loading' ? 0.6 : 1,
+          transition: 'background 0.2s, color 0.2s',
+          alignSelf: 'flex-start',
+        }}
+        onMouseEnter={(e) => {
+          if (status !== 'loading') {
+            e.currentTarget.style.background = 'var(--teal2)'
+            e.currentTarget.style.color = 'var(--white)'
+          }
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = 'var(--white)'
+          e.currentTarget.style.color = 'var(--bg)'
+        }}
+      >
+        {status === 'loading' ? 'Sending…' : 'Send Message'}
+      </button>
+    </form>
+  )
+}
