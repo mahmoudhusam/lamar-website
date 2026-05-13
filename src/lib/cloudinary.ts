@@ -1,9 +1,6 @@
 import { v2 as cloudinary } from 'cloudinary'
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME!,
-  api_key: process.env.CLOUDINARY_API_KEY!,
-  api_secret: process.env.CLOUDINARY_API_SECRET!,
-})
+// SDK reads CLOUDINARY_URL automatically: cloudinary://api_key:api_secret@cloud_name
+cloudinary.config({ secure: true })
 
 export { cloudinary }
