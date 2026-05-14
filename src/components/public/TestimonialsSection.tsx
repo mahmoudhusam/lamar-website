@@ -83,7 +83,7 @@ export default async function TestimonialsSection({ lang }: { lang: Lang }) {
           marginTop: '3.5rem',
         }}
       >
-        {testimonials.map((t, i) => {
+        {testimonials.map((testimonial, i) => {
           const featured = i === 1
           const delay = ['d1', 'd2', 'd3'][i]
           return (
@@ -132,7 +132,7 @@ export default async function TestimonialsSection({ lang }: { lang: Lang }) {
                 >
                   &ldquo;
                 </span>
-                {t.quote}
+                {testimonial.quote}
               </p>
 
               {/* Author */}
@@ -161,7 +161,7 @@ export default async function TestimonialsSection({ lang }: { lang: Lang }) {
                     flexShrink: 0,
                   }}
                 >
-                  {initials(t.name)}
+                  {initials(testimonial.name)}
                 </div>
                 <div>
                   <div
@@ -172,10 +172,10 @@ export default async function TestimonialsSection({ lang }: { lang: Lang }) {
                       color: 'var(--white)',
                     }}
                   >
-                    {t.name}
+                    {testimonial.name}
                   </div>
                   <div style={{ fontSize: '0.72rem', letterSpacing: '0.08em', color: 'var(--white2)', marginTop: 1 }}>
-                    {t.location}
+                    {testimonial.location}
                   </div>
                 </div>
               </div>

@@ -10,4 +10,5 @@ export async function saveLanguage(lang: string, _formData: FormData): Promise<v
     create: { id: 'default', language: lang },
   })
   revalidatePath('/admin/settings')
+  revalidatePath('/')
 }

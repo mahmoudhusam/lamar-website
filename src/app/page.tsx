@@ -11,6 +11,8 @@ import Footer from '@/components/public/Footer';
 import RevealObserver from '@/components/public/RevealObserver';
 import { getLanguage } from '@/lib/content';
 
+export const revalidate = 3600
+
 export default async function Home() {
   const lang = await getLanguage();
   return (
