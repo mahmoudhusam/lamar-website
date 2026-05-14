@@ -1,15 +1,7 @@
-const items = [
-  { label: 'Gypsum Work', accent: true },
-  { label: 'Interior Decoration', accent: false },
-  { label: 'Painting', accent: true },
-  { label: 'House Restoration', accent: false },
-  { label: 'Ceiling Plaster', accent: true },
-  { label: 'Wall Finishing', accent: false },
-  { label: 'Full Renovation', accent: true },
-  { label: 'Quality Guaranteed', accent: false },
-]
+import { t, type Lang } from '@/lib/i18n'
 
-export default function TickerSection() {
+export default function TickerSection({ lang }: { lang: Lang }) {
+  const items = t[lang].ticker
   const doubled = [...items, ...items]
 
   return (

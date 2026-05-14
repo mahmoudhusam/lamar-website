@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/prisma'
+import { t, type Lang } from '@/lib/i18n'
 
 const P = 'https://images.pexels.com/photos'
 
@@ -44,7 +45,8 @@ function ImageCell({ item, style }: { item: { url: string; caption: string; fall
   )
 }
 
-export default async function GallerySection() {
+export default async function GallerySection({ lang }: { lang: Lang }) {
+  const tr = t[lang].gallery
   const dbItems = await prisma.galleryItem.findMany({ orderBy: { order: 'asc' } }).catch(() => [])
   const useDb = dbItems.length > 0
 
@@ -61,10 +63,10 @@ export default async function GallerySection() {
         <div>
           <div style={{ fontSize: '0.63rem', letterSpacing: '0.24em', textTransform: 'uppercase', color: 'var(--teal2)', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
             <span style={{ display: 'block', width: '1.5rem', height: 1, background: 'var(--teal2)', flexShrink: 0 }} />
-            Portfolio
+            {tr.tag}
           </div>
           <h2 style={{ fontFamily: 'var(--font-archivo)', fontWeight: 800, fontSize: 'clamp(1.9rem,3vw,2.8rem)', lineHeight: 1.06, letterSpacing: '-0.01em', color: 'var(--white)', marginBottom: 0 }}>
-            Our Work
+            {tr.heading}
           </h2>
         </div>
         <a
@@ -72,19 +74,19 @@ export default async function GallerySection() {
           className="view-all"
           style={{ fontSize: '0.7rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--white2)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', paddingBottom: 2, borderBottom: '1px solid var(--border2)', transition: 'color 0.2s, border-color 0.2s' }}
         >
-          View All Projects →
+          {tr.viewAll}
         </a>
       </div>
 
       {/* Bento grid */}
-      <div className="rv d1" style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gridTemplateRows: '260px 200px 260px', gap: '0.75rem' }}>
+      <div className="rv d1 gallery-bento" style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gridTemplateRows: '260px 200px 260px', gap: '0.75rem' }}>
         <ImageCell item={imageSlots[0]} style={cellStyles[0]} />
         <ImageCell item={imageSlots[1]} style={cellStyles[1]} />
         <ImageCell item={imageSlots[2]} style={cellStyles[2]} />
         {/* Text card */}
         <div style={{ ...cellStyles[3], background: 'var(--bg3)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '1.75rem', border: '1px solid var(--border)', borderRadius: 3 }}>
-          <div style={{ fontSize: '0.6rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--white2)', marginBottom: '0.6rem', fontFamily: 'var(--font-archivo)' }}>Our Specialty</div>
-          <div style={{ fontFamily: 'var(--font-archivo)', fontWeight: 700, fontSize: '1.15rem', color: 'var(--white)', lineHeight: 1.25 }}>Precision Gypsum &amp; Bespoke Decoration</div>
+          <div style={{ fontSize: '0.6rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--white2)', marginBottom: '0.6rem', fontFamily: 'var(--font-archivo)' }}>{tr.specialtyLabel}</div>
+          <div style={{ fontFamily: 'var(--font-archivo)', fontWeight: 700, fontSize: '1.15rem', color: 'var(--white)', lineHeight: 1.25 }}>{tr.specialtyText}</div>
         </div>
         <ImageCell item={imageSlots[3]} style={cellStyles[4]} />
         <ImageCell item={imageSlots[4]} style={cellStyles[5]} />
@@ -92,7 +94,7 @@ export default async function GallerySection() {
         <ImageCell item={imageSlots[6]} style={cellStyles[7]} />
         {/* Teal CTA */}
         <div style={{ ...cellStyles[8], background: 'var(--teal)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '2rem', borderRadius: 3 }}>
-          <div style={{ fontSize: '0.66rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(242,238,230,0.75)', fontFamily: 'var(--font-archivo)' }}>Ready to start your project?</div>
+          <div style={{ fontSize: '0.66rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(242,238,230,0.75)', fontFamily: 'var(--font-archivo)' }}>{tr.ctaLabel}</div>
           <div style={{ fontFamily: 'var(--font-archivo)', fontWeight: 900, fontSize: '3.5rem', color: 'var(--white)', lineHeight: 1 }}>→</div>
         </div>
       </div>

@@ -1,0 +1,53 @@
+/* ── Responsive overrides (media queries override inline styles via !important) ── */
+
+/* ── Tablet: 768–1023px ───────────────────────────────────────────────────────── */
+@media (max-width: 1023px) {
+  nav                              { padding: 1rem 1.5rem !important; }
+  #hero                            { padding: 5rem 1.5rem 4rem !important; }
+  #services                        { padding: 5rem 1.5rem !important; }
+  #services > div:last-child       { grid-template-columns: repeat(2, 1fr) !important; }
+  #about                           { padding: 6rem 1.5rem !important; grid-template-columns: 1fr !important; gap: 3rem !important; }
+  #process                         { padding: 5rem 1.5rem !important; }
+  #our-work                        { padding: 5rem 1.5rem !important; }
+  #testimonials                    { padding: 5rem 1.5rem !important; }
+  #testimonials > div:last-child   { grid-template-columns: repeat(2, 1fr) !important; }
+  #contact                         { padding: 6rem 1.5rem !important; grid-template-columns: 1fr !important; gap: 3rem !important; }
+  footer                           { padding: 1.75rem 1.5rem !important; }
+}
+
+/* ── Mobile: < 768px ──────────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  nav                              { padding: 0.9rem 1.25rem !important; }
+
+  /* Hero: single column, hide right image panel */
+  #hero                            { grid-template-columns: 1fr !important; min-height: auto !important; padding: calc(75px + 1.5rem) 1.25rem 3rem !important; }
+  #hero > div:last-child           { display: none !important; }
+
+  /* Services: 1-col on smallest, leave as 2-col inherited from tablet */
+  #services                        { padding: 4rem 1.25rem !important; }
+  #services > div:last-child       { grid-template-columns: 1fr !important; }
+
+  /* About: 1-col */
+  #about                           { padding: 4rem 1.25rem !important; gap: 2rem !important; }
+
+  /* Process: hide connecting line, 2-col steps */
+  #process                         { padding: 4rem 1.25rem !important; }
+  #process > div:last-child        { grid-template-columns: repeat(2, 1fr) !important; gap: 2rem !important; }
+  #process > div:last-child > div:first-child { display: none !important; }
+
+  /* Gallery: flat 2-col, reset all bento positioning */
+  #our-work                        { padding: 4rem 1.25rem !important; }
+  .gallery-bento                   { grid-template-columns: repeat(2, 1fr) !important; grid-template-rows: auto !important; }
+  .gallery-bento > *               { grid-column: auto !important; grid-row: auto !important; height: 160px; min-height: 0; }
+
+  /* Testimonials: 1-col */
+  #testimonials                    { padding: 4rem 1.25rem !important; }
+  #testimonials > div:last-child   { grid-template-columns: 1fr !important; }
+
+  /* Contact: 1-col */
+  #contact                         { padding: 4rem 1.25rem !important; gap: 2rem !important; }
+
+  /* Footer: vertical stack */
+  footer                           { flex-direction: column !important; gap: 1.5rem !important; padding: 2rem 1.25rem !important; text-align: center !important; }
+  footer > ul                      { gap: 1.25rem !important; flex-wrap: wrap !important; justify-content: center !important; }
+}

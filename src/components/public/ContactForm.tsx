@@ -2,6 +2,16 @@
 
 import { useState } from 'react'
 
+interface ContactFormTr {
+  nameLbl: string; namePh: string;
+  phoneLbl: string; phonePh: string;
+  emailLbl: string; emailPh: string;
+  serviceLbl: string; servicePh: string;
+  messageLbl: string; messagePh: string;
+  send: string; sending: string;
+  successTitle: string; successMsg: string;
+}
+
 type Status = 'idle' | 'loading' | 'success' | 'error'
 
 const inputStyle: React.CSSProperties = {
@@ -28,7 +38,7 @@ const labelStyle: React.CSSProperties = {
   marginBottom: '0.5rem',
 }
 
-export default function ContactForm() {
+export default function ContactForm({ tr }: { tr: ContactFormTr }) {
   const [form, setForm] = useState({ name: '', phone: '', email: '', service: '', message: '' })
   const [status, setStatus] = useState<Status>('idle')
   const [errorMsg, setErrorMsg] = useState('')
@@ -43,7 +53,7 @@ export default function ContactForm() {
     e.currentTarget.style.borderBottomColor = 'var(--border2)'
   }
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setStatus('loading')
     setErrorMsg('')
@@ -81,10 +91,10 @@ export default function ContactForm() {
           ✓
         </div>
         <h3 style={{ fontFamily: 'var(--font-archivo)', fontWeight: 700, fontSize: '1.25rem', color: 'var(--white)', marginBottom: '0.75rem' }}>
-          Message Sent!
+          {tr.successTitle}
         </h3>
         <p style={{ fontSize: '0.95rem', color: 'var(--white2)', fontWeight: 300 }}>
-          Thank you for reaching out. We&apos;ll be in touch within 24 hours.
+          {tr.successMsg}
         </p>
       </div>
     )
@@ -94,30 +104,30 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
         <div>
-          <label style={labelStyle}>Your Name</label>
-          <input style={inputStyle} type="text" placeholder="Jan de Vries" required value={form.name} onChange={set('name')} onFocus={handleFocus} onBlur={handleBlur} />
+          <label style={labelStyle}>{tr.nameLbl}</label>
+          <input style={inputStyle} type="text" placeholder={tr.namePh} required value={form.name} onChange={set('name')} onFocus={handleFocus} onBlur={handleBlur} />
         </div>
         <div>
-          <label style={labelStyle}>Phone Number</label>
-          <input style={inputStyle} type="tel" placeholder="+31 00 000 0000" value={form.phone} onChange={set('phone')} onFocus={handleFocus} onBlur={handleBlur} />
+          <label style={labelStyle}>{tr.phoneLbl}</label>
+          <input style={inputStyle} type="tel" placeholder={tr.phonePh} value={form.phone} onChange={set('phone')} onFocus={handleFocus} onBlur={handleBlur} />
         </div>
       </div>
 
       <div>
-        <label style={labelStyle}>Email Address</label>
-        <input style={inputStyle} type="email" placeholder="jan@example.com" required value={form.email} onChange={set('email')} onFocus={handleFocus} onBlur={handleBlur} />
+        <label style={labelStyle}>{tr.emailLbl}</label>
+        <input style={inputStyle} type="email" placeholder={tr.emailPh} required value={form.email} onChange={set('email')} onFocus={handleFocus} onBlur={handleBlur} />
       </div>
 
       <div>
-        <label style={labelStyle}>Service Needed</label>
-        <input style={inputStyle} type="text" placeholder="Gypsum, Decoration, Painting..." value={form.service} onChange={set('service')} onFocus={handleFocus} onBlur={handleBlur} />
+        <label style={labelStyle}>{tr.serviceLbl}</label>
+        <input style={inputStyle} type="text" placeholder={tr.servicePh} value={form.service} onChange={set('service')} onFocus={handleFocus} onBlur={handleBlur} />
       </div>
 
       <div>
-        <label style={labelStyle}>Tell Us About Your Project</label>
+        <label style={labelStyle}>{tr.messageLbl}</label>
         <textarea
           style={{ ...inputStyle, minHeight: 100, resize: 'none' }}
-          placeholder="Describe your space and what you have in mind..."
+          placeholder={tr.messagePh}
           value={form.message}
           onChange={set('message')}
           onFocus={handleFocus}
@@ -159,7 +169,7 @@ export default function ContactForm() {
           e.currentTarget.style.color = 'var(--bg)'
         }}
       >
-        {status === 'loading' ? 'Sending…' : 'Send Message'}
+        {status === 'loading' ? tr.sending : tr.send}
       </button>
     </form>
   )

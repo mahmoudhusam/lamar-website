@@ -9,22 +9,24 @@ import TestimonialsSection from '@/components/public/TestimonialsSection';
 import ContactSection from '@/components/public/ContactSection';
 import Footer from '@/components/public/Footer';
 import RevealObserver from '@/components/public/RevealObserver';
+import { getLanguage } from '@/lib/content';
 
-export default function Home() {
+export default async function Home() {
+  const lang = await getLanguage();
   return (
     <>
-      <Navbar />
+      <Navbar lang={lang} />
       <main>
-        <HeroSection />
-        <TickerSection />
-        <ServicesSection />
-        <AboutSection />
-        <ProcessSection />
-        <GallerySection />
-        <TestimonialsSection />
-        <ContactSection />
+        <HeroSection lang={lang} />
+        <TickerSection lang={lang} />
+        <ServicesSection lang={lang} />
+        <AboutSection lang={lang} />
+        <ProcessSection lang={lang} />
+        <GallerySection lang={lang} />
+        <TestimonialsSection lang={lang} />
+        <ContactSection lang={lang} />
       </main>
-      <Footer />
+      <Footer lang={lang} />
       <RevealObserver />
     </>
   );

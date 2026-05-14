@@ -1,29 +1,9 @@
-const steps = [
-  {
-    num: '01',
-    title: 'Free Consultation',
-    desc: 'We visit your space, listen to your vision, and assess exactly what needs to be done — no obligation, no pressure.',
-  },
-  {
-    num: '02',
-    title: 'Clear Quote',
-    desc: 'You receive a detailed, transparent quote within 48 hours. No hidden costs, no surprises — just an honest breakdown of the work.',
-  },
-  {
-    num: '03',
-    title: 'We Get to Work',
-    desc: 'Our team arrives on schedule, works cleanly and efficiently, and keeps you informed throughout every stage of the project.',
-  },
-  {
-    num: '04',
-    title: 'Final Handover',
-    desc: 'We do a walkthrough together, make sure everything meets your expectations, and only leave when you\'re fully satisfied.',
-  },
-]
+import { t, type Lang } from '@/lib/i18n'
 
-const delays = ['d1', 'd2', 'd3', 'd4']
+export default function ProcessSection({ lang }: { lang: Lang }) {
+  const tr = t[lang].process
+  const delays = ['d1', 'd2', 'd3', 'd4']
 
-export default function ProcessSection() {
   return (
     <section id="process" style={{ padding: '8rem 3.5rem', background: 'var(--bg)' }}>
       <div className="rv">
@@ -40,7 +20,7 @@ export default function ProcessSection() {
           }}
         >
           <span style={{ display: 'block', width: '1.5rem', height: 1, background: 'var(--teal2)', flexShrink: 0 }} />
-          Our Approach
+          {tr.tag}
         </div>
         <h2
           style={{
@@ -52,7 +32,7 @@ export default function ProcessSection() {
             color: 'var(--white)',
           }}
         >
-          How We <span style={{ color: 'var(--teal2)' }}>Work</span>
+          {tr.heading} <span style={{ color: 'var(--teal2)' }}>{tr.headingTeal}</span>
         </h2>
       </div>
 
@@ -78,7 +58,7 @@ export default function ProcessSection() {
           }}
         />
 
-        {steps.map((step, i) => (
+        {tr.steps.map((step, i) => (
           <div
             key={step.num}
             className={`rv ${delays[i]}`}

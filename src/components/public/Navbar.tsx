@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { t, type Lang } from '@/lib/i18n'
 
 const LogoMark = ({ size = 32 }: { size?: number }) => (
   <svg width={size} height={Math.round(size * 0.875)} viewBox="0 0 120 100">
@@ -19,7 +20,8 @@ const LogoMark = ({ size = 32 }: { size?: number }) => (
   </svg>
 )
 
-export default function Navbar() {
+export default function Navbar({ lang }: { lang: Lang }) {
+  const tr = t[lang].nav
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -39,6 +41,19 @@ export default function Navbar() {
     setMenuOpen(next)
     document.body.style.overflow = next ? 'hidden' : ''
   }
+
+  const desktopLinks = [
+    { label: tr.about,    href: '#about'    },
+    { label: tr.services, href: '#services' },
+    { label: tr.ourWork,  href: '#our-work' },
+  ]
+
+  const mobileLinks = [
+    { label: tr.about,    href: '#about'        },
+    { label: tr.services, href: '#services'     },
+    { label: tr.ourWork,  href: '#our-work'     },
+    { label: tr.reviews,  href: '#testimonials' },
+  ]
 
   return (
     <>
@@ -94,10 +109,10 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-10">
-          {(['About', 'Services', 'Our Work'] as const).map((label) => (
+          {desktopLinks.map(({ label, href }) => (
             <a
-              key={label}
-              href={`#${label.toLowerCase().replace(' ', '-')}`}
+              key={href}
+              href={href}
               style={{
                 textDecoration: 'none',
                 fontSize: '0.78rem',
@@ -132,14 +147,14 @@ export default function Navbar() {
             onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--teal2)')}
             onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--teal)')}
           >
-            Contact Us
+            {tr.contactUs}
           </a>
         </div>
 
         {/* Hamburger */}
         <button
           onClick={toggleMenu}
-          className="flex md:hidden flex-col gap-[5px] cursor-pointer p-1 bg-transparent border-none"
+          className="flex md:hidden flex-col gap-1.25 cursor-pointer p-1 bg-transparent border-none"
           aria-label="Menu"
           style={{ zIndex: 210 }}
         >
@@ -195,14 +210,9 @@ export default function Navbar() {
             gap: '2rem',
           }}
         >
-          {[
-            { label: 'About', href: '#about' },
-            { label: 'Services', href: '#services' },
-            { label: 'Our Work', href: '#our-work' },
-            { label: 'Reviews', href: '#testimonials' },
-          ].map(({ label, href }) => (
+          {mobileLinks.map(({ label, href }) => (
             <a
-              key={label}
+              key={href}
               href={href}
               onClick={closeMenu}
               style={{
@@ -241,7 +251,7 @@ export default function Navbar() {
             onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--teal2)')}
             onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--teal)')}
           >
-            Contact Us
+            {tr.contactUs}
           </a>
         </div>
       )}

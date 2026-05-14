@@ -1,6 +1,10 @@
+import { t, type Lang } from '@/lib/i18n'
+
 const P = 'https://images.pexels.com/photos'
 
-export default function HeroSection() {
+export default function HeroSection({ lang }: { lang: Lang }) {
+  const tr = t[lang].hero
+
   return (
     <section
       id="hero"
@@ -39,7 +43,7 @@ export default function HeroSection() {
           }}
         >
           <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--teal2)', flexShrink: 0 }} />
-          Renovation &amp; Decoration Specialists
+          {tr.tag}
         </div>
 
         {/* Title */}
@@ -56,11 +60,11 @@ export default function HeroSection() {
             marginBottom: '2.5rem',
           }}
         >
-          We Build
+          {tr.h1a}
           <br />
-          <span style={{ color: 'var(--teal2)' }}>Spaces</span>
+          <span style={{ color: 'var(--teal2)' }}>{tr.h1b}</span>
           <br />
-          <span>That Last.</span>
+          <span>{tr.h1c}</span>
         </h1>
 
         {/* Description */}
@@ -75,8 +79,7 @@ export default function HeroSection() {
             marginBottom: '2.5rem',
           }}
         >
-          Gypsum work, interior decoration, painting, and full house restoration —
-          delivered with craftsmanship that speaks for itself.
+          {tr.desc}
         </p>
 
         {/* CTAs */}
@@ -99,7 +102,7 @@ export default function HeroSection() {
               transition: 'background 0.2s, color 0.2s',
             }}
           >
-            See Our Work
+            {tr.seeWork}
           </a>
           <a
             href="#contact"
@@ -119,7 +122,7 @@ export default function HeroSection() {
               transition: 'border-color 0.2s, color 0.2s',
             }}
           >
-            Get a Quote
+            {tr.getQuote}
           </a>
         </div>
 
@@ -135,9 +138,9 @@ export default function HeroSection() {
           }}
         >
           {[
-            { n: '200+', l: 'Projects Done' },
-            { n: '12+', l: 'Years Active' },
-            { n: '100%', l: 'Satisfaction' },
+            { n: '200+', l: tr.statProjects },
+            { n: '12+',  l: tr.statYears    },
+            { n: '100%', l: tr.statSatisfaction },
           ].map(({ n, l }) => (
             <div key={l}>
               <span
@@ -185,7 +188,7 @@ export default function HeroSection() {
         <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '35%', background: 'linear-gradient(to top, var(--bg) 0%, transparent 100%)' }} />
         <div style={{ position: 'absolute', bottom: '3rem', left: '2rem', right: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
           <span style={{ fontSize: '0.6rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(242,238,230,0.35)' }}>
-            Premium Renovation Work
+            {tr.badge}
           </span>
           <span style={{ background: 'var(--teal)', color: 'var(--white)', fontSize: '0.65rem', letterSpacing: '0.12em', textTransform: 'uppercase', padding: '0.45rem 1rem', borderRadius: 2, fontFamily: 'var(--font-archivo)', fontWeight: 500 }}>
             Est. 2013

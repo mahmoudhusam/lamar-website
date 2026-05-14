@@ -42,6 +42,14 @@ export async function uploadImage(_prev: UploadState, formData: FormData): Promi
 }
 
 export async function deleteImage(id: string): Promise<void> {
+  const item = await prisma.galleryItem.findUnique({ where: { id } })
+  if (item) {
+    const match = item.url.match(/\/upload\/(?:v\d+\/)?(.+)$/)
+    if (match) {
+      const publicId = match[1].replace(/\.[^.]+$/, '')
+      await cloudinary.uploader.destroy(publicId).catch(() => {})
+    }
+  }
   await prisma.galleryItem.delete({ where: { id } })
   revalidatePath('/admin/gallery')
   revalidatePath('/')

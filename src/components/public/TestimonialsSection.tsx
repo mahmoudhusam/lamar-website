@@ -1,4 +1,5 @@
 import { getContentMany } from '@/lib/content'
+import { t, type Lang } from '@/lib/i18n'
 
 interface Testimonial {
   quote: string
@@ -8,7 +9,7 @@ interface Testimonial {
 
 const fallbacks: Testimonial[] = [
   {
-    quote: 'The gypsum ceiling work they did in our living room is absolutely stunning. Clean, precise, and finished ahead of schedule. We couldn\'t be happier with the result.',
+    quote: "The gypsum ceiling work they did in our living room is absolutely stunning. Clean, precise, and finished ahead of schedule. We couldn't be happier with the result.",
     name: 'Jan de Vries',
     location: 'Amsterdam, NL',
   },
@@ -18,7 +19,7 @@ const fallbacks: Testimonial[] = [
     location: 'Rotterdam, NL',
   },
   {
-    quote: 'They restored our 1960s home beautifully — walls, ceilings, painting, everything. The attention to detail was remarkable. Will definitely use LAMAR again for our next project.',
+    quote: "They restored our 1960s home beautifully — walls, ceilings, painting, everything. The attention to detail was remarkable. Will definitely use LAMAR again for our next project.",
     name: 'Mark Timmers',
     location: 'Utrecht, NL',
   },
@@ -33,7 +34,8 @@ function parse(raw: string | undefined, fallback: Testimonial): Testimonial {
   try { return JSON.parse(raw) as Testimonial } catch { return fallback }
 }
 
-export default async function TestimonialsSection() {
+export default async function TestimonialsSection({ lang }: { lang: Lang }) {
+  const tr = t[lang].testimonials
   const content = await getContentMany(['testimonial_1', 'testimonial_2', 'testimonial_3'])
   const testimonials = [
     parse(content['testimonial_1'], fallbacks[0]),
@@ -57,7 +59,7 @@ export default async function TestimonialsSection() {
           }}
         >
           <span style={{ display: 'block', width: '1.5rem', height: 1, background: 'var(--teal2)', flexShrink: 0 }} />
-          Client Reviews
+          {tr.tag}
         </div>
         <h2
           style={{
@@ -69,7 +71,7 @@ export default async function TestimonialsSection() {
             color: 'var(--white)',
           }}
         >
-          What Our <span style={{ color: 'var(--teal2)' }}>Clients Say</span>
+          {tr.heading} <span style={{ color: 'var(--teal2)' }}>{tr.headingTeal}</span>
         </h2>
       </div>
 

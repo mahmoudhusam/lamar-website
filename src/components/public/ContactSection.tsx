@@ -1,4 +1,5 @@
 import { getContentMany } from '@/lib/content'
+import { t, type Lang } from '@/lib/i18n'
 import ContactForm from './ContactForm'
 
 const contactFallbacks: Record<string, string> = {
@@ -9,15 +10,8 @@ const contactFallbacks: Record<string, string> = {
   contact_hours:     'Mon – Sat · 08:00 – 18:00',
 }
 
-const contactLabels: Record<string, string> = {
-  contact_phone:    'Phone',
-  contact_whatsapp: 'WhatsApp',
-  contact_email:    'Email',
-  contact_location: 'Location',
-  contact_hours:    'Working Hours',
-}
-
-export default async function ContactSection() {
+export default async function ContactSection({ lang }: { lang: Lang }) {
+  const tr = t[lang].contact
   const content = await getContentMany(Object.keys(contactFallbacks))
 
   return (
@@ -48,7 +42,7 @@ export default async function ContactSection() {
           }}
         >
           <span style={{ display: 'block', width: '1.5rem', height: 1, background: 'var(--teal2)', flexShrink: 0 }} />
-          Get in Touch
+          {tr.tag}
         </div>
 
         <h2
@@ -64,11 +58,11 @@ export default async function ContactSection() {
             textTransform: 'uppercase',
           }}
         >
-          LET&apos;S BUILD
+          {tr.h1}
           <br />
-          <span style={{ color: 'var(--teal2)' }}>SOMETHING</span>
+          <span style={{ color: 'var(--teal2)' }}>{tr.h2}</span>
           <br />
-          GREAT.
+          {tr.h3}
         </h2>
 
         <div className="rv d2" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -84,7 +78,7 @@ export default async function ContactSection() {
                   fontFamily: 'var(--font-archivo)',
                 }}
               >
-                {contactLabels[key]}
+                {tr.labels[key] ?? key}
               </div>
               <div style={{ fontSize: '0.95rem', color: 'var(--white)', fontWeight: 300 }}>
                 {content[key] ?? contactFallbacks[key]}
@@ -96,7 +90,7 @@ export default async function ContactSection() {
 
       {/* Right — form */}
       <div className="rv d2">
-        <ContactForm />
+        <ContactForm tr={t[lang].contactForm} />
       </div>
     </section>
   )

@@ -1,3 +1,5 @@
+import { t, type Lang } from '@/lib/i18n'
+
 const LogoMark = () => (
   <svg width="26" height="22" viewBox="0 0 120 100">
     <polygon points="0,90 55,5 95,5 70,90" fill="#A0A0A0" />
@@ -8,14 +10,9 @@ const LogoMark = () => (
   </svg>
 )
 
-const links = [
-  { label: 'About',    href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Our Work', href: '#our-work' },
-  { label: 'Contact',  href: '#contact' },
-]
+export default function Footer({ lang }: { lang: Lang }) {
+  const tr = t[lang].footer
 
-export default function Footer() {
   return (
     <footer style={{ background: 'var(--bg2)', borderTop: '1px solid var(--border)', padding: '1.75rem 3.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
       <a href="#hero" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
@@ -27,8 +24,8 @@ export default function Footer() {
       </a>
 
       <ul style={{ display: 'flex', gap: '2rem', listStyle: 'none', margin: 0, padding: 0 }}>
-        {links.map(({ label, href }) => (
-          <li key={label}>
+        {tr.links.map(({ label, href }) => (
+          <li key={href}>
             <a href={href} className="footer-link" style={{ fontSize: '0.68rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--white2)', textDecoration: 'none', transition: 'color 0.2s' }}>
               {label}
             </a>
@@ -37,7 +34,7 @@ export default function Footer() {
       </ul>
 
       <span style={{ fontSize: '0.68rem', color: 'rgba(242,238,230,0.2)', fontFamily: 'var(--font-archivo)' }}>
-        © 2025 LAMAR Renovation &amp; Decoration. All rights reserved.
+        {tr.copy}
       </span>
     </footer>
   )
