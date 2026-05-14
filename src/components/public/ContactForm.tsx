@@ -102,7 +102,7 @@ export default function ContactForm({ tr }: { tr: ContactFormTr }) {
 
   return (
     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+      <div className="contact-name-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
         <div>
           <label style={labelStyle}>{tr.nameLbl}</label>
           <input style={inputStyle} type="text" placeholder={tr.namePh} required value={form.name} onChange={set('name')} onFocus={handleFocus} onBlur={handleBlur} />

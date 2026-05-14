@@ -47,6 +47,7 @@ export default function ProcessSection({ lang }: { lang: Lang }) {
       >
         {/* Connecting line */}
         <div
+          className="process-line"
           style={{
             position: 'absolute',
             top: 28,

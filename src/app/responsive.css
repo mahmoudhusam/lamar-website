@@ -1,3 +1,13 @@
+/* ── Global overflow guard ─────────────────────────────────────────────────── */
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+section, footer, nav {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 /* ── Responsive overrides (media queries override inline styles via !important) ── */
 
 /* ── Tablet: 768–1023px ───────────────────────────────────────────────────────── */
@@ -19,33 +29,35 @@
 @media (max-width: 767px) {
   nav                              { padding: 0.9rem 1.25rem !important; }
 
-  /* Hero: single column, hide right image panel */
-  #hero                            { grid-template-columns: 1fr !important; min-height: auto !important; padding: calc(75px + 1.5rem) 1.25rem 3rem !important; }
-  #hero > div:last-child           { display: none !important; }
+  /* Hero: single column, no ghost column, hide right panel */
+  #hero                            { grid-template-columns: 1fr !important; overflow: hidden !important; min-height: auto !important; padding: calc(75px + 1.5rem) 1.25rem 3rem !important; }
+  #hero > *:last-child             { display: none !important; width: 0 !important; }
 
-  /* Services: 1-col on smallest, leave as 2-col inherited from tablet */
+  /* Services: 1-col */
   #services                        { padding: 4rem 1.25rem !important; }
   #services > div:last-child       { grid-template-columns: 1fr !important; }
 
-  /* About: 1-col */
+  /* About: 1-col, hide image/badges panel */
   #about                           { padding: 4rem 1.25rem !important; gap: 2rem !important; }
+  #about > div:last-child          { display: none !important; }
 
   /* Process: hide connecting line, 2-col steps */
   #process                         { padding: 4rem 1.25rem !important; }
   #process > div:last-child        { grid-template-columns: repeat(2, 1fr) !important; gap: 2rem !important; }
-  #process > div:last-child > div:first-child { display: none !important; }
+  .process-line                    { display: none !important; }
 
   /* Gallery: flat 2-col, reset all bento positioning */
   #our-work                        { padding: 4rem 1.25rem !important; }
-  .gallery-bento                   { grid-template-columns: repeat(2, 1fr) !important; grid-template-rows: auto !important; }
-  .gallery-bento > *               { grid-column: auto !important; grid-row: auto !important; height: 160px; min-height: 0; }
+  .gallery-bento                   { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; grid-template-rows: none !important; grid-auto-rows: 160px !important; }
+  .gallery-bento > *               { grid-column: auto !important; grid-row: auto !important; height: 160px !important; min-height: 0 !important; }
 
   /* Testimonials: 1-col */
   #testimonials                    { padding: 4rem 1.25rem !important; }
   #testimonials > div:last-child   { grid-template-columns: 1fr !important; }
 
-  /* Contact: 1-col */
+  /* Contact: 1-col, name+phone stack */
   #contact                         { padding: 4rem 1.25rem !important; gap: 2rem !important; }
+  .contact-name-row                { grid-template-columns: 1fr !important; }
 
   /* Footer: vertical stack */
   footer                           { flex-direction: column !important; gap: 1.5rem !important; padding: 2rem 1.25rem !important; text-align: center !important; }
