@@ -1,5 +1,5 @@
 'use client'
-import { useActionState } from 'react'
+import { useActionState, useEffect, useState } from 'react'
 import { saveAbout } from './actions'
 
 const btnStyle = (pending: boolean): React.CSSProperties => ({
@@ -17,6 +17,22 @@ const btnStyle = (pending: boolean): React.CSSProperties => ({
 
 export default function AboutForm({ defaultValue }: { defaultValue: string }) {
   const [state, formAction, pending] = useActionState(saveAbout, null)
+  const [showSuccess, setShowSuccess] = useState(false)
+
+  useEffect(() => {
+    if (state?.ok) {
+      setShowSuccess(true)
+      const timer = setTimeout(() => setShowSuccess(false), 3000)
+      return () => clearTimeout(timer)
+    }
+  }, [state])
+
+  const handleFocus = (e: React.FocusEvent<HTMLTextAreaElement>) => {
+    e.currentTarget.style.borderColor = '#2ABFA8'
+  }
+  const handleBlur = (e: React.FocusEvent<HTMLTextAreaElement>) => {
+    e.currentTarget.style.borderColor = '#2A2A28'
+  }
 
   return (
     <form
@@ -34,7 +50,7 @@ export default function AboutForm({ defaultValue }: { defaultValue: string }) {
     >
       <label
         htmlFor="about_text"
-        style={{ fontSize: '0.72rem', color: '#9A9A96', letterSpacing: '0.08em', textTransform: 'uppercase' }}
+        style={{ fontSize: '0.72rem', color: '#9A9A96', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.5rem' }}
       >
         About text
       </label>
@@ -55,17 +71,30 @@ export default function AboutForm({ defaultValue }: { defaultValue: string }) {
           outline: 'none',
           fontFamily: 'inherit',
         }}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
       />
       <p style={{ fontSize: '0.72rem', color: '#6B6B68', margin: 0 }}>
         Separate paragraphs with a blank line (double newline).
       </p>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+      {showSuccess && (
+        <div
+          style={{
+            background: 'rgba(42,191,168,0.1)',
+            border: '1px solid rgba(42,191,168,0.3)',
+            borderRadius: 6,
+            padding: '0.65rem 1rem',
+            color: '#2ABFA8',
+            fontSize: '0.82rem',
+          }}
+        >
+          ✓ Changes saved and published to the public site.
+        </div>
+      )}
+      <div>
         <button type="submit" disabled={pending} style={btnStyle(pending)}>
           {pending ? 'Saving…' : 'Save'}
         </button>
-        {state?.ok && (
-          <span style={{ color: '#2ABFA8', fontSize: '0.8rem' }}>✓ Saved!</span>
-        )}
       </div>
     </form>
   )

@@ -1,14 +1,15 @@
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
-import Link from 'next/link'
 import { authOptions } from '@/lib/auth'
 import SignOutButton from '@/components/admin/SignOutButton'
+import SidebarNav from '@/components/admin/SidebarNav'
 
 const navLinks = [
   { href: '/admin/gallery', label: 'Gallery' },
   { href: '/admin/about', label: 'About' },
   { href: '/admin/services', label: 'Services' },
   { href: '/admin/contact', label: 'Contact' },
+  { href: '/admin/testimonials', label: 'Testimonials' },
   { href: '/admin/settings', label: 'Settings' },
 ]
 
@@ -34,18 +35,7 @@ export default async function AdminLayout({
             <p className="text-xs" style={{ color: '#6B6B68' }}>Admin</p>
           </div>
 
-          <nav className="space-y-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="flex items-center rounded-lg px-3 py-2 text-sm font-medium transition hover:text-white"
-                style={{ color: '#9A9A96' }}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+          <SidebarNav navLinks={navLinks} />
         </div>
 
         <div className="space-y-2 px-0">

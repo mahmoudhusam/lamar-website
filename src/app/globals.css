@@ -82,3 +82,7 @@ body {
 .ticker-track:hover {
   animation-play-state: paused;
 }
+
+/* ── Admin ─────────────────────────────────────────── */
+.move-btn:hover         { border-color: #2ABFA8 !important; color: #2ABFA8 !important; }
+.quick-action-card:hover { border-color: #2ABFA8 !important; }

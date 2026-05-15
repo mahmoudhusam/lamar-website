@@ -1,5 +1,5 @@
 'use client'
-import { useActionState } from 'react'
+import { useActionState, useEffect, useState } from 'react'
 
 type State = { ok: boolean } | null
 type BoundAction = (_prev: State, formData: FormData) => Promise<State>
@@ -27,6 +27,22 @@ export function ServiceCard({
   action: BoundAction
 }) {
   const [state, formAction, pending] = useActionState(action, null)
+  const [showSuccess, setShowSuccess] = useState(false)
+
+  useEffect(() => {
+    if (state?.ok) {
+      setShowSuccess(true)
+      const timer = setTimeout(() => setShowSuccess(false), 3000)
+      return () => clearTimeout(timer)
+    }
+  }, [state])
+
+  const handleFocus = (e: React.FocusEvent<HTMLTextAreaElement>) => {
+    e.currentTarget.style.borderColor = '#2ABFA8'
+  }
+  const handleBlur = (e: React.FocusEvent<HTMLTextAreaElement>) => {
+    e.currentTarget.style.borderColor = '#2A2A28'
+  }
 
   return (
     <form
@@ -58,14 +74,27 @@ export function ServiceCard({
           outline: 'none',
           fontFamily: 'inherit',
         }}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
       />
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+      {showSuccess && (
+        <div
+          style={{
+            background: 'rgba(42,191,168,0.1)',
+            border: '1px solid rgba(42,191,168,0.3)',
+            borderRadius: 6,
+            padding: '0.65rem 1rem',
+            color: '#2ABFA8',
+            fontSize: '0.82rem',
+          }}
+        >
+          ✓ Changes saved and published to the public site.
+        </div>
+      )}
+      <div>
         <button type="submit" disabled={pending} style={btnStyle(pending)}>
           {pending ? 'Saving…' : 'Save'}
         </button>
-        {state?.ok && (
-          <span style={{ color: '#2ABFA8', fontSize: '0.78rem' }}>✓ Saved!</span>
-        )}
       </div>
     </form>
   )

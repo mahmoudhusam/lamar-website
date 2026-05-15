@@ -1,5 +1,5 @@
 'use client'
-import { useActionState } from 'react'
+import { useActionState, useEffect, useState } from 'react'
 import { saveContact } from './actions'
 
 type Field = { key: string; label: string; placeholder: string }
@@ -30,11 +30,27 @@ const labelStyle: React.CSSProperties = {
   letterSpacing: '0.08em',
   textTransform: 'uppercase',
   display: 'block',
-  marginBottom: '0.35rem',
+  marginBottom: '0.5rem',
 }
 
 export default function ContactForm({ defaults }: { defaults: Record<string, string> }) {
   const [state, formAction, pending] = useActionState(saveContact, null)
+  const [showSuccess, setShowSuccess] = useState(false)
+
+  useEffect(() => {
+    if (state?.ok) {
+      setShowSuccess(true)
+      const timer = setTimeout(() => setShowSuccess(false), 3000)
+      return () => clearTimeout(timer)
+    }
+  }, [state])
+
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    e.currentTarget.style.borderColor = '#2ABFA8'
+  }
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    e.currentTarget.style.borderColor = '#2A2A28'
+  }
 
   return (
     <form
@@ -60,11 +76,28 @@ export default function ContactForm({ defaults }: { defaults: Record<string, str
             defaultValue={defaults[key] ?? ''}
             placeholder={placeholder}
             style={inputStyle}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
           />
         </div>
       ))}
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginTop: '0.25rem' }}>
+      {showSuccess && (
+        <div
+          style={{
+            background: 'rgba(42,191,168,0.1)',
+            border: '1px solid rgba(42,191,168,0.3)',
+            borderRadius: 6,
+            padding: '0.65rem 1rem',
+            color: '#2ABFA8',
+            fontSize: '0.82rem',
+          }}
+        >
+          ✓ Changes saved and published to the public site.
+        </div>
+      )}
+
+      <div style={{ marginTop: '0.25rem' }}>
         <button
           type="submit"
           disabled={pending}
@@ -83,9 +116,6 @@ export default function ContactForm({ defaults }: { defaults: Record<string, str
         >
           {pending ? 'Saving…' : 'Save All'}
         </button>
-        {state?.ok && (
-          <span style={{ color: '#2ABFA8', fontSize: '0.8rem' }}>✓ Saved!</span>
-        )}
       </div>
     </form>
   )
