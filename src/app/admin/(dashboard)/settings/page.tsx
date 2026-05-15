@@ -66,7 +66,7 @@ export default async function SettingsPage() {
           </form>
         </div>
         <p style={{ color: '#6B6B68', fontSize: '0.75rem', marginTop: '1rem' }}>
-          Language switching on the public site is coming in Phase 5.
+          Changes apply to the public site within 1 hour, or instantly after any content save.
         </p>
       </div>
     </div>
