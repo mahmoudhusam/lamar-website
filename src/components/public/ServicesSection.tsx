@@ -40,7 +40,10 @@ const delays = ['d1', 'd2', 'd3', 'd4']
 
 export default async function ServicesSection({ lang }: { lang: Lang }) {
   const tr = t[lang].services
-  const content = await getContentMany(services.map((s) => s.key))
+  const content = await getContentMany([
+    ...services.map((s) => s.key),
+    ...services.map((s) => `${s.key}_title`),
+  ])
 
   return (
     <section id="services" style={{ padding: '8rem 3.5rem', background: 'var(--bg2)' }}>
@@ -57,6 +60,7 @@ export default async function ServicesSection({ lang }: { lang: Lang }) {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.75rem', marginTop: '3.5rem' }}>
         {services.map((svc, i) => {
           const svcTr = tr.items[svc.key] ?? { name: svc.key, fallback: '' }
+          const displayName = content[`${svc.key}_title`] ?? svcTr.name
           return (
             <div
               key={svc.key}
@@ -76,7 +80,7 @@ export default async function ServicesSection({ lang }: { lang: Lang }) {
                 {svc.icon}
               </div>
               <div style={{ fontFamily: 'var(--font-archivo)', fontWeight: 700, fontSize: '1.05rem', color: 'var(--white)', letterSpacing: '-0.01em' }}>
-                {svcTr.name}
+                {displayName}
               </div>
               <div style={{ fontSize: '0.875rem', lineHeight: 1.72, color: 'var(--white2)', fontWeight: 300 }}>
                 {content[svc.key] ?? svcTr.fallback}

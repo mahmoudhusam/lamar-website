@@ -47,7 +47,7 @@ function ImageCell({ item, style }: { item: { url: string; caption: string; fall
 
 export default async function GallerySection({ lang }: { lang: Lang }) {
   const tr = t[lang].gallery
-  const dbItems = await prisma.galleryItem.findMany({ orderBy: { order: 'asc' } }).catch(() => [])
+  const dbItems = await prisma.galleryItem.findMany({ where: { order: { gte: 0 } }, orderBy: { order: 'asc' } }).catch(() => [])
   const useDb = dbItems.length > 0
 
   const imageSlots = useDb

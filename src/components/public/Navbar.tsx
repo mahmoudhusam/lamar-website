@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from 'react'
-import { t, type Lang } from '@/lib/i18n'
+import { useEffect, useState } from 'react';
+import { t, type Lang } from '@/lib/i18n';
 
 const LogoMark = ({ size = 32 }: { size?: number }) => (
   <svg width={size} height={Math.round(size * 0.875)} viewBox="0 0 120 100">
@@ -18,42 +18,42 @@ const LogoMark = ({ size = 32 }: { size?: number }) => (
     <rect x="68" y="58" width="20" height="16" fill="white" rx="1" />
     <rect x="74" y="64" width="8" height="10" fill="#4BBFBF" />
   </svg>
-)
+);
 
 export default function Navbar({ lang }: { lang: Lang }) {
-  const tr = t[lang].nav
-  const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
+  const tr = t[lang].nav;
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const closeMenu = () => {
-    setMenuOpen(false)
-    document.body.style.overflow = ''
-  }
+    setMenuOpen(false);
+    document.body.style.overflow = '';
+  };
 
   const toggleMenu = () => {
-    const next = !menuOpen
-    setMenuOpen(next)
-    document.body.style.overflow = next ? 'hidden' : ''
-  }
+    const next = !menuOpen;
+    setMenuOpen(next);
+    document.body.style.overflow = next ? 'hidden' : '';
+  };
 
   const desktopLinks = [
-    { label: tr.about,    href: '#about'    },
+    { label: tr.about, href: '#about' },
     { label: tr.services, href: '#services' },
-    { label: tr.ourWork,  href: '#our-work' },
-  ]
+    { label: tr.ourWork, href: '#our-work' },
+  ];
 
   const mobileLinks = [
-    { label: tr.about,    href: '#about'        },
-    { label: tr.services, href: '#services'     },
-    { label: tr.ourWork,  href: '#our-work'     },
-    { label: tr.reviews,  href: '#testimonials' },
-  ]
+    { label: tr.about, href: '#about' },
+    { label: tr.services, href: '#services' },
+    { label: tr.ourWork, href: '#our-work' },
+    { label: tr.reviews, href: '#testimonials' },
+  ];
 
   return (
     <>
@@ -71,11 +71,21 @@ export default function Navbar({ lang }: { lang: Lang }) {
           transition: 'background 0.4s, border-bottom 0.4s',
           background: scrolled ? 'rgba(12,12,10,0.96)' : 'transparent',
           backdropFilter: scrolled ? 'blur(18px)' : 'none',
-          borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
+          borderBottom: scrolled
+            ? '1px solid var(--border)'
+            : '1px solid transparent',
         }}
       >
         {/* Logo */}
-        <a href="#hero" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
+        <a
+          href="#hero"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 10,
+            textDecoration: 'none',
+          }}
+        >
           <LogoMark size={32} />
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <span
@@ -123,8 +133,12 @@ export default function Navbar({ lang }: { lang: Lang }) {
                 transition: 'color 0.2s',
                 fontFamily: 'var(--font-archivo)',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--white)')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--white2)')}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.color = 'var(--white)')
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.color = 'var(--white2)')
+              }
             >
               {label}
             </a>
@@ -144,8 +158,12 @@ export default function Navbar({ lang }: { lang: Lang }) {
               fontFamily: 'var(--font-archivo)',
               transition: 'background 0.2s',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--teal2)')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--teal)')}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.background = 'var(--teal2)')
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.background = 'var(--teal)')
+            }
           >
             {tr.contactUs}
           </a>
@@ -225,8 +243,12 @@ export default function Navbar({ lang }: { lang: Lang }) {
                 color: 'var(--white2)',
                 transition: 'color 0.2s',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--white)')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--white2)')}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.color = 'var(--white)')
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.color = 'var(--white2)')
+              }
             >
               {label}
             </a>
@@ -248,13 +270,17 @@ export default function Navbar({ lang }: { lang: Lang }) {
               marginTop: '0.75rem',
               transition: 'background 0.2s',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--teal2)')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--teal)')}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.background = 'var(--teal2)')
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.background = 'var(--teal)')
+            }
           >
             {tr.contactUs}
           </a>
         </div>
       )}
     </>
-  )
+  );
 }

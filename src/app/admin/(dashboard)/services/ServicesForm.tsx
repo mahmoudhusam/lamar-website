@@ -4,6 +4,27 @@ import { useActionState, useEffect, useState } from 'react'
 type State = { ok: boolean } | null
 type BoundAction = (_prev: State, formData: FormData) => Promise<State>
 
+const labelStyle: React.CSSProperties = {
+  fontSize: '0.72rem',
+  color: '#9A9A96',
+  letterSpacing: '0.08em',
+  textTransform: 'uppercase',
+  display: 'block',
+  marginBottom: '0.5rem',
+}
+
+const inputStyle: React.CSSProperties = {
+  background: '#0C0C0A',
+  border: '1px solid #2A2A28',
+  borderRadius: 4,
+  padding: '0.6rem 0.75rem',
+  fontSize: '0.87rem',
+  color: '#F2EEE6',
+  outline: 'none',
+  width: '100%',
+  fontFamily: 'inherit',
+}
+
 const btnStyle = (pending: boolean): React.CSSProperties => ({
   background: '#2ABFA8',
   color: '#0C0C0A',
@@ -18,11 +39,13 @@ const btnStyle = (pending: boolean): React.CSSProperties => ({
 })
 
 export function ServiceCard({
-  name,
+  svcKey,
+  defaultTitle,
   defaultValue,
   action,
 }: {
-  name: string
+  svcKey: string
+  defaultTitle: string
   defaultValue: string
   action: BoundAction
 }) {
@@ -37,10 +60,16 @@ export function ServiceCard({
     }
   }, [state])
 
-  const handleFocus = (e: React.FocusEvent<HTMLTextAreaElement>) => {
+  const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>) => {
     e.currentTarget.style.borderColor = '#2ABFA8'
   }
-  const handleBlur = (e: React.FocusEvent<HTMLTextAreaElement>) => {
+  const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    e.currentTarget.style.borderColor = '#2A2A28'
+  }
+  const handleTextareaFocus = (e: React.FocusEvent<HTMLTextAreaElement>) => {
+    e.currentTarget.style.borderColor = '#2ABFA8'
+  }
+  const handleTextareaBlur = (e: React.FocusEvent<HTMLTextAreaElement>) => {
     e.currentTarget.style.borderColor = '#2A2A28'
   }
 
@@ -54,29 +83,45 @@ export function ServiceCard({
         padding: '1.5rem',
         display: 'flex',
         flexDirection: 'column',
-        gap: '0.85rem',
+        gap: '1rem',
       }}
     >
-      <span style={{ color: '#F2EEE6', fontWeight: 700, fontSize: '0.95rem' }}>{name}</span>
-      <textarea
-        name="value"
-        defaultValue={defaultValue}
-        rows={5}
-        style={{
-          background: '#0C0C0A',
-          border: '1px solid #2A2A28',
-          borderRadius: 4,
-          padding: '0.65rem 0.75rem',
-          fontSize: '0.85rem',
-          color: '#F2EEE6',
-          lineHeight: 1.65,
-          resize: 'vertical',
-          outline: 'none',
-          fontFamily: 'inherit',
-        }}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-      />
+      <div>
+        <label htmlFor={`${svcKey}_title`} style={labelStyle}>Service Title</label>
+        <input
+          type="text"
+          id={`${svcKey}_title`}
+          name="title"
+          defaultValue={defaultTitle}
+          style={inputStyle}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
+        />
+      </div>
+      <div>
+        <label htmlFor={`${svcKey}_value`} style={labelStyle}>Description</label>
+        <textarea
+          id={`${svcKey}_value`}
+          name="value"
+          defaultValue={defaultValue}
+          rows={5}
+          style={{
+            background: '#0C0C0A',
+            border: '1px solid #2A2A28',
+            borderRadius: 4,
+            padding: '0.65rem 0.75rem',
+            fontSize: '0.85rem',
+            color: '#F2EEE6',
+            lineHeight: 1.65,
+            resize: 'vertical',
+            outline: 'none',
+            fontFamily: 'inherit',
+            width: '100%',
+          }}
+          onFocus={handleTextareaFocus}
+          onBlur={handleTextareaBlur}
+        />
+      </div>
       {showSuccess && (
         <div
           style={{

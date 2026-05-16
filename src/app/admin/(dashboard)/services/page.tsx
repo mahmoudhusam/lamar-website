@@ -1,6 +1,6 @@
 import { getContentMany } from '@/lib/content'
 import { ServiceCard } from './ServicesForm'
-import { saveService } from './actions'
+import { saveServiceFull } from './actions'
 
 const services = [
   {
@@ -26,7 +26,11 @@ const services = [
 ]
 
 export default async function ServicesPage() {
-  const content = await getContentMany(services.map((s) => s.key))
+  const allKeys = [
+    ...services.map((s) => s.key),
+    ...services.map((s) => `${s.key}_title`),
+  ]
+  const content = await getContentMany(allKeys)
 
   return (
     <div>
@@ -41,11 +45,12 @@ export default async function ServicesPage() {
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', maxWidth: 900 }}>
         {services.map((svc) => {
-          const boundSave = saveService.bind(null, svc.key)
+          const boundSave = saveServiceFull.bind(null, svc.key)
           return (
             <ServiceCard
               key={svc.key}
-              name={svc.name}
+              svcKey={svc.key}
+              defaultTitle={content[`${svc.key}_title`] ?? svc.name}
               defaultValue={content[svc.key] ?? svc.fallback}
               action={boundSave}
             />
