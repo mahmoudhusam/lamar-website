@@ -47,14 +47,17 @@ function ImageCell({ item, style }: { item: { url: string; caption: string; fall
 
 export default async function GallerySection({ lang }: { lang: Lang }) {
   const tr = t[lang].gallery
-  const dbItems = await prisma.galleryItem.findMany({ where: { order: { gte: 0 } }, orderBy: { order: 'asc' } }).catch(() => [])
+  const dbItems = await prisma.galleryItem.findMany({
+    where: { order: { gte: 0, lte: 6 } },
+  }).catch(() => [])
   const useDb = dbItems.length > 0
-
-  const imageSlots = useDb
-    ? dbItems.slice(0, 7).map((g) => ({ url: g.url, caption: g.caption ?? '' }))
-    : [...placeholders]
-
-  while (imageSlots.length < 7) imageSlots.push(placeholders[imageSlots.length % placeholders.length])
+  const slotMap: Record<number, { url: string; caption: string }> = {}
+  for (const item of dbItems) {
+    slotMap[item.order] = { url: item.url, caption: item.caption ?? '' }
+  }
+  const imageSlots = Array.from({ length: 7 }, (_, i) =>
+    slotMap[i] ?? placeholders[i]
+  )
 
   return (
     <section id="our-work" style={{ padding: '8rem 3.5rem', background: 'var(--bg2)' }}>
