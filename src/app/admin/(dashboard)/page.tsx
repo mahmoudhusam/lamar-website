@@ -10,7 +10,7 @@ export default async function AdminDashboard() {
     prisma.galleryItem.count(),
     prisma.content.count(),
     prisma.settings.findUnique({ where: { id: 'default' } }),
-  ])
+  ]).catch(() => [0, 0, null] as const)
 
   const langLabel = settings?.language === 'en' ? 'English' : 'Nederlands'
 

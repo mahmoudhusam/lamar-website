@@ -1,21 +1,5 @@
 import { t, type Lang } from '@/lib/i18n';
 
-const LogoMark = () => (
-  <svg width="26" height="22" viewBox="0 0 120 100">
-    <polygon points="0,90 55,5 95,5 70,90" fill="#A0A0A0" />
-    <polygon points="60,10 115,10 120,90 75,90" fill="#4BBFBF" />
-    <polyline
-      points="63,58 78,42 93,58"
-      fill="none"
-      stroke="white"
-      strokeWidth="7"
-      strokeLinejoin="round"
-      strokeLinecap="round"
-    />
-    <rect x="68" y="58" width="20" height="16" fill="white" rx="1" />
-    <rect x="74" y="64" width="8" height="10" fill="#4BBFBF" />
-  </svg>
-);
 
 export default function Footer({ lang }: { lang: Lang }) {
   const tr = t[lang].footer;
@@ -40,7 +24,11 @@ export default function Footer({ lang }: { lang: Lang }) {
           textDecoration: 'none',
         }}
       >
-        <LogoMark />
+        <img
+          src="lamar_icon.svg"
+          alt=""
+          style={{ height: 26, width: 'auto', display: 'block' }}
+        />
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <span
             style={{
