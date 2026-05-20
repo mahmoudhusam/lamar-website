@@ -27,14 +27,14 @@ export default function Footer({ lang }: { lang: Lang }) {
         <img
           src="lamar_icon.svg"
           alt=""
-          style={{ height: 26, width: 'auto', display: 'block' }}
+          style={{ height: 34, width: 'auto', display: 'block' }}
         />
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <span
             style={{
               fontFamily: 'var(--font-archivo)',
               fontWeight: 800,
-              fontSize: '0.9rem',
+              fontSize: '1.1rem',
               letterSpacing: '0.1em',
               color: 'var(--white)',
             }}
@@ -45,7 +45,7 @@ export default function Footer({ lang }: { lang: Lang }) {
             style={{
               fontFamily: 'var(--font-archivo)',
               fontWeight: 300,
-              fontSize: '0.42rem',
+              fontSize: '0.52rem',
               letterSpacing: '0.22em',
               textTransform: 'uppercase',
               color: '#6A6766',

@@ -73,14 +73,14 @@ export default function Navbar({ lang }: { lang: Lang }) {
           <img
             src="lamar_icon.svg"
             alt=""
-            style={{ height: 32, width: 'auto', display: 'block' }}
+            style={{ height: 44, width: 'auto', display: 'block' }}
           />
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <span
               style={{
                 fontFamily: 'var(--font-archivo)',
                 fontWeight: 800,
-                fontSize: '1.05rem',
+                fontSize: '1.3rem',
                 letterSpacing: '0.1em',
                 color: 'var(--white)',
                 lineHeight: 1,
@@ -92,7 +92,7 @@ export default function Navbar({ lang }: { lang: Lang }) {
               style={{
                 fontFamily: 'var(--font-archivo)',
                 fontWeight: 300,
-                fontSize: '0.45rem',
+                fontSize: '0.58rem',
                 letterSpacing: '0.38em',
                 textTransform: 'uppercase',
                 color: 'var(--white2)',
