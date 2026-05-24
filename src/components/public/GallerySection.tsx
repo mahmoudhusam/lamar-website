@@ -1,64 +1,50 @@
 import { prisma } from '@/lib/prisma'
 import { t, type Lang } from '@/lib/i18n'
 import GalleryCTA from './GalleryCTA'
+import BentoGrid from './BentoGrid'
 
 const P = 'https://images.pexels.com/photos'
 
-const placeholders = [
-  { caption: 'Living Room Gypsum',     url: `${P}/2736139/pexels-photo-2736139.jpeg?auto=compress&cs=tinysrgb&w=900&h=520&fit=crop`,   fallback: 'linear-gradient(145deg,#2A8070 0%,#1A5848 50%,#082820 100%)' },
-  { caption: 'Kitchen Renovation',     url: `${P}/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=600&h=520&fit=crop`,   fallback: 'linear-gradient(160deg,#3A9080 0%,#1A6855 55%,#0A3025 100%)' },
-  { caption: 'Full House Restoration', url: `${P}/5691530/pexels-photo-5691530.jpeg?auto=compress&cs=tinysrgb&w=800&h=720&fit=crop`,   fallback: 'linear-gradient(140deg,#226860 0%,#144840 50%,#082420 100%)' },
-  { caption: 'Ceiling Detail Work',    url: `${P}/16764180/pexels-photo-16764180.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop`, fallback: 'linear-gradient(150deg,#2A7868 0%,#185848 50%,#083028 100%)' },
-  { caption: 'Interior Painting',      url: `${P}/5493654/pexels-photo-5493654.jpeg?auto=compress&cs=tinysrgb&w=500&h=400&fit=crop`,   fallback: 'linear-gradient(135deg,#225858 0%,#124040 50%,#082828 100%)' },
-  { caption: 'Bathroom Renovation',    url: `${P}/7045358/pexels-photo-7045358.jpeg?auto=compress&cs=tinysrgb&w=800&h=520&fit=crop`,   fallback: 'linear-gradient(155deg,#2A8878 0%,#186858 50%,#083430 100%)' },
-  { caption: 'Wall Restoration',       url: `${P}/3990359/pexels-photo-3990359.jpeg?auto=compress&cs=tinysrgb&w=800&h=520&fit=crop`,   fallback: 'linear-gradient(145deg,#1A7068 0%,#105050 50%,#062C2C 100%)' },
+const placeholders: SlotProject[] = [
+  { id: 'p0', slug: '', title: 'Living Room Gypsum',     coverImageUrl: `${P}/2736139/pexels-photo-2736139.jpeg?auto=compress&cs=tinysrgb&w=900&h=520&fit=crop`,   images: [] },
+  { id: 'p1', slug: '', title: 'Kitchen Renovation',     coverImageUrl: `${P}/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=600&h=520&fit=crop`,   images: [] },
+  { id: 'p2', slug: '', title: 'Full House Restoration', coverImageUrl: `${P}/5691530/pexels-photo-5691530.jpeg?auto=compress&cs=tinysrgb&w=800&h=720&fit=crop`,   images: [] },
+  { id: 'p3', slug: '', title: 'Ceiling Detail Work',    coverImageUrl: `${P}/16764180/pexels-photo-16764180.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop`, images: [] },
+  { id: 'p4', slug: '', title: 'Interior Painting',      coverImageUrl: `${P}/5493654/pexels-photo-5493654.jpeg?auto=compress&cs=tinysrgb&w=500&h=400&fit=crop`,   images: [] },
+  { id: 'p5', slug: '', title: 'Bathroom Renovation',    coverImageUrl: `${P}/7045358/pexels-photo-7045358.jpeg?auto=compress&cs=tinysrgb&w=800&h=520&fit=crop`,   images: [] },
+  { id: 'p6', slug: '', title: 'Wall Restoration',       coverImageUrl: `${P}/3990359/pexels-photo-3990359.jpeg?auto=compress&cs=tinysrgb&w=800&h=520&fit=crop`,   images: [] },
 ]
 
-const cellStyles: React.CSSProperties[] = [
-  { gridColumn: '1 / 6',  gridRow: '1 / 2' },
-  { gridColumn: '6 / 9',  gridRow: '1 / 2' },
-  { gridColumn: '9 / 13', gridRow: '1 / 3' },
-  { gridColumn: '1 / 4',  gridRow: '2 / 3' },
-  { gridColumn: '4 / 7',  gridRow: '2 / 3' },
-  { gridColumn: '7 / 9',  gridRow: '2 / 3' },
-  { gridColumn: '1 / 5',  gridRow: '3 / 4' },
-  { gridColumn: '5 / 9',  gridRow: '3 / 4' },
-  { gridColumn: '9 / 13', gridRow: '3 / 4' },
-]
-
-function ImageCell({ item, style }: { item: { url: string; caption: string; fallback?: string }; style: React.CSSProperties }) {
-  return (
-    <div style={{ ...style, overflow: 'hidden', borderRadius: 3, position: 'relative', cursor: 'pointer', background: item.fallback ?? 'var(--bg3)' }}>
-      <div
-        style={{
-          position: 'absolute', inset: 0,
-          backgroundImage: `url('${item.url}')`,
-          backgroundSize: 'cover', backgroundPosition: 'center',
-          transition: 'transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94)',
-        }}
-      />
-      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(4,4,3,0.72) 0%, rgba(4,4,3,0.1) 40%, transparent 100%)', display: 'flex', alignItems: 'flex-end', padding: '1.25rem' }}>
-        <span style={{ fontSize: '0.67rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(242,238,230,0.92)', fontFamily: 'var(--font-archivo)', fontWeight: 500 }}>
-          {item.caption}
-        </span>
-      </div>
-    </div>
-  )
+export type SlotProject = {
+  id: string
+  slug: string
+  title: string
+  coverImageUrl: string | null
+  images: { id: string; url: string; caption: string | null }[]
 }
 
 export default async function GallerySection({ lang }: { lang: Lang }) {
   const tr = t[lang].gallery
-  const dbItems = await prisma.galleryItem.findMany({
-    where: { order: { gte: 0, lte: 6 } },
+
+  const dbProjects = await prisma.project.findMany({
+    where: { published: true, bentoSlot: { gte: 0, lte: 6 } },
+    include: {
+      images: { orderBy: { order: 'asc' }, take: 6 },
+    },
   }).catch(() => [])
-  const useDb = dbItems.length > 0
-  const slotMap: Record<number, { url: string; caption: string }> = {}
-  for (const item of dbItems) {
-    slotMap[item.order] = { url: item.url, caption: item.caption ?? '' }
+
+  const slotMap: Record<number, SlotProject> = {}
+  for (const p of dbProjects) {
+    slotMap[p.bentoSlot] = {
+      id: p.id,
+      slug: p.slug,
+      title: p.title,
+      coverImageUrl: p.coverImageUrl,
+      images: p.images,
+    }
   }
-  const imageSlots = Array.from({ length: 7 }, (_, i) =>
-    slotMap[i] ?? placeholders[i]
-  )
+
+  const slots: SlotProject[] = Array.from({ length: 7 }, (_, i) => slotMap[i] ?? placeholders[i])
 
   return (
     <section id="our-work" style={{ padding: '8rem 3.5rem', background: 'var(--bg2)' }}>
@@ -74,7 +60,7 @@ export default async function GallerySection({ lang }: { lang: Lang }) {
           </h2>
         </div>
         <a
-          href="#our-work"
+          href="/projects"
           className="view-all"
           style={{ fontSize: '0.7rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--white2)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', paddingBottom: 2, borderBottom: '1px solid var(--border2)', transition: 'color 0.2s, border-color 0.2s' }}
         >
@@ -82,23 +68,13 @@ export default async function GallerySection({ lang }: { lang: Lang }) {
         </a>
       </div>
 
-      {/* Bento grid */}
-      <div className="rv d1 gallery-bento" style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gridTemplateRows: '260px 200px 260px', gap: '0.75rem' }}>
-        <ImageCell item={imageSlots[0]} style={cellStyles[0]} />
-        <ImageCell item={imageSlots[1]} style={cellStyles[1]} />
-        <ImageCell item={imageSlots[2]} style={cellStyles[2]} />
-        {/* Text card */}
-        <div style={{ ...cellStyles[3], background: 'var(--bg3)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '1.75rem', border: '1px solid var(--border)', borderRadius: 3 }}>
-          <div style={{ fontSize: '0.6rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--white2)', marginBottom: '0.6rem', fontFamily: 'var(--font-archivo)' }}>{tr.specialtyLabel}</div>
-          <div style={{ fontFamily: 'var(--font-archivo)', fontWeight: 700, fontSize: '1.15rem', color: 'var(--white)', lineHeight: 1.25 }}>{tr.specialtyText}</div>
-        </div>
-        <ImageCell item={imageSlots[3]} style={cellStyles[4]} />
-        <ImageCell item={imageSlots[4]} style={cellStyles[5]} />
-        <ImageCell item={imageSlots[5]} style={cellStyles[6]} />
-        <ImageCell item={imageSlots[6]} style={cellStyles[7]} />
-        {/* Teal CTA */}
-        <GalleryCTA style={cellStyles[8]} label={tr.ctaLabel} />
-      </div>
+      {/* BentoGrid — client component handles hover/interaction */}
+      <BentoGrid
+        slots={slots}
+        specialtyLabel={tr.specialtyLabel}
+        specialtyText={tr.specialtyText}
+        ctaLabel={tr.ctaLabel}
+      />
     </section>
   )
 }
