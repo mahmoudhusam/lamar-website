@@ -3,13 +3,23 @@ export type Lang = 'en' | 'nl'
 type ServiceItems = Record<string, { name: string; fallback: string }>
 
 interface Translations {
-  nav: { about: string; services: string; ourWork: string; contact: string; reviews: string; contactUs: string }
+  nav: { about: string; services: string; ourWork: string; projects: string; contact: string; reviews: string; contactUs: string }
   hero: { tag: string; h1a: string; h1b: string; h1c: string; desc: string; seeWork: string; getQuote: string; statProjects: string; statYears: string; statSatisfaction: string; badge: string }
   ticker: Array<{ label: string; accent: boolean }>
   services: { tag: string; heading: string; headingTeal: string; learnMore: string; items: ServiceItems }
   about: { tag: string; heading: string; headingPre: string; headingTeal: string; quals: string[]; yearsLabel: string[]; projectsLabel: string[] }
   process: { tag: string; heading: string; headingTeal: string; steps: Array<{ num: string; title: string; desc: string }> }
   gallery: { tag: string; heading: string; viewAll: string; specialtyLabel: string; specialtyText: string; ctaLabel: string }
+  projectsPage: {
+    tag: string
+    heading: string
+    headingTeal: string
+    empty: string
+    backToHome: string
+    viewProject: string
+    images: string
+    allProjects: string
+  }
   testimonials: { tag: string; heading: string; headingTeal: string }
   contact: { tag: string; h1: string; h2: string; h3: string; labels: Record<string, string> }
   contactForm: { nameLbl: string; namePh: string; phoneLbl: string; phonePh: string; emailLbl: string; emailPh: string; serviceLbl: string; servicePh: string; messageLbl: string; messagePh: string; send: string; sending: string; successTitle: string; successMsg: string }
@@ -22,6 +32,7 @@ export const t: Record<Lang, Translations> = {
       about: 'About',
       services: 'Services',
       ourWork: 'Our Work',
+      projects: 'Projects',
       contact: 'Contact',
       reviews: 'Reviews',
       contactUs: 'Contact Us',
@@ -89,6 +100,16 @@ export const t: Record<Lang, Translations> = {
       specialtyText: 'Precision Gypsum & Bespoke Decoration',
       ctaLabel: 'Ready to start your project?',
     },
+    projectsPage: {
+      tag: 'Our Portfolio',
+      heading: 'Completed',
+      headingTeal: 'Projects',
+      empty: 'No projects yet. Check back soon.',
+      backToHome: '← Back to Home',
+      viewProject: 'View Project',
+      images: 'photos',
+      allProjects: '← All Projects',
+    },
     testimonials: {
       tag: 'Client Reviews',
       heading: 'What Our',
@@ -122,6 +143,7 @@ export const t: Record<Lang, Translations> = {
         { label: 'About',    href: '#about'    },
         { label: 'Services', href: '#services' },
         { label: 'Our Work', href: '#our-work' },
+        { label: 'Projects', href: '/projects' },
         { label: 'Contact',  href: '#contact'  },
       ],
       copy: '© 2025 LAMAR Renovation & Decoration. All rights reserved.',
@@ -133,6 +155,7 @@ export const t: Record<Lang, Translations> = {
       about: 'Over Ons',
       services: 'Diensten',
       ourWork: 'Ons Werk',
+      projects: 'Projecten',
       contact: 'Contact',
       reviews: 'Reviews',
       contactUs: 'Neem Contact Op',
@@ -200,6 +223,16 @@ export const t: Record<Lang, Translations> = {
       specialtyText: 'Nauwkeurig Gipswerk & Maatwerkdecoratie',
       ctaLabel: 'Klaar om uw project te starten?',
     },
+    projectsPage: {
+      tag: 'Ons Portfolio',
+      heading: 'Voltooide',
+      headingTeal: 'Projecten',
+      empty: 'Nog geen projecten. Kom binnenkort terug.',
+      backToHome: '← Terug naar Home',
+      viewProject: 'Project Bekijken',
+      images: "foto's",
+      allProjects: '← Alle Projecten',
+    },
     testimonials: {
       tag: 'Klantbeoordelingen',
       heading: 'Wat Onze',
@@ -230,10 +263,11 @@ export const t: Record<Lang, Translations> = {
     },
     footer: {
       links: [
-        { label: 'Over Ons', href: '#about'    },
-        { label: 'Diensten', href: '#services' },
-        { label: 'Ons Werk', href: '#our-work' },
-        { label: 'Contact',  href: '#contact'  },
+        { label: 'Over Ons',   href: '#about'    },
+        { label: 'Diensten',   href: '#services' },
+        { label: 'Ons Werk',   href: '#our-work' },
+        { label: 'Projecten',  href: '/projects' },
+        { label: 'Contact',    href: '#contact'  },
       ],
       copy: '© 2025 LAMAR Renovatie & Decoratie. Alle rechten voorbehouden.',
     },

@@ -32,3 +32,26 @@ model AdminUser {
   password  String
   createdAt DateTime @default(now())
 }
+
+model Project {
+  id             String         @id @default(cuid())
+  title          String
+  slug           String         @unique
+  description    String?
+  coverImageUrl  String?
+  order          Int            @default(0)
+  published      Boolean        @default(true)
+  images         ProjectImage[]
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+}
+
+model ProjectImage {
+  id        String   @id @default(cuid())
+  url       String
+  caption   String?
+  order     Int      @default(0)
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}

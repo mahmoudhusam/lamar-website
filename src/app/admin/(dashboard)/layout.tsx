@@ -6,6 +6,7 @@ import SidebarNav from '@/components/admin/SidebarNav'
 
 const navLinks = [
   { href: '/admin/gallery', label: 'Gallery' },
+  { href: '/admin/projects', label: 'Projects' },
   { href: '/admin/about', label: 'About' },
   { href: '/admin/services', label: 'Services' },
   { href: '/admin/contact', label: 'Contact' },

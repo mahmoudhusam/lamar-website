@@ -39,7 +39,7 @@ export default async function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   const lang = await getLanguage()
   return (
-    <html lang={lang} className={`${archivo.variable} ${outfit.variable}`}>
+    <html lang={lang} className={`${archivo.variable} ${outfit.variable}`} data-scroll-behavior="smooth">
       <body>{children}</body>
     </html>
   )

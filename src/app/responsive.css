@@ -63,3 +63,14 @@ section, footer, nav {
   footer                           { flex-direction: column !important; gap: 1.5rem !important; padding: 2rem 1.25rem !important; text-align: center !important; }
   footer > ul                      { gap: 1.25rem !important; flex-wrap: wrap !important; justify-content: center !important; }
 }
+
+@media (max-width: 1023px) {
+  .projects-header { padding: 5rem 1.5rem 3rem !important; }
+  .projects-grid   { padding: 2rem 1.5rem 6rem !important; }
+}
+
+@media (max-width: 767px) {
+  .projects-header { padding: 4rem 1.25rem 2rem !important; }
+  .projects-grid   { padding: 1.5rem 1.25rem 4rem !important; grid-template-columns: 1fr !important; }
+  .lb-prev, .lb-next { padding: 0.5rem 0.65rem !important; font-size: 1.2rem !important; }
+}

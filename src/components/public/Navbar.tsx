@@ -30,12 +30,14 @@ export default function Navbar({ lang }: { lang: Lang }) {
     { label: tr.about, href: '#about' },
     { label: tr.services, href: '#services' },
     { label: tr.ourWork, href: '#our-work' },
+    { label: tr.projects, href: '/projects' },
   ];
 
   const mobileLinks = [
     { label: tr.about, href: '#about' },
     { label: tr.services, href: '#services' },
     { label: tr.ourWork, href: '#our-work' },
+    { label: tr.projects, href: '/projects' },
     { label: tr.reviews, href: '#testimonials' },
   ];
 

@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma'
 import { t, type Lang } from '@/lib/i18n'
+import GalleryCTA from './GalleryCTA'
 
 const P = 'https://images.pexels.com/photos'
 
@@ -96,10 +97,7 @@ export default async function GallerySection({ lang }: { lang: Lang }) {
         <ImageCell item={imageSlots[5]} style={cellStyles[6]} />
         <ImageCell item={imageSlots[6]} style={cellStyles[7]} />
         {/* Teal CTA */}
-        <div style={{ ...cellStyles[8], background: 'var(--teal)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '2rem', borderRadius: 3 }}>
-          <div style={{ fontSize: '0.66rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(242,238,230,0.75)', fontFamily: 'var(--font-archivo)' }}>{tr.ctaLabel}</div>
-          <div style={{ fontFamily: 'var(--font-archivo)', fontWeight: 900, fontSize: '3.5rem', color: 'var(--white)', lineHeight: 1 }}>→</div>
-        </div>
+        <GalleryCTA style={cellStyles[8]} label={tr.ctaLabel} />
       </div>
     </section>
   )
