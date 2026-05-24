@@ -54,10 +54,10 @@ export default function BentoGrid({ slots, specialtyLabel, specialtyText, ctaLab
           background: rgba(12,12,10,0.97);
           backdrop-filter: blur(16px);
           border: 1px solid rgba(242,238,230,0.13);
-          border-radius: 8px;
-          padding: 1rem;
-          min-width: 280px;
-          max-width: 360px;
+          border-radius: 12px;
+          padding: 1.5rem;
+          min-width: 380px;
+          max-width: 480px;
           pointer-events: none;
           opacity: 0;
           transition: opacity 0.18s ease, transform 0.18s ease;
@@ -135,22 +135,22 @@ export default function BentoGrid({ slots, specialtyLabel, specialtyText, ctaLab
               {/* Hover popup */}
               {hasPopup && (
                 <div className={`bento-popup${isHovered ? ' visible' : ''}`}>
-                  <p style={{ fontFamily: 'var(--font-archivo)', fontWeight: 700, fontSize: '0.82rem', color: 'var(--white)', marginBottom: '0.75rem', letterSpacing: '-0.01em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  <p style={{ fontFamily: 'var(--font-archivo)', fontWeight: 700, fontSize: '1rem', color: 'var(--white)', marginBottom: '1rem', letterSpacing: '-0.01em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {project.title}
                   </p>
-                  <div style={{ display: 'grid', gridTemplateColumns: `repeat(${Math.min(popupImages.length, 3)}, 1fr)`, gap: '0.35rem', marginBottom: '0.85rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: `repeat(${Math.min(popupImages.length, 3)}, 1fr)`, gap: '0.5rem', marginBottom: '1rem' }}>
                     {popupImages.slice(0, 3).map((img) => (
-                      <div key={img.id} style={{ aspectRatio: '4/3', borderRadius: 4, overflow: 'hidden', background: 'var(--bg2)' }}>
+                      <div key={img.id} style={{ aspectRatio: '16/9', borderRadius: 6, overflow: 'hidden', background: 'var(--bg2)' }}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={img.url} alt={img.caption ?? ''} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                       </div>
                     ))}
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: '0.65rem', color: 'var(--white2)', letterSpacing: '0.08em' }}>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--white2)', letterSpacing: '0.08em' }}>
                       {popupImages.length} photo{popupImages.length !== 1 ? 's' : ''}
                     </span>
-                    <span style={{ fontSize: '0.65rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--teal2)', fontFamily: 'var(--font-archivo)', fontWeight: 600 }}>
+                    <span style={{ fontSize: '0.72rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--teal2)', fontFamily: 'var(--font-archivo)', fontWeight: 600 }}>
                       View Project →
                     </span>
                   </div>
