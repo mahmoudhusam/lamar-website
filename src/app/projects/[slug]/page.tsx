@@ -1,5 +1,4 @@
 import { prisma } from '@/lib/prisma'
-import { getLanguage } from '@/lib/content'
 import { t } from '@/lib/i18n'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -19,7 +18,7 @@ export async function generateStaticParams() {
 
 export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const lang = await getLanguage()
+  const lang = 'nl' as const
   const tr = t[lang].projectsPage
 
   const project = await prisma.project.findUnique({

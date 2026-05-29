@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { Archivo, Outfit } from 'next/font/google'
-import { getLanguage } from '@/lib/content'
 import './globals.css'
 
 const archivo = Archivo({
@@ -34,12 +33,11 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const lang = await getLanguage()
   return (
-    <html lang={lang} className={`${archivo.variable} ${outfit.variable}`} data-scroll-behavior="smooth">
+    <html lang="nl" className={`${archivo.variable} ${outfit.variable}`} data-scroll-behavior="smooth">
       <body>{children}</body>
     </html>
   )

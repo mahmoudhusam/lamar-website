@@ -9,19 +9,19 @@ interface Testimonial {
 
 const fallbacks: Testimonial[] = [
   {
-    quote: "The gypsum ceiling work they did in our living room is absolutely stunning. Clean, precise, and finished ahead of schedule. We couldn't be happier with the result.",
+    quote: "Het gipswerk dat ze in onze woonkamer hebben gedaan is werkelijk schitterend. Netjes, nauwkeurig en voor op schema opgeleverd. We zijn ontzettend tevreden met het resultaat.",
     name: 'Jan de Vries',
-    location: 'Amsterdam, NL',
+    location: 'Amsterdam',
   },
   {
-    quote: 'LAMAR transformed our entire ground floor. Professional team, excellent communication throughout, and the decoration work exceeded everything we imagined. Highly recommended.',
+    quote: 'LAMAR heeft onze hele begane grond getransformeerd. Een professioneel team, uitstekende communicatie van begin tot eind, en het decoratiewerk overtrof alles wat we ons hadden voorgesteld. Van harte aanbevolen.',
     name: 'Sophie Bakker',
-    location: 'Rotterdam, NL',
+    location: 'Rotterdam',
   },
   {
-    quote: "They restored our 1960s home beautifully — walls, ceilings, painting, everything. The attention to detail was remarkable. Will definitely use LAMAR again for our next project.",
+    quote: "Ze hebben ons jaren-'60 huis prachtig gerestaureerd — wanden, plafonds, schilderwerk, alles. De aandacht voor detail was opmerkelijk. We schakelen LAMAR zeker weer in voor ons volgende project.",
     name: 'Mark Timmers',
-    location: 'Utrecht, NL',
+    location: 'Utrecht',
   },
 ]
 

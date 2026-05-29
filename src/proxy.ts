@@ -1,6 +1,8 @@
 import { getToken } from 'next-auth/jwt'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { canAccess } from '@/lib/permissions'
+import type { Role } from '@/generated/prisma/client'
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
@@ -19,6 +21,11 @@ export async function proxy(request: NextRequest) {
 
   if (isLoginPage) {
     return NextResponse.redirect(new URL('/admin', request.url))
+  }
+
+  const role = token.role as Role | undefined
+  if (role && !canAccess(role, pathname)) {
+    return NextResponse.redirect(new URL('/admin?denied=1', request.url))
   }
 
   return NextResponse.next()

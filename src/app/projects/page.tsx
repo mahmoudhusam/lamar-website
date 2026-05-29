@@ -1,5 +1,4 @@
 import { prisma } from '@/lib/prisma'
-import { getLanguage } from '@/lib/content'
 import { t } from '@/lib/i18n'
 import Navbar from '@/components/public/Navbar'
 import Footer from '@/components/public/Footer'
@@ -8,7 +7,7 @@ import Link from 'next/link'
 export const revalidate = 3600
 
 export default async function ProjectsPage() {
-  const lang = await getLanguage()
+  const lang = 'nl' as const
   const tr = t[lang].projectsPage
 
   const projects = await prisma.project.findMany({

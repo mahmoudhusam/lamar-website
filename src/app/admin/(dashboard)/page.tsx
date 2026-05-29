@@ -3,7 +3,14 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 
-export default async function AdminDashboard() {
+export default async function AdminDashboard({
+  searchParams,
+}: {
+  searchParams: Promise<{ denied?: string }>
+}) {
+  const params = await searchParams
+  const denied = params.denied === '1'
+
   const session = await getServerSession(authOptions)
 
   const [galleryCount, contentCount, settings] = await Promise.all([
@@ -23,12 +30,18 @@ export default async function AdminDashboard() {
 
   return (
     <div>
+      {denied && (
+        <div style={{ background: 'rgba(224,92,92,0.1)', border: '1px solid rgba(224,92,92,0.35)', borderRadius: 6, padding: '0.75rem 1rem', marginBottom: '1.5rem', color: '#E05C5C', fontSize: '0.85rem' }}>
+          You don&apos;t have permission to access that page.
+        </div>
+      )}
+
       <div style={{ marginBottom: '2rem' }}>
         <h1 style={{ color: '#F2EEE6', fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.25rem' }}>
           Dashboard
         </h1>
         <p style={{ color: '#6B6B68', fontSize: '0.85rem' }}>
-          Welcome back, {session?.user?.email}
+          Welcome back, {session?.user?.name ?? session?.user?.email}
         </p>
       </div>
 
