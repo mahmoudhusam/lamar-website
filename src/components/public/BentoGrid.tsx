@@ -148,10 +148,10 @@ export default function BentoGrid({ slots, specialtyLabel, specialtyText, ctaLab
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <span style={{ fontSize: '0.72rem', color: 'var(--white2)', letterSpacing: '0.08em' }}>
-                      {popupImages.length} photo{popupImages.length !== 1 ? 's' : ''}
+                      {popupImages.length} foto{popupImages.length !== 1 ? "'s" : ''}
                     </span>
                     <span style={{ fontSize: '0.72rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--teal2)', fontFamily: 'var(--font-archivo)', fontWeight: 600 }}>
-                      View Project →
+                      Bekijk project →
                     </span>
                   </div>
                 </div>

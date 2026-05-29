@@ -13,13 +13,11 @@ export default async function AdminDashboard({
 
   const session = await getServerSession(authOptions)
 
-  const [galleryCount, contentCount, settings] = await Promise.all([
+  const [galleryCount, contentCount, projectCount] = await Promise.all([
     prisma.galleryItem.count(),
     prisma.content.count(),
-    prisma.settings.findUnique({ where: { id: 'default' } }),
-  ]).catch(() => [0, 0, null] as const)
-
-  const langLabel = settings?.language === 'en' ? 'English' : 'Nederlands'
+    prisma.project.count({ where: { published: true } }),
+  ]).catch(() => [0, 0, 0] as const)
 
   const quickActions = [
     { href: '/admin/gallery',      emoji: '🖼️', title: 'Manage Gallery',    sub: 'Upload & reorder project photos' },
@@ -49,7 +47,7 @@ export default async function AdminDashboard({
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', marginBottom: '2.5rem' }}>
         <StatCard label="Gallery Photos" value={String(galleryCount)} />
         <StatCard label="Content Blocks" value={String(contentCount)} />
-        <StatCard label="Site Language" value={langLabel} teal />
+        <StatCard label="Published Projects" value={String(projectCount)} teal />
       </div>
 
       {/* Quick actions */}
