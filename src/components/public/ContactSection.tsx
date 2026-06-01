@@ -6,8 +6,8 @@ const contactFallbacks: Record<string, string> = {
   contact_phone:     '+31 00 000 0000',
   contact_whatsapp:  '+31 00 000 0000',
   contact_email:     'info@lamar-renovatie.nl',
-  contact_location:  'The Netherlands',
-  contact_hours:     'Mon – Sat · 08:00 – 18:00',
+  contact_location:  'Nederland',
+  contact_hours:     'Ma – Za · 08:00 – 18:00',
 }
 
 export default async function ContactSection({ lang }: { lang: Lang }) {
