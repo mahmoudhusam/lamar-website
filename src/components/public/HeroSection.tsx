@@ -1,7 +1,5 @@
 import { t, type Lang } from '@/lib/i18n'
 
-const P = 'https://images.pexels.com/photos'
-
 export default function HeroSection({ lang }: { lang: Lang }) {
   const tr = t[lang].hero
 
@@ -10,25 +8,58 @@ export default function HeroSection({ lang }: { lang: Lang }) {
       id="hero"
       style={{
         minHeight: '100vh',
-        display: 'grid',
-        gridTemplateColumns: '52% 48%',
-        background: 'var(--bg)',
-        overflow: 'hidden',
+        position: 'relative',
+        background: 'var(--bg2)',
         paddingTop: 75,
+        overflow: 'hidden',
+        display: 'flex',
+        alignItems: 'center',
       }}
     >
-      {/* Left */}
+      {/* Background video */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        poster=""
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          zIndex: 0,
+        }}
+      >
+        <source src="/hero-placeholder.mp4" type="video/mp4" />
+      </video>
+
+      {/* Dark overlay */}
       <div
         style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to top, rgba(12,12,10,0.92) 0%, rgba(12,12,10,0.55) 45%, rgba(12,12,10,0.7) 100%)',
+          zIndex: 1,
+        }}
+      />
+
+      {/* Foreground content */}
+      <div
+        style={{
+          position: 'relative',
+          zIndex: 2,
+          width: '100%',
+          maxWidth: 860,
+          margin: '0 auto',
+          padding: '5rem 3.5rem',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          padding: '5rem 3rem 5rem 3.5rem',
-          position: 'relative',
-          zIndex: 2,
         }}
       >
-        {/* Tag */}
+        {/* Trust badge */}
         <div
           className="rv"
           style={{
@@ -43,49 +74,48 @@ export default function HeroSection({ lang }: { lang: Lang }) {
           }}
         >
           <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--teal2)', flexShrink: 0 }} />
-          {tr.tag}
+          {tr.trustBadge}
         </div>
 
-        {/* Title */}
+        {/* H1 */}
         <h1
           className="rv d1"
           style={{
             fontFamily: 'var(--font-archivo)',
             fontWeight: 900,
-            fontSize: 'clamp(3rem,5.8vw,6.5rem)',
-            lineHeight: 0.92,
+            fontSize: 'clamp(2.8rem, 6vw, 5.5rem)',
+            lineHeight: 0.95,
             letterSpacing: '-0.02em',
             color: 'var(--white)',
-            textTransform: 'uppercase',
-            marginBottom: '2.5rem',
+            marginBottom: '1.75rem',
           }}
         >
-          {tr.h1a}
+          {tr.headlineA}
           <br />
-          <span style={{ color: 'var(--teal2)' }}>{tr.h1b}</span>
-          <br />
-          <span>{tr.h1c}</span>
+          <span style={{ color: 'var(--teal2)' }}>{tr.headlineB}</span>
         </h1>
 
-        {/* Description */}
+        {/* Sub */}
         <p
           className="rv d2"
           style={{
-            fontSize: '0.95rem',
-            lineHeight: 1.78,
-            color: 'var(--white2)',
+            fontFamily: 'var(--font-outfit)',
+            fontSize: '1.05rem',
+            lineHeight: 1.7,
+            color: 'var(--white)',
+            opacity: 0.85,
             fontWeight: 300,
-            maxWidth: 380,
+            maxWidth: 520,
             marginBottom: '2.5rem',
           }}
         >
-          {tr.desc}
+          {tr.sub}
         </p>
 
-        {/* CTAs */}
-        <div className="rv d2" style={{ display: 'flex', gap: '0.75rem' }}>
+        {/* CTA row */}
+        <div className="rv d2" style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
           <a
-            href="#our-work"
+            href="#contact"
             className="btn-fill"
             style={{
               background: 'var(--white)',
@@ -102,10 +132,10 @@ export default function HeroSection({ lang }: { lang: Lang }) {
               transition: 'background 0.2s, color 0.2s',
             }}
           >
-            {tr.seeWork}
+            {tr.quoteCta}
           </a>
           <a
-            href="#contact"
+            href="#process"
             className="btn-line"
             style={{
               border: '1px solid var(--border2)',
@@ -122,78 +152,27 @@ export default function HeroSection({ lang }: { lang: Lang }) {
               transition: 'border-color 0.2s, color 0.2s',
             }}
           >
-            {tr.getQuote}
+            {tr.processCta}
           </a>
         </div>
 
-        {/* Stats */}
-        <div
-          className="rv d3"
+        {/* WhatsApp link — replace 000000000000 with real number */}
+        <a
+          className="rv d2"
+          href="https://wa.me/000000000000"
           style={{
-            display: 'flex',
-            gap: '2.5rem',
-            marginTop: '3.5rem',
-            paddingTop: '2rem',
-            borderTop: '1px solid var(--border)',
+            color: 'var(--teal2)',
+            textDecoration: 'none',
+            fontSize: '0.82rem',
+            fontFamily: 'var(--font-outfit)',
+            fontWeight: 400,
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.4rem',
           }}
         >
-          {[
-            { n: '200+', l: tr.statProjects },
-            { n: '12+',  l: tr.statYears    },
-            { n: '100%', l: tr.statSatisfaction },
-          ].map(({ n, l }) => (
-            <div key={l}>
-              <span
-                style={{
-                  fontFamily: 'var(--font-archivo)',
-                  fontSize: '1.8rem',
-                  fontWeight: 800,
-                  color: 'var(--white)',
-                  lineHeight: 1,
-                  display: 'block',
-                }}
-              >
-                {n}
-              </span>
-              <span
-                style={{
-                  fontSize: '0.62rem',
-                  letterSpacing: '0.12em',
-                  textTransform: 'uppercase',
-                  color: 'var(--white2)',
-                  display: 'block',
-                  marginTop: 3,
-                }}
-              >
-                {l}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Right — image panel */}
-      <div className="rvl" style={{ position: 'relative', overflow: 'hidden' }}>
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            backgroundColor: '#2A5048',
-            backgroundImage: `url('${P}/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, transparent 45%, var(--bg) 100%)' }} />
-        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '35%', background: 'linear-gradient(to top, var(--bg) 0%, transparent 100%)' }} />
-        <div style={{ position: 'absolute', bottom: '3rem', left: '2rem', right: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-          <span style={{ fontSize: '0.6rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(242,238,230,0.35)' }}>
-            {tr.badge}
-          </span>
-          <span style={{ background: 'var(--teal)', color: 'var(--white)', fontSize: '0.65rem', letterSpacing: '0.12em', textTransform: 'uppercase', padding: '0.45rem 1rem', borderRadius: 2, fontFamily: 'var(--font-archivo)', fontWeight: 500 }}>
-            Est. 2013
-          </span>
-        </div>
+          📲 {tr.whatsappCta}
+        </a>
       </div>
     </section>
   )

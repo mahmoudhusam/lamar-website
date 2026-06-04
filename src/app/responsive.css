@@ -13,7 +13,7 @@ section, footer, nav {
 /* ── Tablet: 768–1023px ───────────────────────────────────────────────────────── */
 @media (max-width: 1023px) {
   nav                              { padding: 1rem 1.5rem !important; }
-  #hero                            { padding: 5rem 1.5rem 4rem !important; }
+  #hero                            { padding: 5rem 1.5rem 4rem !important; align-items: center; }
   #services                        { padding: 5rem 1.5rem !important; }
   #services > div:last-child       { grid-template-columns: repeat(2, 1fr) !important; }
   #about                           { padding: 6rem 1.5rem !important; grid-template-columns: 1fr !important; gap: 3rem !important; }
@@ -29,9 +29,8 @@ section, footer, nav {
 @media (max-width: 767px) {
   nav                              { padding: 0.9rem 1.25rem !important; }
 
-  /* Hero: single column, no ghost column, hide right panel */
-  #hero                            { grid-template-columns: 1fr !important; overflow: hidden !important; min-height: auto !important; padding: calc(75px + 1.5rem) 1.25rem 3rem !important; }
-  #hero > *:last-child             { display: none !important; width: 0 !important; }
+  /* Hero: full-screen video hero */
+  #hero                            { padding: calc(75px + 2rem) 1.25rem 3rem !important; min-height: 90vh !important; }
 
   /* Services: 1-col */
   #services                        { padding: 4rem 1.25rem !important; }

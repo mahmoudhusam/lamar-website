@@ -4,7 +4,7 @@ type ServiceItems = Record<string, { name: string; fallback: string }>
 
 interface Translations {
   nav: { about: string; services: string; ourWork: string; projects: string; contact: string; reviews: string; contactUs: string }
-  hero: { tag: string; h1a: string; h1b: string; h1c: string; desc: string; seeWork: string; getQuote: string; statProjects: string; statYears: string; statSatisfaction: string; badge: string }
+  hero: { tag: string; h1a: string; h1b: string; h1c: string; desc: string; seeWork: string; getQuote: string; statProjects: string; statYears: string; statSatisfaction: string; badge: string; trustBadge: string; headlineA: string; headlineB: string; sub: string; quoteCta: string; processCta: string; whatsappCta: string }
   ticker: Array<{ label: string; accent: boolean }>
   services: { tag: string; heading: string; headingTeal: string; learnMore: string; items: ServiceItems }
   about: { tag: string; heading: string; headingPre: string; headingTeal: string; quals: string[]; yearsLabel: string[]; projectsLabel: string[] }
@@ -49,6 +49,13 @@ export const t: Record<Lang, Translations> = {
       statYears: 'Years Active',
       statSatisfaction: 'Satisfaction',
       badge: 'Premium Renovation Work',
+      trustBadge:  'Over 200 projects completed across the Netherlands',
+      headlineA:   'Flawless plastering.',
+      headlineB:   'Clear agreements.',
+      sub:         'With every quote you know exactly where you stand — price, planning and approach, all clearly on the table.',
+      quoteCta:    'Request a quote',
+      processCta:  'Our process',
+      whatsappCta: 'Urgent job? Contact us directly on WhatsApp',
     },
     ticker: [
       { label: 'Gypsum Work',        accent: true  },
@@ -172,6 +179,13 @@ export const t: Record<Lang, Translations> = {
       statYears: 'Jaar actief',
       statSatisfaction: 'Tevredenheid',
       badge: 'Vakkundig renovatiewerk',
+      trustBadge:  'Meer dan 200 projecten voltooid in Nederland',
+      headlineA:   'Strak stucwerk.',
+      headlineB:   'Heldere afspraken.',
+      sub:         'Bij elke offerte weet u precies waar u aan toe bent — prijs, planning en aanpak, allemaal helder op tafel.',
+      quoteCta:    'Offerte aanvragen',
+      processCta:  'Onze werkwijze',
+      whatsappCta: 'Spoedklus? Direct contact via WhatsApp',
     },
     ticker: [
       { label: 'Gipswerk',               accent: true  },
