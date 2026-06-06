@@ -90,12 +90,12 @@ export default function WhatsAppSection({ lang }: { lang: Lang }) {
         </div>
 
         {/* Left column — hugs center strip */}
-        <div className="chat-col left" style={{ position: 'absolute', zIndex: 3, left: '3%', top: '26%', width: 'min(330px, 34%)', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+        <div className="chat-col left" style={{ position: 'absolute', zIndex: 3, left: '11%', top: '19%', width: 'min(320px, 30%)', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
           {left.map((b, i) => (<BubbleCard key={i} b={b} senderName={tr.senderName} delay={i * 0.15} />))}
         </div>
 
         {/* Right column — hugs center strip */}
-        <div className="chat-col right" style={{ position: 'absolute', zIndex: 3, right: '3%', top: '36%', width: 'min(330px, 34%)', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+        <div className="chat-col right" style={{ position: 'absolute', zIndex: 3, right: '11%', top: '40%', width: 'min(320px, 30%)', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
           {right.map((b, i) => (<BubbleCard key={i} b={b} senderName={tr.senderName} delay={(i + 2) * 0.15} />))}
         </div>
       </div>
