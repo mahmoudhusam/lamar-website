@@ -21,6 +21,7 @@ section, footer, nav {
   #our-work                        { padding: 5rem 1.5rem !important; }
   #testimonials                    { padding: 5rem 1.5rem !important; }
   #testimonials > div:last-child   { grid-template-columns: repeat(2, 1fr) !important; }
+  #how-it-works                    { padding: 5rem 1.5rem !important; grid-template-columns: 1fr !important; gap: 3rem !important; }
   #contact                         { padding: 6rem 1.5rem !important; grid-template-columns: 1fr !important; gap: 3rem !important; }
   footer                           { padding: 1.75rem 1.5rem !important; }
 }
@@ -53,6 +54,8 @@ section, footer, nav {
   /* Testimonials: 1-col */
   #testimonials                    { padding: 4rem 1.25rem !important; }
   #testimonials > div:last-child   { grid-template-columns: 1fr !important; }
+
+  #how-it-works                    { padding: 4rem 1.25rem !important; gap: 2.5rem !important; }
 
   /* Contact: 1-col, name+phone stack */
   #contact                         { padding: 4rem 1.25rem !important; gap: 2rem !important; }

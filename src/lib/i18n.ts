@@ -24,6 +24,16 @@ interface Translations {
   contact: { tag: string; h1: string; h2: string; h3: string; labels: Record<string, string> }
   contactForm: { nameLbl: string; namePh: string; phoneLbl: string; phonePh: string; emailLbl: string; emailPh: string; serviceLbl: string; servicePh: string; messageLbl: string; messagePh: string; send: string; sending: string; successTitle: string; successMsg: string }
   footer: { links: Array<{ label: string; href: string }>; copy: string }
+  chat: {
+    tag: string
+    heading: string
+    headingTeal: string
+    sub: string
+    cta: string
+    contactName: string
+    online: string
+    messages: Array<{ from: 'me' | 'them'; text: string; time: string }>
+  }
 }
 
 export const t: Record<Lang, Translations> = {
@@ -155,6 +165,23 @@ export const t: Record<Lang, Translations> = {
       ],
       copy: '© 2025 LAMAR Renovation & Decoration. All rights reserved.',
     },
+    chat: {
+      tag: 'How it works',
+      heading: 'All arranged via',
+      headingTeal: 'WhatsApp',
+      sub: 'No complicated forms or long waits. Send us a message, get a clear quote, and we schedule the job neatly.',
+      cta: 'Start on WhatsApp',
+      contactName: 'LAMAR Stukadoor',
+      online: 'online',
+      messages: [
+        { from: 'me',   text: 'Hi! I would like to have my living room plastered. 👋', time: '09:41' },
+        { from: 'them', text: 'Welcome to LAMAR! Send us a few photos of the space and we will prepare a custom quote.', time: '09:42' },
+        { from: 'me',   text: '📷 Photo sent', time: '09:43' },
+        { from: 'them', text: 'Great! Your quote is ready — price, planning and approach. When suits you?', time: '09:44' },
+        { from: 'me',   text: 'Next week would be perfect 🙌', time: '09:45' },
+        { from: 'them', text: 'Scheduled! We will make sure of a clean finish. ✅', time: '09:45' },
+      ],
+    },
   },
 
   nl: {
@@ -284,6 +311,23 @@ export const t: Record<Lang, Translations> = {
         { label: 'Contact',   href: '#contact'  },
       ],
       copy: '© 2025 LAMAR Stukadoor en Onderhoud. Alle rechten voorbehouden.',
+    },
+    chat: {
+      tag: 'Zo werkt het',
+      heading: 'Alles geregeld via',
+      headingTeal: 'WhatsApp',
+      sub: 'Geen ingewikkelde formulieren of lang wachten. Stuur ons een bericht, ontvang een heldere offerte en wij plannen de klus netjes in.',
+      cta: 'Start via WhatsApp',
+      contactName: 'LAMAR Stukadoor',
+      online: 'online',
+      messages: [
+        { from: 'me',   text: 'Hoi! Ik wil graag mijn woonkamer laten stucen. 👋', time: '09:41' },
+        { from: 'them', text: "Welkom bij LAMAR! Stuur ons een paar foto's van de ruimte, dan maken we een offerte op maat.", time: '09:42' },
+        { from: 'me',   text: '📷 Foto verzonden', time: '09:43' },
+        { from: 'them', text: 'Top! Uw offerte staat klaar — prijs, planning én aanpak. Wanneer komt het u uit?', time: '09:44' },
+        { from: 'me',   text: 'Volgende week zou perfect zijn 🙌', time: '09:45' },
+        { from: 'them', text: 'Ingepland! We zorgen voor een strakke oplevering. ✅', time: '09:45' },
+      ],
     },
   },
 }

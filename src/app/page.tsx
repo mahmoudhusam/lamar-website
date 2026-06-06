@@ -1,6 +1,7 @@
 import Navbar from '@/components/public/Navbar';
 import HeroSection from '@/components/public/HeroSection';
 import TickerSection from '@/components/public/TickerSection';
+import WhatsAppSection from '@/components/public/WhatsAppSection';
 import ServicesSection from '@/components/public/ServicesSection';
 import AboutSection from '@/components/public/AboutSection';
 import ProcessSection from '@/components/public/ProcessSection';
@@ -19,6 +20,7 @@ export default async function Home() {
       <main>
         <HeroSection lang={lang} />
         <TickerSection lang={lang} />
+        <WhatsAppSection lang={lang} />
         <ServicesSection lang={lang} />
         <AboutSection lang={lang} />
         <ProcessSection lang={lang} />
