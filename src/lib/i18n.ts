@@ -23,7 +23,7 @@ interface Translations {
   testimonials: { tag: string; heading: string; headingTeal: string }
   contact: { tag: string; h1: string; h2: string; h3: string; labels: Record<string, string> }
   contactForm: { nameLbl: string; namePh: string; phoneLbl: string; phonePh: string; emailLbl: string; emailPh: string; serviceLbl: string; servicePh: string; messageLbl: string; messagePh: string; send: string; sending: string; successTitle: string; successMsg: string }
-  footer: { links: Array<{ label: string; href: string }>; copy: string }
+  footer: { links: Array<{ label: string; href: string }>; pagesLabel: string; copy: string }
   chat: {
     tag: string
     heading: string
@@ -163,6 +163,7 @@ export const t: Record<Lang, Translations> = {
         { label: 'Projects', href: '/projects' },
         { label: 'Contact',  href: '#contact'  },
       ],
+      pagesLabel: 'Pages',
       copy: '© 2025 LAMAR Renovation & Decoration. All rights reserved.',
     },
     chat: {
@@ -310,6 +311,7 @@ export const t: Record<Lang, Translations> = {
         { label: 'Projecten', href: '/projects' },
         { label: 'Contact',   href: '#contact'  },
       ],
+      pagesLabel: "Pagina's",
       copy: '© 2025 LAMAR Stukadoor en Onderhoud. Alle rechten voorbehouden.',
     },
     chat: {
