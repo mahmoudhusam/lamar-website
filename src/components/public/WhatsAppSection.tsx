@@ -3,137 +3,100 @@
 import { useEffect, useRef, useState } from 'react'
 import { t, type Lang } from '@/lib/i18n'
 
+// Wide room background (the "sides"), and the center work strip poster
+const ROOM = 'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=1400&h=900&fit=crop'
+const POSTER = 'https://images.pexels.com/photos/5493654/pexels-photo-5493654.jpeg?auto=compress&cs=tinysrgb&w=700&h=1100&fit=crop'
+
+function Icon({ name }: { name?: string }) {
+  if (name === 'doc') return (<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>)
+  if (name === 'cal') return (<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>)
+  return (<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>)
+}
+
+type Bubble = { variant: 'note' | 'msg'; side: 'left' | 'right'; icon?: 'doc' | 'wa' | 'cal'; title?: string; text: string }
+
+function BubbleCard({ b, senderName, delay }: { b: Bubble; senderName: string; delay: number }) {
+  return (
+    <div className="chat-fb" style={{ animationDelay: `${delay}s`, background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, padding: '0.8rem 1rem', boxShadow: '0 16px 38px rgba(20,24,29,0.18)', display: 'flex', gap: '0.7rem', alignItems: b.variant === 'note' ? 'center' : 'flex-start' }}>
+      {b.variant === 'note' ? (
+        <span style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(42,191,168,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><Icon name={b.icon} /></span>
+      ) : (
+        <span style={{ position: 'relative', flexShrink: 0 }}>
+          <span style={{ width: 32, height: 32, borderRadius: '50%', background: 'var(--teal)', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-archivo)', fontWeight: 800, fontSize: '0.82rem' }}>L</span>
+          <span style={{ position: 'absolute', bottom: -2, right: -2, width: 14, height: 14, borderRadius: '50%', background: '#25D366', border: '2px solid #FFFFFF' }} />
+        </span>
+      )}
+      <div style={{ minWidth: 0 }}>
+        {b.variant === 'note' ? (
+          <div style={{ fontFamily: 'var(--font-archivo)', fontWeight: 700, fontSize: '0.85rem', color: 'var(--white)', marginBottom: 2 }}>{b.title}</div>
+        ) : (
+          <div style={{ fontWeight: 700, fontSize: '0.74rem', color: 'var(--white)', marginBottom: 2 }}>~ {senderName}</div>
+        )}
+        <div style={{ fontSize: '0.82rem', lineHeight: 1.4, color: 'var(--white2)', fontWeight: 300 }}>{b.text}</div>
+      </div>
+    </div>
+  )
+}
+
 export default function WhatsAppSection({ lang }: { lang: Lang }) {
   const tr = t[lang].chat
-  const total = tr.messages.length
-  const [visible, setVisible] = useState(0)
-  const [started, setStarted] = useState(false)
-  const sectionRef = useRef<HTMLElement>(null)
+  const [on, setOn] = useState(false)
+  const ref = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    const el = sectionRef.current
+    const el = ref.current
     if (!el) return
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setStarted(true)
-          obs.disconnect()
-        }
-      },
-      { threshold: 0.3 }
-    )
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setOn(true); obs.disconnect() } }, { threshold: 0.2 })
     obs.observe(el)
     return () => obs.disconnect()
   }, [])
 
-  useEffect(() => {
-    if (!started) return
-    const timers: ReturnType<typeof setTimeout>[] = []
-    const run = () => {
-      setVisible(0)
-      for (let i = 1; i <= total; i++) {
-        timers.push(setTimeout(() => setVisible(i), i * 1100))
-      }
-      timers.push(setTimeout(run, total * 1100 + 2800))
-    }
-    run()
-    return () => timers.forEach(clearTimeout)
-  }, [started, total])
+  const bubbles = tr.bubbles as Bubble[]
+  const left = bubbles.filter((b) => b.side === 'left')
+  const right = bubbles.filter((b) => b.side === 'right')
 
   return (
-    <section
-      id="how-it-works"
-      ref={sectionRef}
-      style={{
-        padding: '8rem 3.5rem',
-        background: 'var(--bg)',
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        gap: '5rem',
-        alignItems: 'center',
-      }}
-    >
+    <section id="how-it-works" ref={ref} className={on ? 'on' : ''} style={{ background: 'var(--bg)', padding: '5rem 3.5rem' }}>
       <style>{`
-        @keyframes chatIn {
-          from { opacity: 0; transform: translateY(12px) scale(0.96); }
-          to   { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        .chat-bubble { animation: chatIn 0.45s cubic-bezier(0.22,1,0.36,1) both; }
-        @keyframes pulseDot { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+        @keyframes fbIn { from { opacity: 0; transform: translateY(18px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        .chat-fb { opacity: 0; }
+        #how-it-works.on .chat-fb { animation: fbIn 0.55s cubic-bezier(0.22,1,0.36,1) forwards; }
       `}</style>
 
-      {/* Left: intro */}
-      <div>
-        <div className="rv" style={{ fontSize: '0.63rem', letterSpacing: '0.24em', textTransform: 'uppercase', color: 'var(--teal2)', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-          <span style={{ display: 'block', width: '1.5rem', height: 1, background: 'var(--teal2)', flexShrink: 0 }} />
-          {tr.tag}
+      <div className="chat-stage" style={{ position: 'relative', maxWidth: 1180, height: 720, margin: '0 auto' }}>
+        {/* Wide room background */}
+        <div className="chat-bg" style={{ position: 'absolute', inset: 0, borderRadius: 28, overflow: 'hidden', backgroundImage: `url('${ROOM}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'rgba(255,255,255,0.16)' }} />
         </div>
-        <h2 className="rv d1" style={{ fontFamily: 'var(--font-archivo)', fontWeight: 800, fontSize: 'clamp(1.9rem,3vw,2.8rem)', lineHeight: 1.06, letterSpacing: '-0.01em', color: 'var(--white)', marginBottom: '1.5rem' }}>
-          {tr.heading} <span style={{ color: 'var(--teal2)' }}>{tr.headingTeal}</span>
-        </h2>
-        <p className="rv d2" style={{ fontSize: '0.98rem', lineHeight: 1.8, color: 'var(--white2)', fontWeight: 300, maxWidth: 440, marginBottom: '2.25rem' }}>
-          {tr.sub}
-        </p>
-        {/* WhatsApp CTA — replace 000000000000 with the client's real number */}
-        <a
-          className="rv d3 btn-fill"
-          href="https://wa.me/000000000000"
-          style={{ background: 'var(--white)', color: 'var(--bg)', padding: '0.875rem 2rem', fontFamily: 'var(--font-outfit)', fontSize: '0.8rem', letterSpacing: '0.08em', textTransform: 'uppercase', textDecoration: 'none', fontWeight: 500, borderRadius: 2, display: 'inline-flex', alignItems: 'center', gap: '0.5rem', transition: 'background 0.2s, color 0.2s' }}
-        >
-          📲 {tr.cta}
-        </a>
-      </div>
 
-      {/* Right: phone mockup */}
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <div style={{ width: 300, height: 600, background: '#0a0a08', borderRadius: 44, padding: 12, border: '1px solid var(--border2)', boxShadow: '0 30px 70px rgba(0,0,0,0.55)', flexShrink: 0 }}>
-          <div style={{ width: '100%', height: '100%', borderRadius: 32, overflow: 'hidden', display: 'flex', flexDirection: 'column', background: 'var(--bg2)' }}>
-            {/* Header */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.7rem', padding: '0.9rem 1rem', background: 'var(--bg3)', borderBottom: '1px solid var(--border)' }}>
-              <span style={{ color: 'var(--white2)', fontSize: '1.1rem', lineHeight: 1 }}>‹</span>
-              <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'var(--teal)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-archivo)', fontWeight: 800, fontSize: '0.95rem', color: 'var(--white)', flexShrink: 0 }}>L</div>
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontFamily: 'var(--font-archivo)', fontWeight: 600, fontSize: '0.82rem', color: 'var(--white)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{tr.contactName}</div>
-                <div style={{ fontSize: '0.62rem', color: 'var(--teal2)' }}>{tr.online}</div>
-              </div>
-              <span style={{ color: 'var(--white2)', fontSize: '0.9rem' }}>📞</span>
-            </div>
-
-            {/* Chat area */}
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', gap: 8, padding: '0.9rem', overflow: 'hidden' }}>
-              {tr.messages.slice(0, visible).map((m, i) => {
-                const mine = m.from === 'me'
-                return (
-                  <div
-                    key={i}
-                    className="chat-bubble"
-                    style={{
-                      alignSelf: mine ? 'flex-end' : 'flex-start',
-                      maxWidth: '80%',
-                      background: mine ? 'var(--teal)' : 'var(--bg3)',
-                      color: 'var(--white)',
-                      border: mine ? 'none' : '1px solid var(--border)',
-                      borderRadius: 14,
-                      borderBottomRightRadius: mine ? 4 : 14,
-                      borderBottomLeftRadius: mine ? 14 : 4,
-                      padding: '0.5rem 0.7rem',
-                    }}
-                  >
-                    <div style={{ fontSize: '0.78rem', lineHeight: 1.45, fontWeight: 300 }}>{m.text}</div>
-                    <div style={{ fontSize: '0.58rem', opacity: 0.6, marginTop: 3, textAlign: 'right' }}>
-                      {m.time}{mine ? ' ✓✓' : ''}
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-
-            {/* Input bar (decorative) */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '0.7rem 0.9rem', background: 'var(--bg3)', borderTop: '1px solid var(--border)' }}>
-              <div style={{ flex: 1, background: 'var(--bg)', borderRadius: 20, padding: '0.5rem 0.85rem', fontSize: '0.72rem', color: 'var(--white3)' }}>Typ een bericht…</div>
-              <div style={{ width: 34, height: 34, borderRadius: '50%', background: 'var(--teal)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--white)', fontSize: '0.85rem', flexShrink: 0 }}>➤</div>
-            </div>
+        {/* Center portrait work strip (video) */}
+        <div className="chat-strip" style={{ position: 'absolute', top: '8%', left: '50%', transform: 'translateX(-50%)', width: 410, height: '84%', borderRadius: 18, overflow: 'hidden', boxShadow: '0 24px 60px rgba(20,24,29,0.30)', zIndex: 1 }}>
+          <video autoPlay muted loop playsInline poster={POSTER} style={{ width: '100%', height: '100%', objectFit: 'cover' }}>
+            <source src="/work-placeholder.mp4" type="video/mp4" />
+          </video>
+          <div style={{ position: 'absolute', top: 12, left: '50%', transform: 'translateX(-50%)', width: 34, height: 34, borderRadius: 8, background: 'rgba(255,255,255,0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#14181D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
           </div>
+        </div>
+
+        {/* Top gradient for heading legibility */}
+        <div className="chat-grad" style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '42%', borderTopLeftRadius: 28, borderTopRightRadius: 28, background: 'linear-gradient(to bottom, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.55) 50%, rgba(255,255,255,0) 100%)', zIndex: 2 }} />
+
+        {/* Heading */}
+        <div className="chat-head" style={{ position: 'absolute', top: '4%', left: '50%', transform: 'translateX(-50%)', zIndex: 4, textAlign: 'center', width: 'min(620px, 92%)' }}>
+          <h2 style={{ fontFamily: 'var(--font-archivo)', fontWeight: 800, fontSize: 'clamp(2rem,3.6vw,3.2rem)', lineHeight: 1.05, letterSpacing: '-0.01em', color: 'var(--white)', margin: 0 }}>
+            {tr.heading} <span style={{ color: 'var(--teal2)' }}>{tr.headingTeal}</span>
+          </h2>
+        </div>
+
+        {/* Left column — hugs center strip */}
+        <div className="chat-col left" style={{ position: 'absolute', zIndex: 3, left: '3%', top: '26%', width: 'min(330px, 34%)', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+          {left.map((b, i) => (<BubbleCard key={i} b={b} senderName={tr.senderName} delay={i * 0.15} />))}
+        </div>
+
+        {/* Right column — hugs center strip */}
+        <div className="chat-col right" style={{ position: 'absolute', zIndex: 3, right: '3%', top: '36%', width: 'min(330px, 34%)', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+          {right.map((b, i) => (<BubbleCard key={i} b={b} senderName={tr.senderName} delay={(i + 2) * 0.15} />))}
         </div>
       </div>
     </section>

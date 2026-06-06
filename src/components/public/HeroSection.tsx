@@ -7,172 +7,72 @@ export default function HeroSection({ lang }: { lang: Lang }) {
     <section
       id="hero"
       style={{
-        minHeight: '100vh',
-        position: 'relative',
-        background: 'var(--bg2)',
-        paddingTop: 75,
-        overflow: 'hidden',
-        display: 'flex',
+        minHeight: '88vh',
+        background: 'var(--bg)',
+        padding: '7rem 3.5rem 4rem',
+        display: 'grid',
+        gridTemplateColumns: '1.05fr 0.95fr',
+        gap: '3.5rem',
         alignItems: 'center',
       }}
     >
-      {/* Background video */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        poster=""
-        style={{
-          position: 'absolute',
-          inset: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          zIndex: 0,
-        }}
-      >
-        <source src="/hero-placeholder.mp4" type="video/mp4" />
-      </video>
-
-      {/* Dark overlay */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'linear-gradient(to top, rgba(12,12,10,0.92) 0%, rgba(12,12,10,0.55) 45%, rgba(12,12,10,0.7) 100%)',
-          zIndex: 1,
-        }}
-      />
-
-      {/* Foreground content */}
-      <div
-        style={{
-          position: 'relative',
-          zIndex: 2,
-          width: '100%',
-          maxWidth: 860,
-          margin: '0 auto',
-          padding: '5rem 3.5rem',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-        }}
-      >
-        {/* Trust badge */}
+      {/* Left */}
+      <div>
+        {/* Trust / star pill */}
         <div
           className="rv"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.6rem',
-            fontSize: '0.68rem',
-            letterSpacing: '0.22em',
-            textTransform: 'uppercase',
-            color: 'var(--teal2)',
-            marginBottom: '2rem',
-          }}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 999, padding: '0.5rem 1rem', boxShadow: '0 4px 16px rgba(20,24,29,0.05)', marginBottom: '1.75rem' }}
         >
-          <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--teal2)', flexShrink: 0 }} />
-          {tr.trustBadge}
+          <span style={{ display: 'inline-flex', gap: 2 }}>
+            {[0, 1, 2, 3, 4].map((i) => (
+              <span key={i} style={{ color: 'var(--teal2)', fontSize: '0.9rem' }}>★</span>
+            ))}
+          </span>
+          <span style={{ fontSize: '0.78rem', color: 'var(--white)', fontWeight: 500 }}>{tr.trustBadge}</span>
         </div>
 
-        {/* H1 */}
+        {/* Headline */}
         <h1
           className="rv d1"
-          style={{
-            fontFamily: 'var(--font-archivo)',
-            fontWeight: 900,
-            fontSize: 'clamp(2.8rem, 6vw, 5.5rem)',
-            lineHeight: 0.95,
-            letterSpacing: '-0.02em',
-            color: 'var(--white)',
-            marginBottom: '1.75rem',
-          }}
+          style={{ fontFamily: 'var(--font-archivo)', fontWeight: 900, fontSize: 'clamp(2.6rem, 5vw, 5rem)', lineHeight: 1.02, letterSpacing: '-0.02em', color: 'var(--white)', marginBottom: '1.5rem' }}
         >
           {tr.headlineA}
           <br />
-          <span style={{ color: 'var(--teal2)' }}>{tr.headlineB}</span>
+          <span style={{ color: 'var(--teal2)', textDecoration: 'underline', textDecorationThickness: '5px', textUnderlineOffset: '8px' }}>{tr.headlineB}</span>
         </h1>
 
         {/* Sub */}
         <p
           className="rv d2"
-          style={{
-            fontFamily: 'var(--font-outfit)',
-            fontSize: '1.05rem',
-            lineHeight: 1.7,
-            color: 'var(--white)',
-            opacity: 0.85,
-            fontWeight: 300,
-            maxWidth: 520,
-            marginBottom: '2.5rem',
-          }}
+          style={{ fontFamily: 'var(--font-outfit)', fontSize: '1.05rem', lineHeight: 1.7, color: 'var(--white2)', fontWeight: 300, maxWidth: 480, marginBottom: '2.25rem' }}
         >
           {tr.sub}
         </p>
 
-        {/* CTA row */}
-        <div className="rv d2" style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
-          <a
-            href="#contact"
-            className="btn-fill"
-            style={{
-              background: 'var(--white)',
-              color: 'var(--bg)',
-              padding: '0.875rem 2rem',
-              fontFamily: 'var(--font-outfit)',
-              fontSize: '0.8rem',
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-              fontWeight: 500,
-              borderRadius: 2,
-              display: 'inline-block',
-              transition: 'background 0.2s, color 0.2s',
-            }}
-          >
+        {/* CTAs */}
+        <div className="rv d2" style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
+          <a href="#contact" className="btn-teal" style={{ background: 'var(--teal)', color: '#FFFFFF', padding: '0.95rem 2rem', fontFamily: 'var(--font-outfit)', fontSize: '0.82rem', letterSpacing: '0.04em', textTransform: 'uppercase', textDecoration: 'none', fontWeight: 700, borderRadius: 999, display: 'inline-block', transition: 'background 0.2s' }}>
             {tr.quoteCta}
           </a>
-          <a
-            href="#process"
-            className="btn-line"
-            style={{
-              border: '1px solid var(--border2)',
-              color: 'var(--white2)',
-              padding: '0.875rem 2rem',
-              fontFamily: 'var(--font-outfit)',
-              fontSize: '0.8rem',
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-              fontWeight: 400,
-              borderRadius: 2,
-              display: 'inline-block',
-              transition: 'border-color 0.2s, color 0.2s',
-            }}
-          >
+          <a href="#process" className="btn-outline" style={{ border: '1px solid var(--border2)', color: 'var(--white)', padding: '0.95rem 2rem', fontFamily: 'var(--font-outfit)', fontSize: '0.82rem', letterSpacing: '0.04em', textTransform: 'uppercase', textDecoration: 'none', fontWeight: 600, borderRadius: 999, display: 'inline-block', transition: 'border-color 0.2s, color 0.2s' }}>
             {tr.processCta}
           </a>
         </div>
 
-        {/* WhatsApp link — replace 000000000000 with real number */}
-        <a
-          className="rv d2"
-          href="https://wa.me/000000000000"
-          style={{
-            color: 'var(--teal2)',
-            textDecoration: 'none',
-            fontSize: '0.82rem',
-            fontFamily: 'var(--font-outfit)',
-            fontWeight: 400,
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.4rem',
-          }}
-        >
+        {/* WhatsApp — replace 000000000000 with the client's real number */}
+        <a className="rv d2" href="https://wa.me/000000000000" style={{ color: 'var(--teal)', textDecoration: 'none', fontSize: '0.85rem', fontFamily: 'var(--font-outfit)', fontWeight: 500, display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
           📲 {tr.whatsappCta}
         </a>
+      </div>
+
+      {/* Right: rounded video card */}
+      <div className="rv" style={{ position: 'relative', width: '100%', aspectRatio: '4/5', borderRadius: 24, overflow: 'hidden', boxShadow: '0 30px 60px rgba(20,24,29,0.18)', background: 'var(--bg2)' }}>
+        <video autoPlay muted loop playsInline poster="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}>
+          <source src="/hero-placeholder.mp4" type="video/mp4" />
+        </video>
+        <div style={{ position: 'absolute', top: 16, right: 16, width: 34, height: 34, borderRadius: 8, background: 'rgba(20,24,29,0.45)', backdropFilter: 'blur(6px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+        </div>
       </div>
     </section>
   )

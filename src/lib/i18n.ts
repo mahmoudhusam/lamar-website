@@ -30,9 +30,8 @@ interface Translations {
     headingTeal: string
     sub: string
     cta: string
-    contactName: string
-    online: string
-    messages: Array<{ from: 'me' | 'them'; text: string; time: string }>
+    senderName: string
+    bubbles: Array<{ variant: 'note' | 'msg'; side: 'left' | 'right'; icon?: 'doc' | 'wa' | 'cal'; title?: string; text: string }>
   }
 }
 
@@ -172,15 +171,16 @@ export const t: Record<Lang, Translations> = {
       headingTeal: 'WhatsApp',
       sub: 'No complicated forms or long waits. Send us a message, get a clear quote, and we schedule the job neatly.',
       cta: 'Start on WhatsApp',
-      contactName: 'LAMAR Stukadoor',
-      online: 'online',
-      messages: [
-        { from: 'me',   text: 'Hi! I would like to have my living room plastered. 👋', time: '09:41' },
-        { from: 'them', text: 'Welcome to LAMAR! Send us a few photos of the space and we will prepare a custom quote.', time: '09:42' },
-        { from: 'me',   text: '📷 Photo sent', time: '09:43' },
-        { from: 'them', text: 'Great! Your quote is ready — price, planning and approach. When suits you?', time: '09:44' },
-        { from: 'me',   text: 'Next week would be perfect 🙌', time: '09:45' },
-        { from: 'them', text: 'Scheduled! We will make sure of a clean finish. ✅', time: '09:45' },
+      senderName: 'LAMAR Stukadoor',
+      bubbles: [
+        { variant: 'note', side: 'left',  icon: 'doc', title: 'Quote request',    text: 'Your quote, straight in the app' },
+        { variant: 'msg',  side: 'left',                                           text: 'Here is your quote, attached 📎' },
+        { variant: 'msg',  side: 'left',                                           text: 'Quote 2026-142' },
+        { variant: 'note', side: 'left',  icon: 'cal', title: 'Planning',         text: 'Which date suits you?' },
+        { variant: 'msg',  side: 'left',                                           text: 'December 12th is booked! ✅' },
+        { variant: 'note', side: 'right', icon: 'wa',  title: 'WhatsApp contact', text: 'Updates, planning and questions?' },
+        { variant: 'msg',  side: 'right',                                          text: "We're on our way! 🚐" },
+        { variant: 'msg',  side: 'right',                                          text: 'You can come by for the handover 🔑' },
       ],
     },
   },
@@ -320,15 +320,16 @@ export const t: Record<Lang, Translations> = {
       headingTeal: 'WhatsApp',
       sub: 'Geen ingewikkelde formulieren of lang wachten. Stuur ons een bericht, ontvang een heldere offerte en wij plannen de klus netjes in.',
       cta: 'Start via WhatsApp',
-      contactName: 'LAMAR Stukadoor',
-      online: 'online',
-      messages: [
-        { from: 'me',   text: 'Hoi! Ik wil graag mijn woonkamer laten stucen. 👋', time: '09:41' },
-        { from: 'them', text: "Welkom bij LAMAR! Stuur ons een paar foto's van de ruimte, dan maken we een offerte op maat.", time: '09:42' },
-        { from: 'me',   text: '📷 Foto verzonden', time: '09:43' },
-        { from: 'them', text: 'Top! Uw offerte staat klaar — prijs, planning én aanpak. Wanneer komt het u uit?', time: '09:44' },
-        { from: 'me',   text: 'Volgende week zou perfect zijn 🙌', time: '09:45' },
-        { from: 'them', text: 'Ingepland! We zorgen voor een strakke oplevering. ✅', time: '09:45' },
+      senderName: 'LAMAR Stukadoor',
+      bubbles: [
+        { variant: 'note', side: 'left',  icon: 'doc', title: 'Offerte aanvraag',  text: 'Uw offerte, direct in de app' },
+        { variant: 'msg',  side: 'left',                                            text: 'Hierbij stuur ik u de offerte in de bijlage 📎' },
+        { variant: 'msg',  side: 'left',                                            text: 'Offerte 2026-142' },
+        { variant: 'note', side: 'left',  icon: 'cal', title: 'Planning',          text: 'Welke datum komt u uit?' },
+        { variant: 'msg',  side: 'left',                                            text: '12 december staat genoteerd! ✅' },
+        { variant: 'note', side: 'right', icon: 'wa',  title: 'WhatsApp contact',  text: 'Updates, planning en vragen?' },
+        { variant: 'msg',  side: 'right',                                           text: 'We zijn onderweg! 🚐' },
+        { variant: 'msg',  side: 'right',                                           text: 'U kunt langs komen voor de oplevering 🔑' },
       ],
     },
   },

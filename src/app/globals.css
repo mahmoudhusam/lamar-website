@@ -60,8 +60,10 @@ body {
 .rv.d4 { transition-delay: 0.48s; }
 
 /* ── Hover effects for server components ──────────── */
-.btn-fill:hover  { background: var(--teal2) !important; color: var(--white) !important; }
-.btn-line:hover  { border-color: var(--white) !important; color: var(--white) !important; }
+.btn-fill:hover    { background: var(--teal2) !important; color: var(--white) !important; }
+.btn-line:hover    { border-color: var(--white) !important; color: var(--white) !important; }
+.btn-teal:hover    { background: var(--teal2) !important; }
+.btn-outline:hover { border-color: var(--teal) !important; color: var(--teal) !important; }
 .nav-link:hover  { color: var(--white) !important; }
 .nav-cta:hover   { background: var(--teal2) !important; }
 .svc-card:hover  { border-color: var(--teal2) !important; transform: translateY(-4px); }
