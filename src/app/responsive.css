@@ -18,6 +18,9 @@ section, footer, nav {
   #services > div:last-child       { grid-template-columns: repeat(2, 1fr) !important; }
   #about                           { padding: 6rem 1.5rem !important; grid-template-columns: 1fr !important; gap: 3rem !important; }
   #process                         { padding: 5rem 1.5rem !important; }
+  #benefits                        { padding: 5rem 1.5rem !important; }
+  #benefits .ben-grid              { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+  #benefits .ben-img               { height: 420px !important; }
   #our-work                        { padding: 5rem 1.5rem !important; }
   #testimonials                    { padding: 5rem 1.5rem !important; }
   #testimonials > div:last-child   { grid-template-columns: repeat(2, 1fr) !important; }
@@ -48,9 +51,11 @@ section, footer, nav {
   #about                           { padding: 4rem 1.25rem !important; gap: 2rem !important; }
   #about > div:last-child          { display: none !important; }
 
-  /* Process: hide connecting line, 2-col steps */
+  /* Process: 1-col grid on mobile */
   #process                         { padding: 4rem 1.25rem !important; }
-  #process > div:last-child        { grid-template-columns: repeat(2, 1fr) !important; gap: 2rem !important; }
+  #benefits                        { padding: 4rem 1.25rem !important; }
+  #benefits .ben-img               { height: 320px !important; }
+  #process .proc-grid              { grid-template-columns: 1fr !important; }
   .process-line                    { display: none !important; }
 
   /* Gallery: flat 2-col, reset all bento positioning */

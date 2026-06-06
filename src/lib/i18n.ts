@@ -9,6 +9,20 @@ interface Translations {
   services: { tag: string; heading: string; headingTeal: string; learnMore: string; items: ServiceItems }
   about: { tag: string; heading: string; headingPre: string; headingTeal: string; quals: string[]; yearsLabel: string[]; projectsLabel: string[] }
   process: { tag: string; heading: string; headingTeal: string; steps: Array<{ num: string; title: string; desc: string }> }
+  werkwijze: {
+    headingA: string
+    headingB: string
+    headingAccent: string
+    sub: string
+    steps: Array<{ step: string; title: string; icon: 'send' | 'chat' | 'cal' | 'tool' }>
+  }
+  benefits: {
+    headingA: string
+    headingAccent: string
+    headingB: string
+    sub: string
+    items: Array<{ icon: 'clock' | 'phone' | 'shield' | 'timer'; title: string; text: string }>
+  }
   gallery: { tag: string; heading: string; viewAll: string; specialtyLabel: string; specialtyText: string; ctaLabel: string }
   projectsPage: {
     tag: string
@@ -106,6 +120,30 @@ export const t: Record<Lang, Translations> = {
         { num: '02', title: 'Clear Quote',        desc: 'You receive a detailed, transparent quote within 48 hours. No hidden costs, no surprises — just an honest breakdown of the work.' },
         { num: '03', title: 'We Get to Work',     desc: 'Our team arrives on schedule, works cleanly and efficiently, and keeps you informed throughout every stage of the project.' },
         { num: '04', title: 'Final Handover',     desc: "We do a walkthrough together, make sure everything meets your expectations, and only leave when you're fully satisfied." },
+      ],
+    },
+    werkwijze: {
+      headingA: 'A fresh approach',
+      headingB: 'Old-school',
+      headingAccent: 'craftsmanship',
+      sub: 'This is how we work — clear, skilled and without detours.',
+      steps: [
+        { step: 'Step 1', title: 'Quote request',       icon: 'send' },
+        { step: 'Step 2', title: 'Intake conversation', icon: 'chat' },
+        { step: 'Step 3', title: 'Scheduling',          icon: 'cal'  },
+        { step: 'Step 4', title: 'Execution',           icon: 'tool' },
+      ],
+    },
+    benefits: {
+      headingA: 'Why choose',
+      headingAccent: 'LAMAR',
+      headingB: 'Stukadoor en Onderhoud',
+      sub: "Because half-done work isn't in our vocabulary. We deliver craftsmanship you can build on.",
+      items: [
+        { icon: 'clock',  title: 'Sorted in no time', text: 'In minutes you know exactly where you stand — clear, no fine print.' },
+        { icon: 'phone',  title: 'Always close by',   text: 'You talk to real people. No phone menus.' },
+        { icon: 'shield', title: 'Peace of mind',     text: 'We stand behind every project. Guaranteed, because trust is built.' },
+        { icon: 'timer',  title: 'Rush job?',         text: 'We move fast — even when it had to be done yesterday.' },
       ],
     },
     gallery: {
@@ -255,6 +293,30 @@ export const t: Record<Lang, Translations> = {
         { num: '02', title: 'Duidelijke offerte',  desc: 'Binnen 48 uur ontvangt u een heldere, gedetailleerde offerte. Geen verborgen kosten, geen verrassingen — gewoon een eerlijk overzicht van het werk.' },
         { num: '03', title: 'Aan de slag',         desc: 'Ons team werkt op de afgesproken tijd, ruimt netjes op na elk werkdag en houdt u tijdens het hele project goed op de hoogte.' },
         { num: '04', title: 'Oplevering',          desc: 'We lopen samen het werk na, zorgen dat alles naar wens is, en vertrekken pas als u volledig tevreden bent met het resultaat.' },
+      ],
+    },
+    werkwijze: {
+      headingA: 'Frisse aanpak',
+      headingB: 'Ouderwets',
+      headingAccent: 'vakmanschap',
+      sub: 'Zo gaan wij te werk — helder, vakkundig en zonder omwegen.',
+      steps: [
+        { step: 'Stap 1', title: 'Offerte aanvraag', icon: 'send' },
+        { step: 'Stap 2', title: 'Intakegesprek',    icon: 'chat' },
+        { step: 'Stap 3', title: 'Inplannen',         icon: 'cal'  },
+        { step: 'Stap 4', title: 'Uitvoering',        icon: 'tool' },
+      ],
+    },
+    benefits: {
+      headingA: 'Daarom',
+      headingAccent: 'LAMAR',
+      headingB: 'Stukadoor en Onderhoud',
+      sub: 'Omdat half werk niet in ons woordenboek staat. Wij leveren vakwerk waar u op kunt bouwen.',
+      items: [
+        { icon: 'clock',  title: 'Binnen no time geregeld', text: 'In een paar minuten weet u waar u aan toe bent — helder en zonder kleine lettertjes.' },
+        { icon: 'phone',  title: 'Altijd dichtbij',         text: "U praat gewoon met échte mensen. Geen keuzemenu's." },
+        { icon: 'shield', title: 'Zeker van uw zaak',       text: 'Wij staan achter elk project. Garantie, omdat vertrouwen gebouwd wordt.' },
+        { icon: 'timer',  title: 'Haastklus?',              text: 'Wij schakelen snel — zelfs als het gisteren al klaar moest zijn.' },
       ],
     },
     gallery: {

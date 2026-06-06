@@ -5,6 +5,7 @@ import WhatsAppSection from '@/components/public/WhatsAppSection';
 import ServicesSection from '@/components/public/ServicesSection';
 import AboutSection from '@/components/public/AboutSection';
 import ProcessSection from '@/components/public/ProcessSection';
+import BenefitsSection from '@/components/public/BenefitsSection';
 import GallerySection from '@/components/public/GallerySection';
 import TestimonialsSection from '@/components/public/TestimonialsSection';
 import ContactSection from '@/components/public/ContactSection';
@@ -24,6 +25,7 @@ export default async function Home() {
         <ServicesSection lang={lang} />
         <AboutSection lang={lang} />
         <ProcessSection lang={lang} />
+        <BenefitsSection lang={lang} />
         <GallerySection lang={lang} />
         <TestimonialsSection lang={lang} />
         <ContactSection lang={lang} />

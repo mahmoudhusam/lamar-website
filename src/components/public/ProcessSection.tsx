@@ -1,127 +1,33 @@
 import { t, type Lang } from '@/lib/i18n'
 
+function Icon({ name }: { name: string }) {
+  const p = { width: 30, height: 30, viewBox: '0 0 24 24', fill: 'none', stroke: 'var(--teal2)', strokeWidth: 2, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const }
+  if (name === 'send') return (<svg {...p}><path d="M22 2 11 13"/><path d="M22 2 15 22 11 13 2 9 22 2z"/></svg>)
+  if (name === 'chat') return (<svg {...p}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>)
+  if (name === 'cal') return (<svg {...p}><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M9 16l2 2 4-4"/></svg>)
+  return (<svg {...p}><path d="M14.7 6.3a4 4 0 0 0-5.6 5.6L3 18l3 3 6.1-6.1a4 4 0 0 0 5.6-5.6l-2.6 2.6-2.1-.4-.4-2.1z"/></svg>)
+}
+
 export default function ProcessSection({ lang }: { lang: Lang }) {
-  const tr = t[lang].process
-  const delays = ['d1', 'd2', 'd3', 'd4']
+  const tr = t[lang].werkwijze
 
   return (
-    <section id="process" style={{ padding: '8rem 3.5rem', background: 'var(--bg)' }}>
-      <div className="rv">
-        <div
-          style={{
-            fontSize: '0.63rem',
-            letterSpacing: '0.24em',
-            textTransform: 'uppercase',
-            color: 'var(--teal2)',
-            marginBottom: '1.5rem',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.6rem',
-          }}
-        >
-          <span style={{ display: 'block', width: '1.5rem', height: 1, background: 'var(--teal2)', flexShrink: 0 }} />
-          {tr.tag}
-        </div>
-        <h2
-          style={{
-            fontFamily: 'var(--font-archivo)',
-            fontWeight: 800,
-            fontSize: 'clamp(1.9rem,3vw,2.8rem)',
-            lineHeight: 1.06,
-            letterSpacing: '-0.01em',
-            color: 'var(--white)',
-          }}
-        >
-          {tr.heading} <span style={{ color: 'var(--teal2)' }}>{tr.headingTeal}</span>
+    <section id="process" style={{ background: 'var(--bg)', padding: '7rem 3.5rem' }}>
+      <style>{`.proc-card{transition:transform .2s, box-shadow .2s}.proc-card:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(20,24,29,0.12)}`}</style>
+
+      <div className="rv" style={{ textAlign: 'center', maxWidth: 680, margin: '0 auto 3rem' }}>
+        <h2 style={{ fontFamily: 'var(--font-archivo)', fontWeight: 800, fontSize: 'clamp(2rem,3.6vw,3.1rem)', lineHeight: 1.06, letterSpacing: '-0.01em', color: 'var(--white)', marginBottom: '1rem' }}>
+          {tr.headingA}<br />{tr.headingB} <span style={{ color: 'var(--teal2)' }}>{tr.headingAccent}</span>
         </h2>
+        <p style={{ fontSize: '1rem', lineHeight: 1.7, color: 'var(--white2)', fontWeight: 300 }}>{tr.sub}</p>
       </div>
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: 0,
-          marginTop: '3.5rem',
-          position: 'relative',
-        }}
-      >
-        {/* Connecting line */}
-        <div
-          className="process-line"
-          style={{
-            position: 'absolute',
-            top: 28,
-            left: 'calc(12.5% + 1rem)',
-            right: 'calc(12.5% + 1rem)',
-            height: 1,
-            background: 'linear-gradient(to right, var(--teal) 0%, var(--teal2) 100%)',
-            zIndex: 0,
-          }}
-        />
-
-        {tr.steps.map((step, i) => (
-          <div
-            key={step.num}
-            className={`rv ${delays[i]}`}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              textAlign: 'center',
-              padding: '0 1.5rem',
-              position: 'relative',
-              zIndex: 1,
-            }}
-          >
-            <div
-              style={{
-                width: 56,
-                height: 56,
-                borderRadius: '50%',
-                background: 'var(--bg2)',
-                border: '1px solid var(--teal)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1.75rem',
-                flexShrink: 0,
-                transition: 'background 0.3s, border-color 0.3s',
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: 'var(--font-archivo)',
-                  fontWeight: 800,
-                  fontSize: '0.85rem',
-                  color: 'var(--teal2)',
-                  letterSpacing: '0.08em',
-                }}
-              >
-                {step.num}
-              </span>
-            </div>
-            <div
-              style={{
-                fontFamily: 'var(--font-archivo)',
-                fontWeight: 700,
-                fontSize: '1rem',
-                color: 'var(--white)',
-                marginBottom: '0.75rem',
-                letterSpacing: '-0.01em',
-              }}
-            >
-              {step.title}
-            </div>
-            <div
-              style={{
-                fontSize: '0.85rem',
-                lineHeight: 1.72,
-                color: 'var(--white2)',
-                fontWeight: 300,
-              }}
-            >
-              {step.desc}
-            </div>
+      <div className="proc-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem', maxWidth: 760, margin: '0 auto' }}>
+        {tr.steps.map((s, i) => (
+          <div key={i} className={`proc-card rv${i > 1 ? ' d1' : ''}`} style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 18, padding: '2.25rem 1.5rem', boxShadow: '0 10px 30px rgba(20,24,29,0.06)', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.55rem' }}>
+            <span style={{ marginBottom: '0.4rem' }}><Icon name={s.icon} /></span>
+            <div style={{ fontFamily: 'var(--font-archivo)', fontWeight: 800, fontSize: '1.05rem', color: 'var(--white)' }}>{s.step}</div>
+            <div style={{ fontSize: '0.9rem', color: 'var(--white2)', fontWeight: 300 }}>{s.title}</div>
           </div>
         ))}
       </div>
