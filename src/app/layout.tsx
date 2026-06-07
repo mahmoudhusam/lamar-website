@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Archivo, Outfit } from 'next/font/google'
 import './globals.css'
+import FloatingWhatsApp from '@/components/public/FloatingWhatsApp'
 
 const archivo = Archivo({
   subsets: ['latin'],
@@ -38,7 +39,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="nl" className={`${archivo.variable} ${outfit.variable}`} data-scroll-behavior="smooth">
-      <body>{children}</body>
+      <body>{children}<FloatingWhatsApp /></body>
     </html>
   )
 }

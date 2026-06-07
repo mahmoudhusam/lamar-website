@@ -8,6 +8,7 @@ import ProcessSection from '@/components/public/ProcessSection';
 import BenefitsSection from '@/components/public/BenefitsSection';
 import GallerySection from '@/components/public/GallerySection';
 import TestimonialsSection from '@/components/public/TestimonialsSection';
+import FAQSection from '@/components/public/FAQSection';
 import ContactSection from '@/components/public/ContactSection';
 import Footer from '@/components/public/Footer';
 import RevealObserver from '@/components/public/RevealObserver';
@@ -28,6 +29,7 @@ export default async function Home() {
         <BenefitsSection lang={lang} />
         <GallerySection lang={lang} />
         <TestimonialsSection lang={lang} />
+        <FAQSection lang={lang} />
         <ContactSection lang={lang} />
       </main>
       <Footer lang={lang} />

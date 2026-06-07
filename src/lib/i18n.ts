@@ -35,7 +35,14 @@ interface Translations {
     allProjects: string
   }
   testimonials: { tag: string; heading: string; headingTeal: string }
+  faq: { heading: string; items: Array<{ q: string; a: string }> }
   contact: { tag: string; h1: string; h2: string; h3: string; labels: Record<string, string> }
+  contactCards: {
+    quote: string
+    heading: string
+    sub: string
+    cards: Array<{ icon: 'wa' | 'phone' | 'doc' | 'mail'; title: string; text: string; btn: string }>
+  }
   contactForm: { nameLbl: string; namePh: string; phoneLbl: string; phonePh: string; emailLbl: string; emailPh: string; serviceLbl: string; servicePh: string; messageLbl: string; messagePh: string; send: string; sending: string; successTitle: string; successMsg: string }
   footer: { links: Array<{ label: string; href: string }>; pagesLabel: string; copy: string }
   chat: {
@@ -168,6 +175,27 @@ export const t: Record<Lang, Translations> = {
       tag: 'Client Reviews',
       heading: 'What Our',
       headingTeal: 'Clients Say',
+    },
+    faq: {
+      heading: 'Frequently asked questions',
+      items: [
+        { q: 'What does plastering or painting cost?',                    a: 'It depends on the surface area, the condition of the walls and the desired finish. After a short intake you get a clear quote, with no surprises afterwards.' },
+        { q: 'How long does a job take on average?',                      a: 'An average room is often done within one to two days. We always give a realistic schedule with the quote.' },
+        { q: 'Do I need to move furniture or prepare anything myself?',   a: "You don't have to. We discuss in advance what helps, cover everything neatly where needed and tidy up afterwards." },
+        { q: 'How do you prevent cracks or peeling plaster?',             a: 'Through the right preparation, materials and drying time. That is also why we guarantee our work.' },
+        { q: 'Which regions do you work in?',                             a: 'We work throughout the Netherlands and are happy to schedule an appointment near you.' },
+      ],
+    },
+    contactCards: {
+      quote: 'Plaster is not just a coat. It is a signature — and we set it with care.',
+      heading: 'What can we do for you today?',
+      sub: 'Trust starts with contact — let us take that first step together.',
+      cards: [
+        { icon: 'wa',    title: 'WhatsApp',       text: 'Quick chat? Send us a message. We reply faster than the plaster dries.', btn: 'Chat now' },
+        { icon: 'phone', title: 'Call',            text: 'Prefer a personal touch? Pick up the phone, we are happy to help.',       btn: 'Call us'  },
+        { icon: 'doc',   title: 'Request a quote', text: 'Want clarity? In a few minutes you know exactly where you stand.',         btn: 'Request'  },
+        { icon: 'mail',  title: 'Mail',            text: 'Prefer to type? Send us a message by email, we reply quickly.',           btn: 'Mail now' },
+      ],
     },
     contact: {
       tag: 'Get in Touch',
@@ -375,6 +403,27 @@ export const t: Record<Lang, Translations> = {
       ],
       pagesLabel: "Pagina's",
       copy: '© 2025 LAMAR Stukadoor en Onderhoud. Alle rechten voorbehouden.',
+    },
+    faq: {
+      heading: 'Veel gestelde vragen',
+      items: [
+        { q: 'Wat kost stucwerk of schilderwerk?',                                   a: 'De prijs hangt af van de oppervlakte, de staat van de muren en de gewenste afwerking. Na een korte intake krijgt u een heldere offerte, zonder verrassingen achteraf.' },
+        { q: 'Hoe lang duurt een klus gemiddeld?',                                   a: 'Een gemiddelde kamer is vaak binnen één tot twee dagen klaar. Bij de offerte geven wij altijd een realistische planning aan.' },
+        { q: 'Moet ik zelf meubels verplaatsen of iets voorbereiden?',               a: 'Dat hoeft niet. We bespreken vooraf wat handig is, dekken waar nodig alles netjes af en ruimen na afloop weer op.' },
+        { q: 'Hoe voorkomen jullie scheuren of loslatend stucwerk?',                 a: 'Door de juiste voorbehandeling, materialen en droogtijd. Daarom geven wij ook garantie op ons werk.' },
+        { q: "In welke regio's werken jullie?",                                      a: 'Wij zijn actief door heel Nederland en plannen graag een afspraak bij u in de buurt.' },
+      ],
+    },
+    contactCards: {
+      quote: 'Stucwerk is geen laagje. Het is een handtekening — en wij zetten hem met zorg.',
+      heading: 'Wat kunnen wij vandaag voor u doen?',
+      sub: 'Vertrouwen begint bij contact — laten we die eerste stap samen zetten.',
+      cards: [
+        { icon: 'wa',    title: 'WhatsApp',        text: 'Snel schakelen? Stuur ons een appje. Wij reageren sneller dan de stuc droogt.',     btn: 'Chat nu'  },
+        { icon: 'phone', title: 'Bellen',           text: 'Liever persoonlijk contact? Pak de telefoon, wij staan u graag te woord.',          btn: 'Bel ons'  },
+        { icon: 'doc',   title: 'Offerte aanvraag', text: 'Zin in duidelijkheid? Binnen een paar minuten weet u waar u aan toe bent.',         btn: 'Vraag aan'},
+        { icon: 'mail',  title: 'Mail',             text: 'Liever rustig typen? Stuur ons een bericht via mail, wij reageren snel.',           btn: 'Mail nu'  },
+      ],
     },
     chat: {
       tag: 'Zo werkt het',
