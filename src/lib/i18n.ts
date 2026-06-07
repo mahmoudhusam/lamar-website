@@ -236,11 +236,11 @@ export const t: Record<Lang, Translations> = {
     },
     footer: {
       links: [
-        { label: 'About',    href: '#about'    },
-        { label: 'Services', href: '#services' },
-        { label: 'Our Work', href: '#our-work' },
+        { label: 'Home',     href: '/'         },
+        { label: 'About',    href: '/over-ons' },
+        { label: 'Infohub',  href: '/infohub'  },
         { label: 'Projects', href: '/projects' },
-        { label: 'Contact',  href: '#contact'  },
+        { label: 'Contact',  href: '/contact'  },
       ],
       pagesLabel: 'Pages',
       copy: '© 2025 LAMAR Renovation & Decoration. All rights reserved.',
@@ -422,11 +422,11 @@ export const t: Record<Lang, Translations> = {
     },
     footer: {
       links: [
-        { label: 'Over ons',  href: '#about'    },
-        { label: 'Diensten',  href: '#services' },
-        { label: 'Ons werk',  href: '#our-work' },
+        { label: 'Home',      href: '/'         },
+        { label: 'Over ons',  href: '/over-ons' },
+        { label: 'Infohub',   href: '/infohub'  },
         { label: 'Projecten', href: '/projects' },
-        { label: 'Contact',   href: '#contact'  },
+        { label: 'Contact',   href: '/contact'  },
       ],
       pagesLabel: "Pagina's",
       copy: '© 2025 LAMAR Stukadoor en Onderhoud. Alle rechten voorbehouden.',

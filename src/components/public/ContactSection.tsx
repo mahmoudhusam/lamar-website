@@ -13,7 +13,7 @@ function CIcon({ name }: { name: string }) {
   return (<svg {...p}><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>)
 }
 
-export default async function ContactSection({ lang }: { lang: Lang }) {
+export default async function ContactSection({ lang, quote }: { lang: Lang; quote?: string }) {
   const tr = t[lang].contactCards
   const c = await getContentMany(['contact_phone', 'contact_email'])
   const phone = c['contact_phone'] || '06 84054528'
@@ -29,7 +29,7 @@ export default async function ContactSection({ lang }: { lang: Lang }) {
     <section id="contact" style={{ background: 'var(--bg)', padding: '7rem 3.5rem' }}>
       {/* Quote band */}
       <div className="rv contact-quote" style={{ maxWidth: 1200, margin: '0 auto 2.5rem', borderRadius: 24, overflow: 'hidden', minHeight: 200, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '3rem 2rem', backgroundImage: `linear-gradient(rgba(255,255,255,0.78), rgba(255,255,255,0.78)), url('${QUOTE_IMG}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-        <p style={{ fontFamily: 'var(--font-archivo)', fontStyle: 'italic', fontWeight: 800, fontSize: 'clamp(1.3rem,2.6vw,2.2rem)', lineHeight: 1.25, color: 'var(--white)', margin: 0, maxWidth: 900 }}>&ldquo;{tr.quote}&rdquo;</p>
+        <p style={{ fontFamily: 'var(--font-archivo)', fontStyle: 'italic', fontWeight: 800, fontSize: 'clamp(1.3rem,2.6vw,2.2rem)', lineHeight: 1.25, color: 'var(--white)', margin: 0, maxWidth: 900 }}>&ldquo;{quote ?? tr.quote}&rdquo;</p>
       </div>
 
       {/* Teal card panel */}
