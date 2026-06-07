@@ -94,3 +94,27 @@ section, footer, nav {
   .projects-grid   { padding: 1.5rem 1.25rem 4rem !important; grid-template-columns: 1fr !important; }
   .lb-prev, .lb-next { padding: 0.5rem 0.65rem !important; font-size: 1.2rem !important; }
 }
+
+@media (max-width: 1023px) {
+  #over-intro                 { padding: 5rem 1.5rem !important; }
+  #over-intro .over-grid      { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+  #over-intro .over-img       { height: 420px !important; }
+}
+@media (max-width: 767px) {
+  #over-intro                 { padding: 4rem 1.25rem !important; }
+  #over-intro .over-img       { height: 320px !important; }
+}
+
+@media (max-width: 1023px) {
+  #info-top        { padding: 5rem 1.5rem 0 !important; }
+  .info-hero       { min-height: 0 !important; padding: 2.5rem !important; }
+  #info-cards      { padding: 3rem 1.5rem 5rem !important; }
+  .info-grid       { grid-template-columns: repeat(2, 1fr) !important; gap: 1.5rem !important; }
+}
+@media (max-width: 767px) {
+  #info-top        { padding: calc(75px + 1.5rem) 1.25rem 0 !important; }
+  .info-hero       { padding: 1.75rem !important; }
+  .info-hero-card  { max-width: 100% !important; }
+  #info-cards      { padding: 2.5rem 1.25rem 4rem !important; }
+  .info-grid       { grid-template-columns: 1fr !important; }
+}

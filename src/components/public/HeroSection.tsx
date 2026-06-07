@@ -38,7 +38,7 @@ export default function HeroSection({ lang }: { lang: Lang }) {
         >
           {tr.headlineA}
           <br />
-          <span style={{ color: 'var(--teal2)', textDecoration: 'underline', textDecorationThickness: '5px', textUnderlineOffset: '8px' }}>{tr.headlineB}</span>
+          <span style={{ color: 'var(--teal2)' }}>{tr.headlineB}</span>
         </h1>
 
         {/* Sub */}
@@ -51,16 +51,16 @@ export default function HeroSection({ lang }: { lang: Lang }) {
 
         {/* CTAs */}
         <div className="rv d2" style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
-          <a href="#contact" className="btn-teal" style={{ background: 'var(--teal)', color: '#FFFFFF', padding: '0.95rem 2rem', fontFamily: 'var(--font-outfit)', fontSize: '0.82rem', letterSpacing: '0.04em', textTransform: 'uppercase', textDecoration: 'none', fontWeight: 700, borderRadius: 999, display: 'inline-block', transition: 'background 0.2s' }}>
+          <a href="#contact" className="btn-teal" style={{ background: 'var(--teal)', color: '#FFFFFF', padding: '0.95rem 2rem', fontFamily: 'var(--font-outfit)', fontSize: '0.82rem', letterSpacing: '0.01em', textDecoration: 'none', fontWeight: 700, borderRadius: 999, display: 'inline-block', transition: 'background 0.2s' }}>
             {tr.quoteCta}
           </a>
-          <a href="#process" className="btn-outline" style={{ border: '1px solid var(--border2)', color: 'var(--white)', padding: '0.95rem 2rem', fontFamily: 'var(--font-outfit)', fontSize: '0.82rem', letterSpacing: '0.04em', textTransform: 'uppercase', textDecoration: 'none', fontWeight: 600, borderRadius: 999, display: 'inline-block', transition: 'border-color 0.2s, color 0.2s' }}>
+          <a href="#process" className="btn-outline" style={{ border: '1px solid var(--border2)', color: 'var(--white)', padding: '0.95rem 2rem', fontFamily: 'var(--font-outfit)', fontSize: '0.82rem', letterSpacing: '0.01em', textDecoration: 'none', fontWeight: 600, borderRadius: 999, display: 'inline-block', transition: 'border-color 0.2s, color 0.2s' }}>
             {tr.processCta}
           </a>
         </div>
 
         {/* WhatsApp — replace 000000000000 with the client's real number */}
-        <a className="rv d2" href="https://wa.me/000000000000" style={{ color: 'var(--teal)', textDecoration: 'none', fontSize: '0.85rem', fontFamily: 'var(--font-outfit)', fontWeight: 500, display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+        <a className="rv d2" href="https://wa.me/31684054528" style={{ color: 'var(--teal)', textDecoration: 'none', fontSize: '0.85rem', fontFamily: 'var(--font-outfit)', fontWeight: 500, display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
           📲 {tr.whatsappCta}
         </a>
       </div>

@@ -18,12 +18,11 @@ export default function Navbar({ lang }: { lang: Lang }) {
   const toggleMenu = () => { const next = !menuOpen; setMenuOpen(next); document.body.style.overflow = next ? 'hidden' : ''; };
 
   const desktopLinks = [
-    { label: tr.about, href: '#about' },
-    { label: tr.services, href: '#services' },
-    { label: tr.ourWork, href: '#our-work' },
-    { label: tr.projects, href: '/projects' },
+    { label: tr.about, href: '/over-ons' },
+    { label: tr.infohub, href: '/infohub' },
+    { label: tr.contact, href: '/contact' },
   ];
-  const mobileLinks = [...desktopLinks, { label: tr.reviews, href: '#testimonials' }];
+  const mobileLinks = [...desktopLinks];
 
   return (
     <>
@@ -39,7 +38,7 @@ export default function Navbar({ lang }: { lang: Lang }) {
         }}
       >
         {/* Logo */}
-        <a href="#hero" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
+        <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
           <img src="lamar_icon.svg" alt="" style={{ height: 42, width: 'auto', display: 'block' }} />
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <span style={{ fontFamily: 'var(--font-archivo)', fontWeight: 800, fontSize: '1.3rem', letterSpacing: '0.06em', color: 'var(--white)', lineHeight: 1 }}>Lamar</span>
@@ -56,7 +55,7 @@ export default function Navbar({ lang }: { lang: Lang }) {
               onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--white2)')}
             >{label}</a>
           ))}
-          <a href="#contact"
+          <a href="/contact"
             style={{ background: 'var(--teal)', color: '#FFFFFF', padding: '0.7rem 1.6rem', borderRadius: 999, textDecoration: 'none', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.02em', fontFamily: 'var(--font-outfit)', transition: 'background 0.2s' }}
             onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--teal2)')}
             onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--teal)')}
@@ -81,7 +80,7 @@ export default function Navbar({ lang }: { lang: Lang }) {
               onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--white2)')}
             >{label}</a>
           ))}
-          <a href="#contact" onClick={closeMenu}
+          <a href="/contact" onClick={closeMenu}
             style={{ background: 'var(--teal)', color: '#FFFFFF', padding: '0.9rem 2.5rem', borderRadius: 999, textDecoration: 'none', fontFamily: 'var(--font-outfit)', fontWeight: 700, fontSize: '1rem', marginTop: '0.75rem' }}
           >{tr.contactUs}</a>
         </div>

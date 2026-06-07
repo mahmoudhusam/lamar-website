@@ -3,7 +3,7 @@ export type Lang = 'en' | 'nl'
 type ServiceItems = Record<string, { name: string; fallback: string }>
 
 interface Translations {
-  nav: { about: string; services: string; ourWork: string; projects: string; contact: string; reviews: string; contactUs: string }
+  nav: { about: string; services: string; ourWork: string; projects: string; contact: string; reviews: string; contactUs: string; infohub: string }
   hero: { tag: string; h1a: string; h1b: string; h1c: string; desc: string; seeWork: string; getQuote: string; statProjects: string; statYears: string; statSatisfaction: string; badge: string; trustBadge: string; headlineA: string; headlineB: string; sub: string; quoteCta: string; processCta: string; whatsappCta: string }
   ticker: Array<{ label: string; accent: boolean }>
   services: { tag: string; heading: string; headingTeal: string; learnMore: string; items: ServiceItems }
@@ -34,7 +34,8 @@ interface Translations {
     images: string
     allProjects: string
   }
-  testimonials: { tag: string; heading: string; headingTeal: string }
+  testimonials: { tag: string; heading: string; headingTeal: string; sub: string }
+  overOns: { headingA: string; headingAccent: string; headingB: string; principles: Array<{ title: string; text: string }> }
   faq: { heading: string; items: Array<{ q: string; a: string }> }
   contact: { tag: string; h1: string; h2: string; h3: string; labels: Record<string, string> }
   contactCards: {
@@ -66,6 +67,7 @@ export const t: Record<Lang, Translations> = {
       contact: 'Contact',
       reviews: 'Reviews',
       contactUs: 'Contact Us',
+      infohub: 'Infohub',
     },
     hero: {
       tag: 'Renovation & Decoration Specialists',
@@ -175,6 +177,18 @@ export const t: Record<Lang, Translations> = {
       tag: 'Client Reviews',
       heading: 'What Our',
       headingTeal: 'Clients Say',
+      sub: 'We do more than finish walls — we build trust. You hear it from our clients across the Netherlands.',
+    },
+    overOns: {
+      headingA: 'This is who',
+      headingAccent: 'we',
+      headingB: 'are',
+      principles: [
+        { title: 'Walls with character', text: "We don't just finish smooth — we give every space character." },
+        { title: 'Craftsmanship that connects', text: 'Layer by layer, hand by hand, we build quality together.' },
+        { title: 'An eye for perfection', text: "We do what we're truly good at, and you see it in the detail." },
+        { title: 'Quality speaks for itself', text: 'No empty promises — just a sharp, lasting result.' },
+      ],
     },
     faq: {
       heading: 'Frequently asked questions',
@@ -260,6 +274,7 @@ export const t: Record<Lang, Translations> = {
       contact: 'Contact',
       reviews: 'Reviews',
       contactUs: 'Neem contact op',
+      infohub: 'Infohub',
     },
     hero: {
       tag: 'Renovatie & Decoratie Specialisten',
@@ -369,6 +384,18 @@ export const t: Record<Lang, Translations> = {
       tag: 'Klantbeoordelingen',
       heading: 'Wat onze',
       headingTeal: 'Klanten zeggen',
+      sub: 'Wij doen meer dan muren afwerken — wij bouwen vertrouwen. Dat hoort u terug bij onze klanten door heel Nederland.',
+    },
+    overOns: {
+      headingA: 'Dit is wie',
+      headingAccent: 'wij',
+      headingB: 'zijn',
+      principles: [
+        { title: 'Muren met karakter', text: 'Wij leveren niet zomaar strak werk — wij geven elke ruimte karakter.' },
+        { title: 'Vakmanschap dat verbindt', text: 'Laag voor laag, hand voor hand bouwen wij samen aan kwaliteit.' },
+        { title: 'Oog voor perfectie', text: 'Wij doen waar we echt goed in zijn, en dat ziet u terug in het detail.' },
+        { title: 'Kwaliteit spreekt voor zich', text: 'Geen loze beloftes — alleen een strak en duurzaam resultaat.' },
+      ],
     },
     contact: {
       tag: 'Neem contact op',

@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation'
 
 // Replace with the client's real WhatsApp number (international, no +)
-const WA = '000000000000'
+const WA = '31684054528'
 
 export default function FloatingWhatsApp() {
   const pathname = usePathname()

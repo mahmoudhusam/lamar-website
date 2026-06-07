@@ -2,7 +2,7 @@ import { getContentMany } from '@/lib/content'
 import { t, type Lang } from '@/lib/i18n'
 
 // Replace with the client's real WhatsApp number (international, no +)
-const WA = '000000000000'
+const WA = '31684054528'
 const QUOTE_IMG = 'https://images.pexels.com/photos/5493654/pexels-photo-5493654.jpeg?auto=compress&cs=tinysrgb&w=1400&h=600&fit=crop'
 
 function CIcon({ name }: { name: string }) {
@@ -16,8 +16,8 @@ function CIcon({ name }: { name: string }) {
 export default async function ContactSection({ lang }: { lang: Lang }) {
   const tr = t[lang].contactCards
   const c = await getContentMany(['contact_phone', 'contact_email'])
-  const phone = c['contact_phone'] || '+31 00 000 0000'
-  const email = c['contact_email'] || 'info@lamar-renovatie.nl'
+  const phone = c['contact_phone'] || '06 84054528'
+  const email = c['contact_email'] || 'lamarstukadoor@gmail.com'
   const hrefs = [
     `https://wa.me/${WA}`,
     `tel:${phone.replace(/[^0-9+]/g, '')}`,
