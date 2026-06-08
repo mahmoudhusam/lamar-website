@@ -7,7 +7,6 @@ export default function HeroSection({ lang }: { lang: Lang }) {
     <section
       id="hero"
       style={{
-        minHeight: '88vh',
         background: 'var(--bg)',
         padding: '7rem 3.5rem 4rem',
         display: 'grid',
@@ -66,7 +65,7 @@ export default function HeroSection({ lang }: { lang: Lang }) {
       </div>
 
       {/* Right: rounded video card */}
-      <div className="rv" style={{ position: 'relative', width: '100%', aspectRatio: '4/5', borderRadius: 24, overflow: 'hidden', boxShadow: '0 30px 60px rgba(20,24,29,0.18)', background: 'var(--bg2)' }}>
+      <div className="rv" style={{ position: 'relative', width: '100%', aspectRatio: '1/1', maxWidth: 560, marginLeft: 'auto', borderRadius: 24, overflow: 'hidden', boxShadow: '0 30px 60px rgba(20,24,29,0.18)', background: 'var(--bg2)' }}>
         <video autoPlay muted loop playsInline poster="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}>
           <source src="/hero-placeholder.mp4" type="video/mp4" />
         </video>
