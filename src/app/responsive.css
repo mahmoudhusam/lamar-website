@@ -135,3 +135,14 @@ section, footer, nav {
   .oa-measure-grid   { grid-template-columns: 1fr !important; }
   .oa-woning         { grid-template-columns: 1fr !important; }
 }
+
+/* ── Werkwijze page ─────────────────────────────────────── */
+@media (max-width: 1023px) {
+  #werkwijze-intro           { padding: 4rem 1.5rem 3rem !important; }
+  #werkwijze-intro .ww-grid  { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 767px) {
+  #werkwijze-intro           { padding: 3rem 1.25rem 2.5rem !important; }
+  #werkwijze-intro .ww-grid  { grid-template-columns: 1fr !important; }
+  .ww-banner                 { padding: 2.5rem 1.25rem !important; }
+}

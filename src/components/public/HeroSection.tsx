@@ -51,7 +51,7 @@ export default function HeroSection({ lang }: { lang: Lang }) {
             <a href="/offerte-aanvragen" className="btn-teal" style={{ background: 'var(--teal)', color: '#FFFFFF', padding: '0.95rem 2rem', fontFamily: 'var(--font-outfit)', fontSize: '0.82rem', letterSpacing: '0.01em', textDecoration: 'none', fontWeight: 700, borderRadius: 999, display: 'inline-block', transition: 'background 0.2s' }}>
               {tr.quoteCta}
             </a>
-            <a href="#process" className="btn-outline" style={{ border: '1px solid var(--border2)', color: 'var(--white)', padding: '0.95rem 2rem', fontFamily: 'var(--font-outfit)', fontSize: '0.82rem', letterSpacing: '0.01em', textDecoration: 'none', fontWeight: 600, borderRadius: 999, display: 'inline-block', transition: 'border-color 0.2s, color 0.2s' }}>
+            <a href="/werkwijze" className="btn-outline" style={{ border: '1px solid var(--border2)', color: 'var(--white)', padding: '0.95rem 2rem', fontFamily: 'var(--font-outfit)', fontSize: '0.82rem', letterSpacing: '0.01em', textDecoration: 'none', fontWeight: 600, borderRadius: 999, display: 'inline-block', transition: 'border-color 0.2s, color 0.2s' }}>
               {tr.processCta}
             </a>
           </div>
