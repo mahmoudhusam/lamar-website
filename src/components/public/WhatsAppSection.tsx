@@ -15,9 +15,11 @@ function Icon({ name }: { name?: string }) {
 
 type Bubble = { variant: 'note' | 'msg'; side: 'left' | 'right'; icon?: 'doc' | 'wa' | 'cal'; title?: string; text: string }
 
-function BubbleCard({ b, senderName, delay }: { b: Bubble; senderName: string; delay: number }) {
+function BubbleCard({ b, senderName, delay, offset }: { b: Bubble; senderName: string; delay: number; offset: number }) {
+  const isLeft = b.side === 'left'
+  const isNote = b.variant === 'note'
   return (
-    <div className="chat-fb" style={{ animationDelay: `${delay}s`, background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 16, padding: '0.8rem 1rem', boxShadow: '0 16px 38px rgba(20,24,29,0.18)', display: 'flex', gap: '0.7rem', alignItems: b.variant === 'note' ? 'center' : 'flex-start' }}>
+    <div className="chat-fb" style={{ animationDelay: `${delay}s`, width: isNote ? 'min(300px, 100%)' : 'min(282px, 100%)', [isLeft ? 'marginLeft' : 'marginRight']: offset, background: isNote ? '#FFFFFF' : 'rgba(255,255,255,0.86)', backdropFilter: isNote ? undefined : 'blur(10px)', WebkitBackdropFilter: isNote ? undefined : 'blur(10px)', border: '1px solid var(--border)', borderRadius: 16, padding: '0.8rem 1rem', boxShadow: '0 16px 38px rgba(20,24,29,0.18)', display: 'flex', gap: '0.7rem', alignItems: isNote ? 'center' : 'flex-start' }}>
       {b.variant === 'note' ? (
         <span style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(42,191,168,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><Icon name={b.icon} /></span>
       ) : (
@@ -90,13 +92,13 @@ export default function WhatsAppSection({ lang }: { lang: Lang }) {
         </div>
 
         {/* Left column — hugs center strip */}
-        <div className="chat-col left" style={{ position: 'absolute', zIndex: 3, left: '11%', top: '19%', width: 'min(320px, 30%)', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-          {left.map((b, i) => (<BubbleCard key={i} b={b} senderName={tr.senderName} delay={i * 0.15} />))}
+        <div className="chat-col left" style={{ position: 'absolute', zIndex: 3, left: '9%', top: '17%', width: 'min(360px, 34%)', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0.85rem' }}>
+          {left.map((b, i) => (<BubbleCard key={i} b={b} senderName={tr.senderName} delay={i * 0.15} offset={b.variant === 'note' ? 56 : 4} />))}
         </div>
 
         {/* Right column — hugs center strip */}
-        <div className="chat-col right" style={{ position: 'absolute', zIndex: 3, right: '11%', top: '40%', width: 'min(320px, 30%)', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-          {right.map((b, i) => (<BubbleCard key={i} b={b} senderName={tr.senderName} delay={(i + 2) * 0.15} />))}
+        <div className="chat-col right" style={{ position: 'absolute', zIndex: 3, right: '9%', top: '40%', width: 'min(360px, 34%)', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.85rem' }}>
+          {right.map((b, i) => (<BubbleCard key={i} b={b} senderName={tr.senderName} delay={(i + 2) * 0.15} offset={b.variant === 'note' ? 56 : 4} />))}
         </div>
       </div>
     </section>

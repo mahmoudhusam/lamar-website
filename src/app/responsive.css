@@ -13,7 +13,9 @@ section, footer, nav {
 /* ── Tablet: 768–1023px ───────────────────────────────────────────────────────── */
 @media (max-width: 1023px) {
   nav                              { padding: 1rem 1.5rem !important; }
-  #hero                            { grid-template-columns: 1fr !important; padding: 6rem 1.5rem 3rem !important; gap: 2.5rem !important; min-height: 0 !important; }
+  #hero                            { padding: 6rem 1.5rem 3rem !important; }
+  #hero .hero-grid                 { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+  #hero .hero-media                { max-width: 100% !important; margin-left: 0 !important; }
   #services                        { padding: 5rem 1.5rem !important; }
   #services > div:last-child       { grid-template-columns: repeat(2, 1fr) !important; }
   #about                           { padding: 6rem 1.5rem !important; grid-template-columns: 1fr !important; gap: 3rem !important; }
@@ -33,6 +35,7 @@ section, footer, nav {
   #how-it-works .chat-grad { display: none !important; }
   #how-it-works .chat-head { position: static !important; transform: none !important; width: 100% !important; margin: 0 auto 2rem !important; }
   #how-it-works .chat-col  { position: static !important; width: 100% !important; max-width: 460px !important; top: auto !important; left: auto !important; right: auto !important; transform: none !important; margin: 1.25rem auto 0 !important; }
+  #how-it-works .chat-fb   { width: 100% !important; margin-left: 0 !important; margin-right: 0 !important; }
   #contact                         { padding: 5rem 1.5rem !important; }
   #contact .contact-panel          { padding: 2.5rem 1.5rem !important; }
   #contact .contact-cards          { grid-template-columns: repeat(2, 1fr) !important; }
@@ -45,7 +48,8 @@ section, footer, nav {
   nav                              { padding: 0.9rem 1.25rem !important; }
 
   /* Hero: two-col stacked */
-  #hero                            { grid-template-columns: 1fr !important; padding: calc(75px + 1.5rem) 1.25rem 2.5rem !important; gap: 2rem !important; min-height: 0 !important; }
+  #hero                            { padding: calc(75px + 1.5rem) 1.25rem 2.5rem !important; }
+  #hero .hero-grid                 { grid-template-columns: 1fr !important; gap: 2rem !important; }
 
   /* Services: 1-col */
   #services                        { padding: 4rem 1.25rem !important; }
