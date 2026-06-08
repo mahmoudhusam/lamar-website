@@ -122,3 +122,16 @@ section, footer, nav {
   #info-cards      { padding: 2.5rem 1.25rem 4rem !important; }
   .info-grid       { grid-template-columns: 1fr !important; }
 }
+
+/* ── Offerte wizard ─────────────────────────────────────── */
+@media (max-width: 1023px) {
+  #offerte-top       { padding: 3rem 1.5rem 4rem !important; }
+  .oa-grid           { grid-template-columns: 1fr !important; }
+  .oa-sidebar        { position: static !important; top: auto !important; }
+}
+@media (max-width: 767px) {
+  #offerte-top       { padding: 2.5rem 1.25rem 3.5rem !important; }
+  .oa-chips          { grid-template-columns: repeat(2, 1fr) !important; }
+  .oa-measure-grid   { grid-template-columns: 1fr !important; }
+  .oa-woning         { grid-template-columns: 1fr !important; }
+}
