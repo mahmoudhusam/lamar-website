@@ -136,6 +136,13 @@ section, footer, nav {
   .oa-woning         { grid-template-columns: 1fr !important; }
 }
 
+/* ── Offerte wizard — extra mobile polish ──────────────── */
+@media (max-width: 767px) {
+  .oa-stepper .oa-step                  { min-width: 0 !important; }
+  .oa-stepper .oa-step span:first-child { font-size: 0.74rem !important; }
+  .oa-formcard                          { padding: 1.5rem !important; }
+}
+
 /* ── Werkwijze page ─────────────────────────────────────── */
 @media (max-width: 1023px) {
   #werkwijze-intro           { padding: 4rem 1.5rem 3rem !important; }

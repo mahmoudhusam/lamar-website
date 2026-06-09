@@ -40,7 +40,7 @@ export default function Navbar({ lang }: { lang: Lang }) {
         {/* Left: logo + links */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '2.75rem' }}>
           <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-            <img src="lamar_icon.svg" alt="" style={{ height: 42, width: 'auto', display: 'block' }} />
+            <img src="/lamar_icon.svg" alt="" style={{ height: 42, width: 'auto', display: 'block' }} />
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <span style={{ fontFamily: 'var(--font-archivo)', fontWeight: 800, fontSize: '1.3rem', letterSpacing: '0.06em', color: 'var(--white)', lineHeight: 1 }}>Lamar</span>
               <span style={{ fontFamily: 'var(--font-archivo)', fontWeight: 300, fontSize: '0.56rem', letterSpacing: '0.34em', textTransform: 'uppercase', color: 'var(--white2)', lineHeight: 1, marginTop: 3 }}>Stukadoor en Onderhoud</span>

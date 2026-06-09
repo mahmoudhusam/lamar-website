@@ -189,14 +189,14 @@ export default function QuoteWizard() {
       `}</style>
 
       {/* Stepper */}
-      <div style={{ maxWidth: 1080, margin: '0 auto 2.5rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'center' }}>
+      <div className="oa-stepper" style={{ maxWidth: 1080, margin: '0 auto 2.5rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'center' }}>
         {STEPS.map((s, i) => {
           const done = i < step
           const active = i === step
           const on = done || active
           return (
             <div key={s} style={{ display: 'flex', alignItems: 'center', flex: i < STEPS.length - 1 ? 1 : 'none' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem', minWidth: 110 }}>
+              <div className="oa-step" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem', minWidth: 110 }}>
                 <span style={{ fontSize: '0.82rem', fontWeight: on ? 700 : 400, color: on ? 'var(--white)' : 'var(--white3)', fontFamily: 'var(--font-archivo)' }}>{s}</span>
                 <span style={{ width: 22, height: 22, borderRadius: '50%', background: on ? 'var(--teal)' : '#FFFFFF', border: on ? 'none' : '2px solid var(--border2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFFFFF', fontSize: '0.7rem' }}>
                   {done ? '✓' : ''}
@@ -212,7 +212,7 @@ export default function QuoteWizard() {
 
       <div className="oa-grid" style={{ maxWidth: 1080, margin: '0 auto', display: 'grid', gridTemplateColumns: '1.65fr 1fr', gap: '1.75rem', alignItems: 'start' }}>
         {/* ── Form card ── */}
-        <div style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 24, padding: '2.25rem', boxShadow: '0 20px 50px rgba(20,24,29,0.06)' }}>
+        <div className="oa-formcard" style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 24, padding: '2.25rem', boxShadow: '0 20px 50px rgba(20,24,29,0.06)' }}>
 
           {step === 0 && (
             <>
