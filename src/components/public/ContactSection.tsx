@@ -21,7 +21,7 @@ export default async function ContactSection({ lang, quote }: { lang: Lang; quot
   const hrefs = [
     `https://wa.me/${WA}`,
     `tel:${phone.replace(/[^0-9+]/g, '')}`,
-    `https://wa.me/${WA}?text=Ik%20wil%20graag%20een%20offerte%20aanvragen`,
+    `/offerte-aanvragen`,
     `mailto:${email}`,
   ]
 
