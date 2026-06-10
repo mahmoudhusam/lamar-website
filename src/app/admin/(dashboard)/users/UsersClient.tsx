@@ -16,10 +16,10 @@ const ROLE_LABELS: Record<Role, string> = {
 }
 
 const inputStyle: React.CSSProperties = {
-  background: '#0C0C0A',
-  border: '1px solid #2A2A28',
+  background: '#FFFFFF',
+  border: '1px solid rgba(20,24,29,0.10)',
   borderRadius: 6,
-  color: '#F2EEE6',
+  color: '#14181D',
   padding: '0.55rem 0.75rem',
   fontSize: '0.85rem',
   width: '100%',
@@ -28,8 +28,8 @@ const inputStyle: React.CSSProperties = {
 }
 
 const btnPrimary: React.CSSProperties = {
-  background: '#2ABFA8',
-  color: '#0C0C0A',
+  background: '#1A6B60',
+  color: '#FFFFFF',
   border: 'none',
   borderRadius: 6,
   padding: '0.55rem 1.25rem',
@@ -41,8 +41,8 @@ const btnPrimary: React.CSSProperties = {
 
 const btnGhost: React.CSSProperties = {
   background: 'transparent',
-  color: '#9A9A96',
-  border: '1px solid #2A2A28',
+  color: '#5B6470',
+  border: '1px solid rgba(20,24,29,0.10)',
   borderRadius: 6,
   padding: '0.5rem 1rem',
   fontSize: '0.8rem',
@@ -89,19 +89,19 @@ function CreateUserForm({ onDone }: { onDone: () => void }) {
     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
         <div>
-          <label style={{ color: '#9A9A96', fontSize: '0.75rem', display: 'block', marginBottom: '0.35rem' }}>Name</label>
+          <label style={{ color: '#5B6470', fontSize: '0.75rem', display: 'block', marginBottom: '0.35rem' }}>Name</label>
           <input name="name" required style={inputStyle} placeholder="Full name" />
         </div>
         <div>
-          <label style={{ color: '#9A9A96', fontSize: '0.75rem', display: 'block', marginBottom: '0.35rem' }}>Email</label>
+          <label style={{ color: '#5B6470', fontSize: '0.75rem', display: 'block', marginBottom: '0.35rem' }}>Email</label>
           <input name="email" type="email" required style={inputStyle} placeholder="user@example.com" />
         </div>
         <div>
-          <label style={{ color: '#9A9A96', fontSize: '0.75rem', display: 'block', marginBottom: '0.35rem' }}>Password</label>
+          <label style={{ color: '#5B6470', fontSize: '0.75rem', display: 'block', marginBottom: '0.35rem' }}>Password</label>
           <input name="password" type="password" required minLength={8} style={inputStyle} placeholder="Min. 8 characters" />
         </div>
         <div>
-          <label style={{ color: '#9A9A96', fontSize: '0.75rem', display: 'block', marginBottom: '0.35rem' }}>Role</label>
+          <label style={{ color: '#5B6470', fontSize: '0.75rem', display: 'block', marginBottom: '0.35rem' }}>Role</label>
           <select name="role" required style={{ ...inputStyle, appearance: 'none' }}>
             {ALL_ROLES.map((r) => (
               <option key={r} value={r}>{ROLE_LABELS[r]}</option>
@@ -146,24 +146,24 @@ function EditUserForm({ user, currentUserId, onDone }: { user: UserRow; currentU
   const isSelf = user.id === currentUserId
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', padding: '1rem', background: '#0C0C0A', borderRadius: 6, marginTop: '0.75rem' }}>
+    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', padding: '1rem', background: '#F2F5F8', borderRadius: 6, marginTop: '0.75rem' }}>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
         <div>
-          <label style={{ color: '#9A9A96', fontSize: '0.75rem', display: 'block', marginBottom: '0.35rem' }}>Name</label>
+          <label style={{ color: '#5B6470', fontSize: '0.75rem', display: 'block', marginBottom: '0.35rem' }}>Name</label>
           <input name="name" required defaultValue={user.name} style={inputStyle} />
         </div>
         <div>
-          <label style={{ color: '#9A9A96', fontSize: '0.75rem', display: 'block', marginBottom: '0.35rem' }}>Email</label>
+          <label style={{ color: '#5B6470', fontSize: '0.75rem', display: 'block', marginBottom: '0.35rem' }}>Email</label>
           <input name="email" type="email" required defaultValue={user.email} style={inputStyle} />
         </div>
         <div>
-          <label style={{ color: '#9A9A96', fontSize: '0.75rem', display: 'block', marginBottom: '0.35rem' }}>Role</label>
+          <label style={{ color: '#5B6470', fontSize: '0.75rem', display: 'block', marginBottom: '0.35rem' }}>Role</label>
           <select name="role" required defaultValue={user.role} disabled={isSelf} style={{ ...inputStyle, appearance: 'none', opacity: isSelf ? 0.5 : 1 }}>
             {ALL_ROLES.map((r) => (
               <option key={r} value={r}>{ROLE_LABELS[r]}</option>
             ))}
           </select>
-          {isSelf && <p style={{ color: '#6B6B68', fontSize: '0.72rem', marginTop: '0.25rem' }}>You cannot change your own role.</p>}
+          {isSelf && <p style={{ color: '#97A0AC', fontSize: '0.72rem', marginTop: '0.25rem' }}>You cannot change your own role.</p>}
         </div>
       </div>
       {error && <p style={{ color: '#E05C5C', fontSize: '0.8rem' }}>{error}</p>}
@@ -199,8 +199,8 @@ export default function UsersClient({ users, currentUserId }: { users: UserRow[]
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem' }}>
         <div>
-          <h1 style={{ color: '#F2EEE6', fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.25rem' }}>Users</h1>
-          <p style={{ color: '#6B6B68', fontSize: '0.85rem' }}>{users.length} user{users.length !== 1 ? 's' : ''}</p>
+          <h1 style={{ fontFamily: 'var(--font-archivo)', color: '#14181D', fontSize: '1.5rem', fontWeight: 800, marginBottom: '0.25rem' }}>Users</h1>
+          <p style={{ color: '#97A0AC', fontSize: '0.85rem' }}>{users.length} user{users.length !== 1 ? 's' : ''}</p>
         </div>
         {!showCreate && (
           <button onClick={() => setShowCreate(true)} style={btnPrimary}>+ New User</button>
@@ -209,8 +209,8 @@ export default function UsersClient({ users, currentUserId }: { users: UserRow[]
 
       {/* Create form */}
       {showCreate && (
-        <div style={{ background: '#1A1A18', border: '1px solid #2ABFA8', borderRadius: 8, padding: '1.5rem', marginBottom: '1.5rem' }}>
-          <p style={{ color: '#F2EEE6', fontWeight: 600, fontSize: '0.9rem', marginBottom: '1rem' }}>New User</p>
+        <div style={{ background: '#FFFFFF', border: '1px solid #2ABFA8', borderRadius: 8, padding: '1.5rem', marginBottom: '1.5rem' }}>
+          <p style={{ color: '#14181D', fontWeight: 600, fontSize: '0.9rem', marginBottom: '1rem' }}>New User</p>
           <CreateUserForm onDone={() => setShowCreate(false)} />
         </div>
       )}
@@ -220,27 +220,27 @@ export default function UsersClient({ users, currentUserId }: { users: UserRow[]
         {users.map((user) => (
           <div
             key={user.id}
-            style={{ background: '#1A1A18', border: `1px solid ${editingId === user.id ? '#2ABFA8' : '#2A2A28'}`, borderRadius: 8, padding: '1.25rem 1.5rem' }}
+            style={{ background: '#FFFFFF', border: `1px solid ${editingId === user.id ? '#2ABFA8' : 'rgba(20,24,29,0.10)'}`, borderRadius: 8, padding: '1.25rem 1.5rem' }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
               {/* Avatar placeholder */}
-              <div style={{ width: 36, height: 36, borderRadius: '50%', background: '#2A2A28', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#9A9A96', fontSize: '0.85rem', fontWeight: 700, flexShrink: 0 }}>
+              <div style={{ width: 36, height: 36, borderRadius: '50%', background: '#E3E8EE', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#5B6470', fontSize: '0.85rem', fontWeight: 700, flexShrink: 0 }}>
                 {user.name.charAt(0).toUpperCase()}
               </div>
 
               {/* Info */}
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ color: '#F2EEE6', fontWeight: 600, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <div style={{ color: '#14181D', fontWeight: 600, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   {user.name}
                   {user.id === currentUserId && (
-                    <span style={{ color: '#6B6B68', fontSize: '0.68rem', fontWeight: 400 }}>(you)</span>
+                    <span style={{ color: '#97A0AC', fontSize: '0.68rem', fontWeight: 400 }}>(you)</span>
                   )}
                 </div>
-                <div style={{ color: '#6B6B68', fontSize: '0.78rem' }}>{user.email}</div>
+                <div style={{ color: '#97A0AC', fontSize: '0.78rem' }}>{user.email}</div>
               </div>
 
               {/* Role badge */}
-              <span style={{ background: user.role === 'SUPER_ADMIN' ? 'rgba(42,191,168,0.12)' : 'rgba(100,100,98,0.12)', border: `1px solid ${user.role === 'SUPER_ADMIN' ? 'rgba(42,191,168,0.3)' : '#3A3A38'}`, color: user.role === 'SUPER_ADMIN' ? '#2ABFA8' : '#9A9A96', borderRadius: 4, padding: '0.2rem 0.65rem', fontSize: '0.72rem', whiteSpace: 'nowrap', flexShrink: 0 }}>
+              <span style={{ background: user.role === 'SUPER_ADMIN' ? 'rgba(42,191,168,0.12)' : '#F2F5F8', border: `1px solid ${user.role === 'SUPER_ADMIN' ? 'rgba(42,191,168,0.3)' : 'rgba(20,24,29,0.10)'}`, color: user.role === 'SUPER_ADMIN' ? '#1A6B60' : '#5B6470', borderRadius: 4, padding: '0.2rem 0.65rem', fontSize: '0.72rem', whiteSpace: 'nowrap', flexShrink: 0 }}>
                 {ROLE_LABELS[user.role]}
               </span>
 
@@ -248,7 +248,7 @@ export default function UsersClient({ users, currentUserId }: { users: UserRow[]
               <div style={{ display: 'flex', gap: '0.5rem', flexShrink: 0 }}>
                 <button
                   onClick={() => setEditingId(editingId === user.id ? null : user.id)}
-                  style={{ ...btnGhost, color: editingId === user.id ? '#2ABFA8' : '#9A9A96', borderColor: editingId === user.id ? 'rgba(42,191,168,0.4)' : '#2A2A28' }}
+                  style={{ ...btnGhost, color: editingId === user.id ? '#1A6B60' : '#5B6470', borderColor: editingId === user.id ? 'rgba(42,191,168,0.4)' : 'rgba(20,24,29,0.10)' }}
                 >
                   {editingId === user.id ? 'Cancel' : 'Edit'}
                 </button>

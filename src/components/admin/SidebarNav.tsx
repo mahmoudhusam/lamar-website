@@ -25,9 +25,9 @@ export default function SidebarNav({ navLinks }: { navLinks: NavLink[] }) {
               fontWeight: 500,
               textDecoration: 'none',
               transition: 'color 0.15s',
-              color: active ? '#2ABFA8' : '#9A9A96',
-              background: active ? 'rgba(42,191,168,0.08)' : 'transparent',
-              borderLeft: active ? '2px solid #2ABFA8' : '2px solid transparent',
+              color: active ? '#1A6B60' : '#5B6470',
+              background: active ? 'rgba(42,191,168,0.10)' : 'transparent',
+              borderLeft: active ? '2px solid #1A6B60' : '2px solid transparent',
             }}
           >
             {link.label}

@@ -12,10 +12,10 @@ const ROLE_LABELS: Record<Role, string> = {
 }
 
 const inputStyle: React.CSSProperties = {
-  background: '#0C0C0A',
-  border: '1px solid #2A2A28',
+  background: '#FFFFFF',
+  border: '1px solid rgba(20,24,29,0.10)',
   borderRadius: 6,
-  color: '#F2EEE6',
+  color: '#14181D',
   padding: '0.55rem 0.75rem',
   fontSize: '0.85rem',
   width: '100%',
@@ -24,8 +24,8 @@ const inputStyle: React.CSSProperties = {
 }
 
 const cardStyle: React.CSSProperties = {
-  background: '#1A1A18',
-  border: '1px solid #2A2A28',
+  background: '#FFFFFF',
+  border: '1px solid rgba(20,24,29,0.10)',
   borderRadius: 8,
   padding: '1.5rem',
   marginBottom: '1.25rem',
@@ -33,15 +33,15 @@ const cardStyle: React.CSSProperties = {
 }
 
 const labelStyle: React.CSSProperties = {
-  color: '#9A9A96',
+  color: '#5B6470',
   fontSize: '0.75rem',
   display: 'block',
   marginBottom: '0.35rem',
 }
 
 const btnPrimary: React.CSSProperties = {
-  background: '#2ABFA8',
-  color: '#0C0C0A',
+  background: '#1A6B60',
+  color: '#FFFFFF',
   border: 'none',
   borderRadius: 6,
   padding: '0.55rem 1.25rem',
@@ -107,27 +107,27 @@ export default function AccountClient({ id, name, email, role }: Props) {
   return (
     <div>
       <div style={{ marginBottom: '2rem' }}>
-        <h1 style={{ color: '#F2EEE6', fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.25rem' }}>My Account</h1>
-        <p style={{ color: '#6B6B68', fontSize: '0.85rem' }}>Update your profile and password.</p>
+        <h1 style={{ fontFamily: 'var(--font-archivo)', color: '#14181D', fontSize: '1.5rem', fontWeight: 800, marginBottom: '0.25rem' }}>My Account</h1>
+        <p style={{ color: '#97A0AC', fontSize: '0.85rem' }}>Update your profile and password.</p>
       </div>
 
       {/* Role badge */}
       <div style={{ ...cardStyle, display: 'flex', alignItems: 'center', gap: '1rem' }}>
-        <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#2A2A28', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#9A9A96', fontSize: '1rem', fontWeight: 700, flexShrink: 0 }}>
+        <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#E3E8EE', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#5B6470', fontSize: '1rem', fontWeight: 700, flexShrink: 0 }}>
           {name.charAt(0).toUpperCase()}
         </div>
         <div>
-          <div style={{ color: '#F2EEE6', fontWeight: 600 }}>{name}</div>
-          <div style={{ color: '#6B6B68', fontSize: '0.8rem' }}>{email}</div>
+          <div style={{ color: '#14181D', fontWeight: 600 }}>{name}</div>
+          <div style={{ color: '#97A0AC', fontSize: '0.8rem' }}>{email}</div>
         </div>
-        <span style={{ marginLeft: 'auto', background: role === 'SUPER_ADMIN' ? 'rgba(42,191,168,0.12)' : 'rgba(100,100,98,0.12)', border: `1px solid ${role === 'SUPER_ADMIN' ? 'rgba(42,191,168,0.3)' : '#3A3A38'}`, color: role === 'SUPER_ADMIN' ? '#2ABFA8' : '#9A9A96', borderRadius: 4, padding: '0.25rem 0.75rem', fontSize: '0.75rem' }}>
+        <span style={{ marginLeft: 'auto', background: role === 'SUPER_ADMIN' ? 'rgba(42,191,168,0.12)' : '#F2F5F8', border: `1px solid ${role === 'SUPER_ADMIN' ? 'rgba(42,191,168,0.3)' : 'rgba(20,24,29,0.10)'}`, color: role === 'SUPER_ADMIN' ? '#1A6B60' : '#5B6470', borderRadius: 4, padding: '0.25rem 0.75rem', fontSize: '0.75rem' }}>
           {ROLE_LABELS[role]}
         </span>
       </div>
 
       {/* Profile form */}
       <div style={cardStyle}>
-        <p style={{ color: '#F2EEE6', fontWeight: 600, fontSize: '0.9rem', marginBottom: '1.25rem' }}>Profile</p>
+        <p style={{ color: '#14181D', fontWeight: 600, fontSize: '0.9rem', marginBottom: '1.25rem' }}>Profile</p>
         <form onSubmit={handleProfile} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
           <div>
             <label style={labelStyle}>Name</label>
@@ -138,7 +138,7 @@ export default function AccountClient({ id, name, email, role }: Props) {
             <input name="email" type="email" required defaultValue={email} style={inputStyle} />
           </div>
           {profileError && <p style={{ color: '#E05C5C', fontSize: '0.8rem' }}>{profileError}</p>}
-          {profileMsg && <p style={{ color: '#2ABFA8', fontSize: '0.8rem' }}>{profileMsg}</p>}
+          {profileMsg && <p style={{ color: '#1A6B60', fontSize: '0.8rem' }}>{profileMsg}</p>}
           <div>
             <button type="submit" disabled={isPendingProfile} style={{ ...btnPrimary, opacity: isPendingProfile ? 0.6 : 1 }}>
               {isPendingProfile ? 'Saving…' : 'Save Profile'}
@@ -149,7 +149,7 @@ export default function AccountClient({ id, name, email, role }: Props) {
 
       {/* Password form */}
       <div style={cardStyle}>
-        <p style={{ color: '#F2EEE6', fontWeight: 600, fontSize: '0.9rem', marginBottom: '1.25rem' }}>Change Password</p>
+        <p style={{ color: '#14181D', fontWeight: 600, fontSize: '0.9rem', marginBottom: '1.25rem' }}>Change Password</p>
         <form onSubmit={handlePassword} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
           <div>
             <label style={labelStyle}>Current Password</label>
@@ -164,7 +164,7 @@ export default function AccountClient({ id, name, email, role }: Props) {
             <input name="confirmPassword" type="password" required minLength={8} style={inputStyle} />
           </div>
           {pwError && <p style={{ color: '#E05C5C', fontSize: '0.8rem' }}>{pwError}</p>}
-          {pwMsg && <p style={{ color: '#2ABFA8', fontSize: '0.8rem' }}>{pwMsg}</p>}
+          {pwMsg && <p style={{ color: '#1A6B60', fontSize: '0.8rem' }}>{pwMsg}</p>}
           <div>
             <button type="submit" disabled={isPendingPw} style={{ ...btnPrimary, opacity: isPendingPw ? 0.6 : 1 }}>
               {isPendingPw ? 'Changing…' : 'Change Password'}

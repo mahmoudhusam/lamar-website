@@ -21,14 +21,14 @@ export default async function ProjectEditPage({ params }: { params: Promise<{ id
   return (
     <div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
-        <Link href="/admin/projects" style={{ color: '#6B6B68', textDecoration: 'none', fontSize: '0.82rem' }}>← Projects</Link>
-        <span style={{ color: '#3A3A38' }}>/</span>
-        <h1 style={{ color: '#F2EEE6', fontSize: '1.5rem', fontWeight: 700, flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{project.title}</h1>
+        <Link href="/admin/projects" style={{ color: '#97A0AC', textDecoration: 'none', fontSize: '0.82rem' }}>← Projects</Link>
+        <span style={{ color: 'rgba(20,24,29,0.10)' }}>/</span>
+        <h1 style={{ fontFamily: 'var(--font-archivo)', color: '#14181D', fontSize: '1.5rem', fontWeight: 800, flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{project.title}</h1>
         <a
           href={`/projects/${project.slug}`}
           target="_blank"
           rel="noopener noreferrer"
-          style={{ fontSize: '0.72rem', color: '#2ABFA8', textDecoration: 'none', letterSpacing: '0.08em', border: '1px solid rgba(42,191,168,0.3)', padding: '0.35rem 0.85rem', borderRadius: 4 }}
+          style={{ fontSize: '0.72rem', color: '#1A6B60', textDecoration: 'none', letterSpacing: '0.08em', border: '1px solid rgba(42,191,168,0.3)', padding: '0.35rem 0.85rem', borderRadius: 4 }}
         >
           Preview ↗
         </a>
@@ -36,7 +36,7 @@ export default async function ProjectEditPage({ params }: { params: Promise<{ id
 
       {/* Metadata form */}
       <section style={{ marginBottom: '2.5rem' }}>
-        <p style={{ color: '#9A9A96', fontSize: '0.72rem', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1rem' }}>Project Details</p>
+        <p style={{ color: '#5B6470', fontSize: '0.72rem', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1rem' }}>Project Details</p>
         <ProjectEditForm
           defaultTitle={project.title}
           defaultSlug={project.slug}
@@ -47,7 +47,7 @@ export default async function ProjectEditPage({ params }: { params: Promise<{ id
 
       {/* Image manager */}
       <section>
-        <p style={{ color: '#9A9A96', fontSize: '0.72rem', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1rem' }}>Images ({project.images.length})</p>
+        <p style={{ color: '#5B6470', fontSize: '0.72rem', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1rem' }}>Images ({project.images.length})</p>
         <ProjectImageManager
           images={project.images}
           coverImageUrl={project.coverImageUrl}

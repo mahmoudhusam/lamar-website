@@ -36,10 +36,10 @@ export default function AssignSlotForm({
         value={selected}
         onChange={(e) => setSelected(Number(e.target.value))}
         style={{
-          background: '#0C0C0A',
-          border: '1px solid #2A2A28',
+          background: '#FFFFFF',
+          border: '1px solid rgba(20,24,29,0.10)',
           borderRadius: 4,
-          color: selected >= 0 ? '#F2EEE6' : '#4A4A48',
+          color: selected >= 0 ? '#14181D' : '#B6BEC8',
           padding: '0.3rem 0.5rem',
           fontSize: '0.75rem',
           flex: 1,
@@ -58,8 +58,8 @@ export default function AssignSlotForm({
         onClick={handleAssign}
         disabled={isPending || selected < 0}
         style={{
-          background: '#2ABFA8',
-          color: '#0C0C0A',
+          background: '#1A6B60',
+          color: '#FFFFFF',
           border: 'none',
           borderRadius: 4,
           padding: '0.3rem 0.75rem',

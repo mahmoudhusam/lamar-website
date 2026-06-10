@@ -16,77 +16,71 @@ export default function LoginPage() {
     setError('')
     setLoading(true)
 
-    const result = await signIn('credentials', {
-      email,
-      password,
-      redirect: false,
-    })
+    const result = await signIn('credentials', { email, password, redirect: false })
 
     setLoading(false)
-
     if (result?.error) {
       setError('Invalid email or password.')
       return
     }
-
     router.push('/admin')
     router.refresh()
   }
 
+  const inputStyle: React.CSSProperties = {
+    width: '100%',
+    borderRadius: 8,
+    padding: '0.65rem 0.9rem',
+    fontSize: '0.9rem',
+    color: '#14181D',
+    background: '#FFFFFF',
+    border: '1px solid rgba(20,24,29,0.10)',
+    outline: 'none',
+    fontFamily: 'inherit',
+  }
+  const labelStyle: React.CSSProperties = {
+    display: 'block',
+    marginBottom: '0.4rem',
+    fontSize: '0.7rem',
+    fontWeight: 600,
+    textTransform: 'uppercase',
+    letterSpacing: '0.08em',
+    color: '#5B6470',
+  }
+
   return (
-    <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#0C0C0A' }}>
-      <div className="w-full max-w-sm rounded-2xl p-8" style={{ backgroundColor: '#1A1A18' }}>
-        <div className="mb-8 text-center">
-          <h1 className="text-2xl font-bold tracking-widest text-white">LAMAR</h1>
-          <p className="mt-1 text-sm" style={{ color: '#6B6B68' }}>Admin Dashboard</p>
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#F2F5F8', padding: '1.5rem' }}>
+      <div style={{ width: '100%', maxWidth: 380, borderRadius: 20, padding: '2.25rem', background: '#FFFFFF', border: '1px solid rgba(20,24,29,0.10)', boxShadow: '0 20px 50px rgba(20,24,29,0.08)' }}>
+        <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
+          <h1 style={{ fontFamily: 'var(--font-archivo)', fontWeight: 800, fontSize: '1.6rem', letterSpacing: '0.08em', color: '#14181D' }}>LAMAR</h1>
+          <p style={{ marginTop: '0.35rem', fontSize: '0.85rem', color: '#97A0AC' }}>Admin Dashboard</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <div>
-            <label className="block mb-1.5 text-xs font-medium uppercase tracking-wider" style={{ color: '#9A9A96' }}>
-              Email
-            </label>
+            <label style={labelStyle}>Email</label>
             <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              autoComplete="email"
-              className="w-full rounded-lg px-4 py-2.5 text-sm text-white outline-none transition focus:ring-2"
-              style={{
-                backgroundColor: '#0C0C0A',
-                border: '1px solid #2A2A28',
-              }}
+              type="email" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email"
+              style={inputStyle}
+              onFocus={(e) => (e.currentTarget.style.borderColor = '#2ABFA8')}
+              onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(20,24,29,0.10)')}
+            />
+          </div>
+          <div>
+            <label style={labelStyle}>Password</label>
+            <input
+              type="password" value={password} onChange={(e) => setPassword(e.target.value)} required autoComplete="current-password"
+              style={inputStyle}
+              onFocus={(e) => (e.currentTarget.style.borderColor = '#2ABFA8')}
+              onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(20,24,29,0.10)')}
             />
           </div>
 
-          <div>
-            <label className="block mb-1.5 text-xs font-medium uppercase tracking-wider" style={{ color: '#9A9A96' }}>
-              Password
-            </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              autoComplete="current-password"
-              className="w-full rounded-lg px-4 py-2.5 text-sm text-white outline-none transition focus:ring-2"
-              style={{
-                backgroundColor: '#0C0C0A',
-                border: '1px solid #2A2A28',
-              }}
-            />
-          </div>
-
-          {error && (
-            <p className="text-sm text-red-400">{error}</p>
-          )}
+          {error && <p style={{ fontSize: '0.85rem', color: '#E05C5C' }}>{error}</p>}
 
           <button
-            type="submit"
-            disabled={loading}
-            className="w-full rounded-lg py-2.5 text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-50"
-            style={{ backgroundColor: '#2ABFA8' }}
+            type="submit" disabled={loading}
+            style={{ width: '100%', borderRadius: 8, padding: '0.7rem', fontSize: '0.88rem', fontWeight: 700, color: '#FFFFFF', background: '#1A6B60', border: 'none', cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.6 : 1, fontFamily: 'inherit', transition: 'opacity 0.2s' }}
           >
             {loading ? 'Signing in…' : 'Sign In'}
           </button>

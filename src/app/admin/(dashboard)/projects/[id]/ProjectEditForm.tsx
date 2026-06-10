@@ -6,12 +6,12 @@ type SaveState = { ok: boolean; error?: string } | null
 type SaveAction = (prev: SaveState, formData: FormData) => Promise<SaveState>
 
 const inputStyle: React.CSSProperties = {
-  background: '#0C0C0A',
-  border: '1px solid #2A2A28',
+  background: '#FFFFFF',
+  border: '1px solid rgba(20,24,29,0.10)',
   borderRadius: 4,
   padding: '0.6rem 0.75rem',
   fontSize: '0.87rem',
-  color: '#F2EEE6',
+  color: '#14181D',
   outline: 'none',
   width: '100%',
   fontFamily: 'inherit',
@@ -19,7 +19,7 @@ const inputStyle: React.CSSProperties = {
 
 const labelStyle: React.CSSProperties = {
   fontSize: '0.72rem',
-  color: '#9A9A96',
+  color: '#5B6470',
   letterSpacing: '0.08em',
   textTransform: 'uppercase' as const,
   display: 'block',
@@ -48,7 +48,7 @@ export default function ProjectEditForm({
   }, [state])
 
   return (
-    <form action={formAction} style={{ background: '#1A1A18', border: '1px solid #2A2A28', borderRadius: 8, padding: '1.75rem', display: 'flex', flexDirection: 'column', gap: '1.25rem', maxWidth: 560 }}>
+    <form action={formAction} style={{ background: '#FFFFFF', border: '1px solid rgba(20,24,29,0.10)', borderRadius: 8, padding: '1.75rem', display: 'flex', flexDirection: 'column', gap: '1.25rem', maxWidth: 560 }}>
       <div>
         <label style={labelStyle}>Title *</label>
         <input type="text" name="title" required defaultValue={defaultTitle} style={inputStyle} />
@@ -56,7 +56,7 @@ export default function ProjectEditForm({
       <div>
         <label style={labelStyle}>Slug</label>
         <input type="text" name="slug" defaultValue={defaultSlug} style={inputStyle} placeholder="auto-generated from title" />
-        <p style={{ fontSize: '0.7rem', color: '#6B6B68', marginTop: '0.35rem' }}>URL: /projects/<em>{defaultSlug}</em></p>
+        <p style={{ fontSize: '0.7rem', color: '#97A0AC', marginTop: '0.35rem' }}>URL: /projects/<em>{defaultSlug}</em></p>
       </div>
       <div>
         <label style={labelStyle}>Description</label>
@@ -72,12 +72,12 @@ export default function ProjectEditForm({
         <button
           type="submit"
           disabled={pending}
-          style={{ background: '#2ABFA8', color: '#0C0C0A', border: 'none', borderRadius: 6, padding: '0.6rem 1.5rem', fontSize: '0.83rem', fontWeight: 700, cursor: pending ? 'not-allowed' : 'pointer', opacity: pending ? 0.65 : 1 }}
+          style={{ background: '#1A6B60', color: '#FFFFFF', border: 'none', borderRadius: 6, padding: '0.6rem 1.5rem', fontSize: '0.83rem', fontWeight: 700, cursor: pending ? 'not-allowed' : 'pointer', opacity: pending ? 0.65 : 1 }}
         >
           {pending ? 'Saving…' : 'Save Changes'}
         </button>
         {showSuccess && (
-          <span style={{ fontSize: '0.78rem', color: '#2ABFA8' }}>Saved ✓</span>
+          <span style={{ fontSize: '0.78rem', color: '#1A6B60' }}>Saved ✓</span>
         )}
         {state && !state.ok && state.error && (
           <span style={{ fontSize: '0.78rem', color: '#F87171' }}>{state.error}</span>

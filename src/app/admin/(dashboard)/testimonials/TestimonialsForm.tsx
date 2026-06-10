@@ -6,12 +6,12 @@ type State = { ok: boolean } | null
 type BoundAction = (_prev: State, formData: FormData) => Promise<State>
 
 const inputStyle: React.CSSProperties = {
-  background: '#0C0C0A',
-  border: '1px solid #2A2A28',
+  background: '#FFFFFF',
+  border: '1px solid rgba(20,24,29,0.10)',
   borderRadius: 4,
   padding: '0.6rem 0.75rem',
   fontSize: '0.87rem',
-  color: '#F2EEE6',
+  color: '#14181D',
   outline: 'none',
   width: '100%',
   fontFamily: 'inherit',
@@ -19,7 +19,7 @@ const inputStyle: React.CSSProperties = {
 
 const labelStyle: React.CSSProperties = {
   fontSize: '0.72rem',
-  color: '#9A9A96',
+  color: '#5B6470',
   letterSpacing: '0.08em',
   textTransform: 'uppercase',
   display: 'block',
@@ -50,15 +50,15 @@ export function TestimonialCard({
     e.currentTarget.style.borderColor = '#2ABFA8'
   }
   const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    e.currentTarget.style.borderColor = '#2A2A28'
+    e.currentTarget.style.borderColor = 'rgba(20,24,29,0.10)'
   }
 
   return (
     <form
       action={formAction}
       style={{
-        background: '#1A1A18',
-        border: '1px solid #2A2A28',
+        background: '#FFFFFF',
+        border: '1px solid rgba(20,24,29,0.10)',
         borderRadius: 8,
         padding: '1.75rem',
         display: 'flex',
@@ -79,13 +79,13 @@ export function TestimonialCard({
             justifyContent: 'center',
             fontWeight: 700,
             fontSize: '0.8rem',
-            color: '#2ABFA8',
+            color: '#1A6B60',
             flexShrink: 0,
           }}
         >
           {index}
         </div>
-        <span style={{ color: '#F2EEE6', fontWeight: 700, fontSize: '0.95rem' }}>
+        <span style={{ color: '#14181D', fontWeight: 700, fontSize: '0.95rem' }}>
           Testimonial {index}
         </span>
       </div>
@@ -136,7 +136,7 @@ export function TestimonialCard({
             border: '1px solid rgba(42,191,168,0.3)',
             borderRadius: 6,
             padding: '0.65rem 1rem',
-            color: '#2ABFA8',
+            color: '#1A6B60',
             fontSize: '0.82rem',
           }}
         >
@@ -149,8 +149,8 @@ export function TestimonialCard({
           type="submit"
           disabled={pending}
           style={{
-            background: '#2ABFA8',
-            color: '#0C0C0A',
+            background: '#1A6B60',
+            color: '#FFFFFF',
             border: 'none',
             borderRadius: 6,
             padding: '0.55rem 1.4rem',

@@ -3,8 +3,8 @@ import type { Role } from '@/generated/prisma/client'
 export const ROLE_PERMISSIONS: Record<Role, string[]> = {
   SUPER_ADMIN: ['*'],
   PROJECTS_EDITOR: ['/admin/projects'],
-  CONTENT_EDITOR: ['/admin/services', '/admin/about', '/admin/testimonials', '/admin/contact'],
-  GALLERY_EDITOR: ['/admin/gallery'],
+  CONTENT_EDITOR: ['/admin/about', '/admin/testimonials', '/admin/contact'],
+  GALLERY_EDITOR: ['/admin/projects'],
 }
 
 export function canAccess(role: Role, path: string): boolean {

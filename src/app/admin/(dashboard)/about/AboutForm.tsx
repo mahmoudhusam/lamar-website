@@ -3,8 +3,8 @@ import { useActionState, useEffect, useState } from 'react'
 import { saveAbout } from './actions'
 
 const btnStyle = (pending: boolean): React.CSSProperties => ({
-  background: '#2ABFA8',
-  color: '#0C0C0A',
+  background: '#1A6B60',
+  color: '#FFFFFF',
   border: 'none',
   borderRadius: 6,
   padding: '0.55rem 1.4rem',
@@ -31,15 +31,15 @@ export default function AboutForm({ defaultValue }: { defaultValue: string }) {
     e.currentTarget.style.borderColor = '#2ABFA8'
   }
   const handleBlur = (e: React.FocusEvent<HTMLTextAreaElement>) => {
-    e.currentTarget.style.borderColor = '#2A2A28'
+    e.currentTarget.style.borderColor = 'rgba(20,24,29,0.10)'
   }
 
   return (
     <form
       action={formAction}
       style={{
-        background: '#1A1A18',
-        border: '1px solid #2A2A28',
+        background: '#FFFFFF',
+        border: '1px solid rgba(20,24,29,0.10)',
         borderRadius: 8,
         padding: '1.75rem',
         display: 'flex',
@@ -50,7 +50,7 @@ export default function AboutForm({ defaultValue }: { defaultValue: string }) {
     >
       <label
         htmlFor="about_text"
-        style={{ fontSize: '0.72rem', color: '#9A9A96', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.5rem' }}
+        style={{ fontSize: '0.72rem', color: '#5B6470', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.5rem' }}
       >
         About text
       </label>
@@ -60,12 +60,12 @@ export default function AboutForm({ defaultValue }: { defaultValue: string }) {
         defaultValue={defaultValue}
         rows={10}
         style={{
-          background: '#0C0C0A',
-          border: '1px solid #2A2A28',
+          background: '#FFFFFF',
+          border: '1px solid rgba(20,24,29,0.10)',
           borderRadius: 4,
           padding: '0.75rem',
           fontSize: '0.88rem',
-          color: '#F2EEE6',
+          color: '#14181D',
           lineHeight: 1.7,
           resize: 'vertical',
           outline: 'none',
@@ -74,7 +74,7 @@ export default function AboutForm({ defaultValue }: { defaultValue: string }) {
         onFocus={handleFocus}
         onBlur={handleBlur}
       />
-      <p style={{ fontSize: '0.72rem', color: '#6B6B68', margin: 0 }}>
+      <p style={{ fontSize: '0.72rem', color: '#97A0AC', margin: 0 }}>
         Separate paragraphs with a blank line (double newline).
       </p>
       {showSuccess && (
@@ -84,7 +84,7 @@ export default function AboutForm({ defaultValue }: { defaultValue: string }) {
             border: '1px solid rgba(42,191,168,0.3)',
             borderRadius: 6,
             padding: '0.65rem 1rem',
-            color: '#2ABFA8',
+            color: '#1A6B60',
             fontSize: '0.82rem',
           }}
         >

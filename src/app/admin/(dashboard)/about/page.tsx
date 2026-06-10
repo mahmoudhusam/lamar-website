@@ -11,10 +11,10 @@ export default async function AboutPage() {
   return (
     <div>
       <div style={{ marginBottom: '2rem' }}>
-        <h1 style={{ color: '#F2EEE6', fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.25rem' }}>
+        <h1 style={{ fontFamily: 'var(--font-archivo)', color: '#14181D', fontSize: '1.5rem', fontWeight: 800, marginBottom: '0.25rem' }}>
           About
         </h1>
-        <p style={{ color: '#6B6B68', fontSize: '0.85rem' }}>
+        <p style={{ color: '#97A0AC', fontSize: '0.85rem' }}>
           Edits appear instantly on the public site.
         </p>
       </div>

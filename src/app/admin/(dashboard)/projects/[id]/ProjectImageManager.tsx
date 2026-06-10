@@ -10,12 +10,12 @@ type SetCoverAction = (projectId: string, imageUrl: string) => Promise<void>
 type Image = { id: string; url: string; caption: string | null; order: number }
 
 const inputStyle: React.CSSProperties = {
-  background: '#0C0C0A',
-  border: '1px solid #2A2A28',
+  background: '#FFFFFF',
+  border: '1px solid rgba(20,24,29,0.10)',
   borderRadius: 4,
   padding: '0.6rem 0.75rem',
   fontSize: '0.87rem',
-  color: '#F2EEE6',
+  color: '#14181D',
   outline: 'none',
   width: '100%',
   fontFamily: 'inherit',
@@ -23,7 +23,7 @@ const inputStyle: React.CSSProperties = {
 
 const labelStyle: React.CSSProperties = {
   fontSize: '0.72rem',
-  color: '#9A9A96',
+  color: '#5B6470',
   letterSpacing: '0.08em',
   textTransform: 'uppercase' as const,
   display: 'block',
@@ -44,7 +44,7 @@ function UploadForm({ uploadAction }: { uploadAction: UploadAction }) {
   return (
     <form
       action={formAction}
-      style={{ background: '#1A1A18', border: '1px solid #2A2A28', borderRadius: 8, padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: 560, marginBottom: '2rem' }}
+      style={{ background: '#FFFFFF', border: '1px solid rgba(20,24,29,0.10)', borderRadius: 8, padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: 560, marginBottom: '2rem' }}
     >
       <div>
         <label style={labelStyle}>Image File *</label>
@@ -55,7 +55,7 @@ function UploadForm({ uploadAction }: { uploadAction: UploadAction }) {
         <input type="text" name="caption" placeholder="e.g. Living room after gypsum work" style={inputStyle} />
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '0.8rem', color: '#9A9A96' }}>
+        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '0.8rem', color: '#5B6470' }}>
           <input type="checkbox" name="set_cover" style={{ accentColor: '#2ABFA8' }} />
           Set as cover image
         </label>
@@ -64,11 +64,11 @@ function UploadForm({ uploadAction }: { uploadAction: UploadAction }) {
         <button
           type="submit"
           disabled={pending}
-          style={{ background: '#2ABFA8', color: '#0C0C0A', border: 'none', borderRadius: 6, padding: '0.6rem 1.5rem', fontSize: '0.83rem', fontWeight: 700, cursor: pending ? 'not-allowed' : 'pointer', opacity: pending ? 0.65 : 1 }}
+          style={{ background: '#1A6B60', color: '#FFFFFF', border: 'none', borderRadius: 6, padding: '0.6rem 1.5rem', fontSize: '0.83rem', fontWeight: 700, cursor: pending ? 'not-allowed' : 'pointer', opacity: pending ? 0.65 : 1 }}
         >
           {pending ? 'Uploading…' : 'Upload Image'}
         </button>
-        {showSuccess && <span style={{ fontSize: '0.78rem', color: '#2ABFA8' }}>Uploaded ✓</span>}
+        {showSuccess && <span style={{ fontSize: '0.78rem', color: '#1A6B60' }}>Uploaded ✓</span>}
         {state && !state.ok && state.error && <span style={{ fontSize: '0.78rem', color: '#F87171' }}>{state.error}</span>}
       </div>
     </form>
@@ -95,7 +95,7 @@ export default function ProjectImageManager({
       <UploadForm uploadAction={uploadAction} />
 
       {images.length === 0 ? (
-        <p style={{ color: '#6B6B68', fontSize: '0.85rem' }}>No images yet. Upload the first one above.</p>
+        <p style={{ color: '#97A0AC', fontSize: '0.85rem' }}>No images yet. Upload the first one above.</p>
       ) : (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '0.75rem' }}>
           {images.map((img) => {
@@ -103,31 +103,31 @@ export default function ProjectImageManager({
             return (
               <div
                 key={img.id}
-                style={{ background: '#1A1A18', borderRadius: 6, overflow: 'hidden', border: isCover ? '2px solid #2ABFA8' : '1px solid #2A2A28', position: 'relative' }}
+                style={{ background: '#FFFFFF', borderRadius: 6, overflow: 'hidden', border: isCover ? '2px solid #2ABFA8' : '1px solid rgba(20,24,29,0.10)', position: 'relative' }}
               >
                 {/* Cover badge */}
                 {isCover && (
-                  <div style={{ position: 'absolute', top: 8, left: 8, background: '#2ABFA8', color: '#0C0C0A', fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '0.2rem 0.5rem', borderRadius: 3, zIndex: 1 }}>
+                  <div style={{ position: 'absolute', top: 8, left: 8, background: '#2ABFA8', color: '#FFFFFF', fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '0.2rem 0.5rem', borderRadius: 3, zIndex: 1 }}>
                     Cover
                   </div>
                 )}
 
                 {/* Image */}
-                <div style={{ aspectRatio: '16/9', overflow: 'hidden', background: '#131310' }}>
+                <div style={{ aspectRatio: '16/9', overflow: 'hidden', background: '#F2F5F8' }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={img.url} alt={img.caption ?? ''} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                 </div>
 
                 {/* Caption */}
                 {img.caption && (
-                  <div style={{ padding: '0.5rem 0.75rem', fontSize: '0.72rem', color: '#9A9A96' }}>{img.caption}</div>
+                  <div style={{ padding: '0.5rem 0.75rem', fontSize: '0.72rem', color: '#5B6470' }}>{img.caption}</div>
                 )}
 
                 {/* Actions */}
                 <div style={{ padding: '0.5rem 0.75rem 0.75rem', display: 'flex', gap: '0.5rem' }}>
                   {!isCover && (
                     <form action={setCoverAction.bind(null, projectId, img.url)}>
-                      <button type="submit" style={{ background: 'rgba(42,191,168,0.1)', border: '1px solid rgba(42,191,168,0.25)', color: '#2ABFA8', borderRadius: 4, padding: '0.3rem 0.65rem', fontSize: '0.68rem', cursor: 'pointer', fontFamily: 'inherit' }}>
+                      <button type="submit" style={{ background: 'rgba(42,191,168,0.1)', border: '1px solid rgba(42,191,168,0.25)', color: '#1A6B60', borderRadius: 4, padding: '0.3rem 0.65rem', fontSize: '0.68rem', cursor: 'pointer', fontFamily: 'inherit' }}>
                         Set Cover
                       </button>
                     </form>

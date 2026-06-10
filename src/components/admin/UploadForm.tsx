@@ -4,19 +4,19 @@ import { useActionState, useEffect, useRef } from 'react'
 type UploadState = { ok: boolean; error?: string } | null
 
 const inputStyle: React.CSSProperties = {
-  background: '#0C0C0A',
-  border: '1px solid #2A2A28',
+  background: '#FFFFFF',
+  border: '1px solid rgba(20,24,29,0.10)',
   borderRadius: 4,
   padding: '0.55rem 0.75rem',
   fontSize: '0.85rem',
-  color: '#F2EEE6',
+  color: '#14181D',
   outline: 'none',
   width: '100%',
 }
 
 const labelStyle: React.CSSProperties = {
   fontSize: '0.72rem',
-  color: '#9A9A96',
+  color: '#5B6470',
   letterSpacing: '0.08em',
   textTransform: 'uppercase',
   display: 'block',
@@ -40,8 +40,8 @@ export default function UploadForm({
       ref={formRef}
       action={formAction}
       style={{
-        background: '#1A1A18',
-        border: '1px solid #2A2A28',
+        background: '#FFFFFF',
+        border: '1px solid rgba(20,24,29,0.10)',
         borderRadius: 8,
         padding: '1.5rem',
         display: 'flex',
@@ -50,7 +50,7 @@ export default function UploadForm({
         maxWidth: 500,
       }}
     >
-      <h3 style={{ color: '#F2EEE6', fontWeight: 700, fontSize: '0.95rem', margin: 0 }}>
+      <h3 style={{ color: '#14181D', fontWeight: 700, fontSize: '0.95rem', margin: 0 }}>
         Upload Photo
       </h3>
 
@@ -61,7 +61,7 @@ export default function UploadForm({
           name="file"
           accept="image/*"
           required
-          style={{ ...inputStyle, color: '#9A9A96' }}
+          style={{ ...inputStyle, color: '#5B6470' }}
         />
       </div>
 
@@ -80,8 +80,8 @@ export default function UploadForm({
           type="submit"
           disabled={pending}
           style={{
-            background: '#2ABFA8',
-            color: '#0C0C0A',
+            background: '#1A6B60',
+            color: '#FFFFFF',
             border: 'none',
             borderRadius: 6,
             padding: '0.55rem 1.4rem',
@@ -95,7 +95,7 @@ export default function UploadForm({
           {pending ? 'Uploading…' : 'Upload'}
         </button>
         {state?.ok && (
-          <span style={{ color: '#2ABFA8', fontSize: '0.8rem' }}>✓ Uploaded!</span>
+          <span style={{ color: '#1A6B60', fontSize: '0.8rem' }}>✓ Uploaded!</span>
         )}
         {state?.error && (
           <span style={{ color: '#F87171', fontSize: '0.8rem' }}>{state.error}</span>

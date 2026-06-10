@@ -16,27 +16,25 @@ export default async function AdminLayout({
   const isSuperAdmin = session.user.role === 'SUPER_ADMIN'
 
   const navLinks = [
-    { href: '/admin/gallery', label: 'Gallery' },
     { href: '/admin/projects', label: 'Projects' },
-    { href: '/admin/about', label: 'About' },
-    { href: '/admin/services', label: 'Services' },
+    { href: '/admin/about', label: 'About (Over ons)' },
+    { href: '/admin/testimonials', label: 'Reviews' },
     { href: '/admin/contact', label: 'Contact' },
-    { href: '/admin/testimonials', label: 'Testimonials' },
     { href: '/admin/settings', label: 'Settings' },
     ...(isSuperAdmin ? [{ href: '/admin/users', label: 'Users' }] : []),
   ]
 
   return (
-    <div className="flex min-h-screen" style={{ backgroundColor: '#0C0C0A' }}>
+    <div className="flex min-h-screen" style={{ backgroundColor: '#F2F5F8' }}>
       {/* Sidebar */}
       <aside
         className="flex w-56 flex-col justify-between px-4 py-6"
-        style={{ backgroundColor: '#111110', borderRight: '1px solid #1F1F1D' }}
+        style={{ backgroundColor: '#FFFFFF', borderRight: '1px solid rgba(20,24,29,0.10)' }}
       >
         <div>
           <div className="mb-8 px-2">
-            <span className="text-lg font-bold tracking-widest text-white">LAMAR</span>
-            <p className="text-xs" style={{ color: '#6B6B68' }}>Admin</p>
+            <span className="text-lg font-bold tracking-widest" style={{ color: '#14181D' }}>LAMAR</span>
+            <p className="text-xs" style={{ color: '#97A0AC' }}>Admin</p>
           </div>
 
           <SidebarNav navLinks={navLinks} />
@@ -49,14 +47,14 @@ export default async function AdminLayout({
               display: 'block',
               padding: '0.4rem 0.5rem',
               fontSize: '0.78rem',
-              color: '#9A9A96',
+              color: '#5B6470',
               textDecoration: 'none',
               borderRadius: 4,
               marginBottom: '0.25rem',
             }}
           >
             {session.user.name ?? session.user.email}
-            <span style={{ display: 'block', fontSize: '0.68rem', color: '#6B6B68' }}>My Account</span>
+            <span style={{ display: 'block', fontSize: '0.68rem', color: '#97A0AC' }}>My Account</span>
           </a>
           <SignOutButton />
         </div>
