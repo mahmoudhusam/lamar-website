@@ -22,6 +22,8 @@ export default async function AdminDashboard({
   const quickActions = [
     { href: '/admin/projects',     emoji: '🏗️', title: 'Manage Projects', sub: 'Add, edit & publish your portfolio' },
     { href: '/admin/about',        emoji: '📝', title: 'Edit Over Ons',    sub: 'Update your about-page text' },
+    { href: '/admin/werkwijze',    emoji: '🛠️', title: 'Edit Werkwijze',  sub: 'Steps, headings & banner slogan' },
+    { href: '/admin/offerte',      emoji: '💬', title: 'Edit Offerte',     sub: 'WhatsApp number & intro text' },
     { href: '/admin/testimonials', emoji: '⭐', title: 'Edit Reviews',     sub: 'Manage customer testimonials' },
     { href: '/admin/contact',      emoji: '📞', title: 'Edit Contact',     sub: 'Update phone, email & location' },
   ]

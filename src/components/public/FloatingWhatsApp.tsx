@@ -2,16 +2,13 @@
 
 import { usePathname } from 'next/navigation'
 
-// Replace with the client's real WhatsApp number (international, no +)
-const WA = '31684054528'
-
-export default function FloatingWhatsApp() {
+export default function FloatingWhatsApp({ number }: { number: string }) {
   const pathname = usePathname()
   if (pathname?.startsWith('/admin') || pathname?.startsWith('/login')) return null
 
   return (
     <a
-      href={`https://wa.me/${WA}`}
+      href={`https://wa.me/${number}`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="WhatsApp"

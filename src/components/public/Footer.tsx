@@ -6,6 +6,7 @@ const fallbacks: Record<string, string> = {
   contact_email:    'lamarstukadoor@gmail.com',
   contact_location: 'Geurdeland 17 g, 6673 DR Andelst',
   contact_hours:    'Ma – Za · 08:00 – 18:00',
+  whatsapp_number:  '31684054528',
 }
 
 const circle: React.CSSProperties = {
@@ -35,7 +36,7 @@ export default async function Footer({ lang }: { lang: Lang }) {
             <div>{get('contact_hours')}</div>
           </div>
           <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.75rem' }}>
-            <a href="https://wa.me/31684054528" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" style={circle}>
+            <a href={`https://wa.me/${get('whatsapp_number')}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" style={circle}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
             </a>
             <a href="https://www.facebook.com/share/1B9dyMWyi8/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style={circle}>

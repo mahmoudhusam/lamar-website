@@ -1,7 +1,9 @@
 import { t, type Lang } from '@/lib/i18n'
+import { getContent } from '@/lib/content'
 
-export default function HeroSection({ lang }: { lang: Lang }) {
+export default async function HeroSection({ lang }: { lang: Lang }) {
   const tr = t[lang].hero
+  const wa = await getContent('whatsapp_number', '31684054528')
 
   return (
     <section
@@ -57,7 +59,7 @@ export default function HeroSection({ lang }: { lang: Lang }) {
           </div>
 
           {/* WhatsApp */}
-          <a className="rv d2" href="https://wa.me/31684054528" style={{ color: 'var(--teal)', textDecoration: 'none', fontSize: '0.85rem', fontFamily: 'var(--font-outfit)', fontWeight: 500, display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+          <a className="rv d2" href={`https://wa.me/${wa}`} style={{ color: 'var(--teal)', textDecoration: 'none', fontSize: '0.85rem', fontFamily: 'var(--font-outfit)', fontWeight: 500, display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
             📲 {tr.whatsappCta}
           </a>
         </div>

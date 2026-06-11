@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Archivo, Outfit } from 'next/font/google'
 import './globals.css'
 import FloatingWhatsApp from '@/components/public/FloatingWhatsApp'
+import { getContent } from '@/lib/content'
 
 const archivo = Archivo({
   subsets: ['latin'],
@@ -40,12 +41,13 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const wa = await getContent('whatsapp_number', '31684054528')
   return (
     <html lang="nl" className={`${archivo.variable} ${outfit.variable}`} data-scroll-behavior="smooth">
-      <body>{children}<FloatingWhatsApp /></body>
+      <body>{children}<FloatingWhatsApp number={wa} /></body>
     </html>
   )
 }

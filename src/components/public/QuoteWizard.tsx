@@ -2,8 +2,6 @@
 
 import { useEffect, useMemo, useState } from 'react'
 
-const WA = '31684054528'
-
 type KlusKey = 'stucwerk' | 'latex' | 'sauswerk' | 'lijstwerk'
 
 const KLUS_OPTIONS: { key: KlusKey; label: string }[] = [
@@ -52,7 +50,7 @@ const labelStyle: React.CSSProperties = { fontSize: '0.7rem', letterSpacing: '0.
 const inputStyle: React.CSSProperties = { width: '100%', background: 'var(--bg2)', border: '1px solid var(--border)', borderRadius: 12, padding: '0.85rem 1rem', fontSize: '0.95rem', color: 'var(--white)', fontFamily: 'var(--font-outfit)', outline: 'none', transition: 'border-color 0.2s' }
 const sectionTitle: React.CSSProperties = { fontFamily: 'var(--font-archivo)', fontWeight: 800, fontSize: '0.95rem', color: 'var(--white)', marginBottom: '0.25rem' }
 
-export default function QuoteWizard() {
+export default function QuoteWizard({ whatsappNumber, introText }: { whatsappNumber: string; introText?: string }) {
   const [step, setStep] = useState(0)
   const [woning, setWoning] = useState<'' | 'bestaand' | 'nieuwbouw'>('')
   const [selected, setSelected] = useState<KlusKey[]>([])
@@ -154,7 +152,7 @@ export default function QuoteWizard() {
   function handleSubmit() {
     if (!gegevensDone) return
     // ── SWAP POINT: replace this with an API POST / email when the channel is decided ──
-    window.open(`https://wa.me/${WA}?text=${buildMessage()}`, '_blank', 'noopener,noreferrer')
+    window.open(`https://wa.me/${whatsappNumber}?text=${buildMessage()}`, '_blank', 'noopener,noreferrer')
     setSubmitted(true)
   }
 
@@ -187,6 +185,10 @@ export default function QuoteWizard() {
         .oa-upload:hover { border-color: var(--teal2); }
         .oa-navmonth:hover { background: var(--bg2); }
       `}</style>
+
+      {introText && (
+        <p style={{ maxWidth: 720, margin: '0 auto 2rem', textAlign: 'center', fontSize: '1rem', lineHeight: 1.7, color: 'var(--white2)', fontWeight: 300 }}>{introText}</p>
+      )}
 
       {/* Stepper */}
       <div className="oa-stepper" style={{ maxWidth: 1080, margin: '0 auto 2.5rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'center' }}>

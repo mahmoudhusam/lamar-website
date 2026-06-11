@@ -3,7 +3,7 @@ import type { Role } from '@/generated/prisma/client'
 export const ROLE_PERMISSIONS: Record<Role, string[]> = {
   SUPER_ADMIN: ['*'],
   PROJECTS_EDITOR: ['/admin/projects'],
-  CONTENT_EDITOR: ['/admin/about', '/admin/testimonials', '/admin/contact'],
+  CONTENT_EDITOR: ['/admin/about', '/admin/werkwijze', '/admin/offerte', '/admin/testimonials', '/admin/contact'],
   GALLERY_EDITOR: ['/admin/projects'],
 }
 
