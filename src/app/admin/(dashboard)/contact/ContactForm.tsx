@@ -1,16 +1,27 @@
-'use client'
-import { useActionState, useEffect, useState } from 'react'
-import { saveContact } from './actions'
+'use client';
+import { useActionState, useEffect, useState } from 'react';
+import { saveContact } from './actions';
 
-type Field = { key: string; label: string; placeholder: string }
+type Field = { key: string; label: string; placeholder: string };
 
 const fields: Field[] = [
-  { key: 'contact_phone',     label: 'Phone',         placeholder: '+31 6 00 000 000' },
-  { key: 'contact_whatsapp',  label: 'WhatsApp',      placeholder: '+31 6 00 000 000' },
-  { key: 'contact_email',     label: 'Email',         placeholder: 'info@lamar-renovatie.nl' },
-  { key: 'contact_location',  label: 'Location',      placeholder: 'Amsterdam, Netherlands' },
-  { key: 'contact_hours',     label: 'Working Hours',  placeholder: 'Mon–Fri 08:00–18:00' },
-]
+  { key: 'contact_phone', label: 'Phone', placeholder: '+31 6 00 000 000' },
+  {
+    key: 'contact_email',
+    label: 'Email',
+    placeholder: 'info@lamar-renovatie.nl',
+  },
+  {
+    key: 'contact_location',
+    label: 'Location',
+    placeholder: 'Amsterdam, Netherlands',
+  },
+  {
+    key: 'contact_hours',
+    label: 'Working Hours',
+    placeholder: 'Mon–Fri 08:00–18:00',
+  },
+];
 
 const inputStyle: React.CSSProperties = {
   background: '#FFFFFF',
@@ -22,7 +33,7 @@ const inputStyle: React.CSSProperties = {
   outline: 'none',
   width: '100%',
   fontFamily: 'inherit',
-}
+};
 
 const labelStyle: React.CSSProperties = {
   fontSize: '0.72rem',
@@ -31,26 +42,30 @@ const labelStyle: React.CSSProperties = {
   textTransform: 'uppercase',
   display: 'block',
   marginBottom: '0.5rem',
-}
+};
 
-export default function ContactForm({ defaults }: { defaults: Record<string, string> }) {
-  const [state, formAction, pending] = useActionState(saveContact, null)
-  const [showSuccess, setShowSuccess] = useState(false)
+export default function ContactForm({
+  defaults,
+}: {
+  defaults: Record<string, string>;
+}) {
+  const [state, formAction, pending] = useActionState(saveContact, null);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
     if (state?.ok) {
-      setShowSuccess(true)
-      const timer = setTimeout(() => setShowSuccess(false), 3000)
-      return () => clearTimeout(timer)
+      setShowSuccess(true);
+      const timer = setTimeout(() => setShowSuccess(false), 3000);
+      return () => clearTimeout(timer);
     }
-  }, [state])
+  }, [state]);
 
   const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-    e.currentTarget.style.borderColor = '#2ABFA8'
-  }
+    e.currentTarget.style.borderColor = '#2ABFA8';
+  };
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    e.currentTarget.style.borderColor = 'rgba(20,24,29,0.10)'
-  }
+    e.currentTarget.style.borderColor = 'rgba(20,24,29,0.10)';
+  };
 
   return (
     <form
@@ -68,7 +83,9 @@ export default function ContactForm({ defaults }: { defaults: Record<string, str
     >
       {fields.map(({ key, label, placeholder }) => (
         <div key={key}>
-          <label htmlFor={key} style={labelStyle}>{label}</label>
+          <label htmlFor={key} style={labelStyle}>
+            {label}
+          </label>
           <input
             type="text"
             id={key}
@@ -118,5 +135,5 @@ export default function ContactForm({ defaults }: { defaults: Record<string, str
         </button>
       </div>
     </form>
-  )
+  );
 }

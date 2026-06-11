@@ -1,15 +1,28 @@
-import { getContentMany } from '@/lib/content'
-import ContactForm from './ContactForm'
+import { getContentMany } from '@/lib/content';
+import ContactForm from './ContactForm';
 
-const KEYS = ['contact_phone', 'contact_whatsapp', 'contact_email', 'contact_location', 'contact_hours']
+const KEYS = [
+  'contact_phone',
+  'contact_email',
+  'contact_location',
+  'contact_hours',
+];
 
 export default async function ContactPage() {
-  const defaults = await getContentMany(KEYS)
+  const defaults = await getContentMany(KEYS);
 
   return (
     <div>
       <div style={{ marginBottom: '2rem' }}>
-        <h1 style={{ fontFamily: 'var(--font-archivo)', color: '#14181D', fontSize: '1.5rem', fontWeight: 800, marginBottom: '0.25rem' }}>
+        <h1
+          style={{
+            fontFamily: 'var(--font-archivo)',
+            color: '#14181D',
+            fontSize: '1.5rem',
+            fontWeight: 800,
+            marginBottom: '0.25rem',
+          }}
+        >
           Contact
         </h1>
         <p style={{ color: '#97A0AC', fontSize: '0.85rem' }}>
@@ -18,5 +31,5 @@ export default async function ContactPage() {
       </div>
       <ContactForm defaults={defaults} />
     </div>
-  )
+  );
 }
