@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 import { authOptions } from '@/lib/auth'
 import SignOutButton from '@/components/admin/SignOutButton'
 import SidebarNav from '@/components/admin/SidebarNav'
+import { canAccess } from '@/lib/permissions'
 
 export default async function AdminLayout({
   children,
@@ -13,18 +14,16 @@ export default async function AdminLayout({
 
   if (!session) redirect('/admin/login')
 
-  const isSuperAdmin = session.user.role === 'SUPER_ADMIN'
-
   const navLinks = [
     { href: '/admin/projects', label: 'Projects' },
-    { href: '/admin/about', label: 'About (Over ons)' },
-    { href: '/admin/werkwijze', label: 'Werkwijze' },
-    { href: '/admin/offerte', label: 'Offerte' },
+    { href: '/admin/about', label: 'About' },
+    { href: '/admin/werkwijze', label: 'Process' },
+    { href: '/admin/offerte', label: 'Quote' },
     { href: '/admin/testimonials', label: 'Reviews' },
     { href: '/admin/contact', label: 'Contact' },
     { href: '/admin/settings', label: 'Settings' },
-    ...(isSuperAdmin ? [{ href: '/admin/users', label: 'Users' }] : []),
-  ]
+    { href: '/admin/users', label: 'Users' },
+  ].filter((link) => canAccess(session.user.role, link.href))
 
   return (
     <div className="flex min-h-screen" style={{ backgroundColor: '#F2F5F8' }}>

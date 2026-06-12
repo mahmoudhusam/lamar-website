@@ -29,7 +29,7 @@ export default async function AdminWerkwijzePage() {
   return (
     <div>
       <div style={{ marginBottom: '2rem' }}>
-        <h1 style={{ fontFamily: 'var(--font-archivo)', color: '#14181D', fontSize: '1.5rem', fontWeight: 800, marginBottom: '0.25rem' }}>Werkwijze</h1>
+        <h1 style={{ fontFamily: 'var(--font-archivo)', color: '#14181D', fontSize: '1.5rem', fontWeight: 800, marginBottom: '0.25rem' }}>Process</h1>
         <p style={{ color: '#97A0AC', fontSize: '0.85rem' }}>Heading, steps and banner for the public Werkwijze page. Edits appear instantly.</p>
       </div>
       <WerkwijzeForm defaults={defaults} />

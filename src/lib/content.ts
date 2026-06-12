@@ -3,7 +3,7 @@ import { prisma } from '@/lib/prisma'
 export async function getContent(key: string, fallback: string): Promise<string> {
   try {
     const row = await prisma.content.findUnique({ where: { key } })
-    return row?.value ?? fallback
+    return row?.value || fallback
   } catch {
     return fallback
   }

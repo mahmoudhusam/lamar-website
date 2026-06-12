@@ -10,7 +10,7 @@ export default async function AdminOffertePage() {
   return (
     <div>
       <div style={{ marginBottom: '2rem' }}>
-        <h1 style={{ fontFamily: 'var(--font-archivo)', color: '#14181D', fontSize: '1.5rem', fontWeight: 800, marginBottom: '0.25rem' }}>Offerte</h1>
+        <h1 style={{ fontFamily: 'var(--font-archivo)', color: '#14181D', fontSize: '1.5rem', fontWeight: 800, marginBottom: '0.25rem' }}>Quote</h1>
         <p style={{ color: '#97A0AC', fontSize: '0.85rem' }}>WhatsApp number &amp; intro for the offerte page. Edits appear instantly.</p>
       </div>
       <OfferteForm defaults={defaults} />

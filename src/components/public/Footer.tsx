@@ -181,13 +181,11 @@ export default async function Footer({ lang }: { lang: Lang }) {
             style={{ display: 'flex', gap: '0.75rem', marginTop: '1.75rem' }}
           >
             {socialLinks.map((social) => {
-              const url = social.isWhatsApp
-                ? `https://wa.me/${get(social.key)}`
-                : get(social.key);
-              // Only render if the URL is not empty/fallback or if it's a real social link
-              const hasContent =
-                social.key === 'whatsapp_number' || c[social.key];
-              if (!hasContent) return null;
+              // undefined = never configured (use fallback); '' = cleared in admin (hide); else use saved value
+              const saved = c[social.key];
+              const value = saved === undefined ? fallbacks[social.key] : saved;
+              if (!value) return null;
+              const url = social.isWhatsApp ? `https://wa.me/${value}` : value;
               return (
                 <a
                   key={social.key}

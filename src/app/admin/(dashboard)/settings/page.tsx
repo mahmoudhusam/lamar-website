@@ -18,7 +18,17 @@ export default async function SettingsPage() {
     'social_tiktok',
     'social_youtube',
   ];
-  const socialDefaults = await getContentMany(socialKeys);
+  // Keep these in sync with the fallbacks in Footer.tsx
+  const SOCIAL_FALLBACKS: Record<string, string> = {
+    social_facebook: 'https://www.facebook.com/share/1B9dyMWyi8/',
+    social_instagram: 'https://www.instagram.com/lamarstukadoor',
+    social_tiktok: 'https://www.tiktok.com/@lamarstukadoor',
+    social_youtube: 'https://www.youtube.com/@lamarstukadoorenonderhod6868',
+  };
+  const savedSocials = await getContentMany(socialKeys);
+  const socialDefaults = Object.fromEntries(
+    socialKeys.map((k) => [k, savedSocials[k] ?? SOCIAL_FALLBACKS[k]]),
+  );
 
   return (
     <div>

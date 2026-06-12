@@ -195,7 +195,7 @@ export default async function HeroSection({ lang }: { lang: Lang }) {
             }}
           >
             <source src="/sample1.webm" type="video/webm" />
-            <source src="/sampl1.mp4" type="video/mp4" />
+            <source src="/sample1.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
           <div
