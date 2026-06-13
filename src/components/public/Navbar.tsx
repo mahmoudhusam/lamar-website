@@ -1,12 +1,15 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { t, type Lang } from '@/lib/i18n';
 
 export default function Navbar({ lang }: { lang: Lang }) {
   const tr = t[lang].nav;
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname() || '/';
+  const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/');
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -19,6 +22,7 @@ export default function Navbar({ lang }: { lang: Lang }) {
 
   const desktopLinks = [
     { label: tr.about, href: '/over-ons' },
+    { label: tr.projects, href: '/projects' },
     { label: tr.infohub, href: '/infohub' },
     { label: tr.contact, href: '/contact' },
   ];
@@ -48,13 +52,19 @@ export default function Navbar({ lang }: { lang: Lang }) {
           </a>
 
           <div className="hidden md:flex items-center gap-8">
-            {desktopLinks.map(({ label, href }) => (
-              <a key={href} href={href}
-                style={{ textDecoration: 'none', fontSize: '0.82rem', fontWeight: 500, letterSpacing: '0.04em', color: 'var(--white2)', transition: 'color 0.2s', fontFamily: 'var(--font-outfit)' }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--white)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--white2)')}
-              >{label}</a>
-            ))}
+            {desktopLinks.map(({ label, href }) => {
+              const active = isActive(href);
+              return (
+                <a key={href} href={href}
+                  style={{ position: 'relative', textDecoration: 'none', fontSize: '0.82rem', fontWeight: active ? 700 : 500, letterSpacing: '0.04em', color: active ? 'var(--teal)' : 'var(--white2)', transition: 'color 0.2s', fontFamily: 'var(--font-outfit)', paddingBottom: 4 }}
+                  onMouseEnter={(e) => { if (!active) e.currentTarget.style.color = 'var(--white)'; }}
+                  onMouseLeave={(e) => { if (!active) e.currentTarget.style.color = 'var(--white2)'; }}
+                >
+                  {label}
+                  {active && <span style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 2, borderRadius: 2, background: 'var(--teal2)' }} />}
+                </a>
+              );
+            })}
           </div>
         </div>
 
@@ -76,13 +86,16 @@ export default function Navbar({ lang }: { lang: Lang }) {
 
       {menuOpen && (
         <div style={{ position: 'fixed', inset: 0, zIndex: 199, background: 'rgba(255,255,255,0.98)', backdropFilter: 'blur(18px)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '2rem' }}>
-          {mobileLinks.map(({ label, href }) => (
-            <a key={href} href={href} onClick={closeMenu}
-              style={{ textDecoration: 'none', fontFamily: 'var(--font-archivo)', fontWeight: 700, fontSize: '2rem', letterSpacing: '0.04em', color: 'var(--white2)', transition: 'color 0.2s' }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--white)')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--white2)')}
-            >{label}</a>
-          ))}
+          {mobileLinks.map(({ label, href }) => {
+            const active = isActive(href);
+            return (
+              <a key={href} href={href} onClick={closeMenu}
+                style={{ textDecoration: 'none', fontFamily: 'var(--font-archivo)', fontWeight: 700, fontSize: '2rem', letterSpacing: '0.04em', color: active ? 'var(--teal)' : 'var(--white2)', transition: 'color 0.2s' }}
+                onMouseEnter={(e) => { if (!active) e.currentTarget.style.color = 'var(--white)'; }}
+                onMouseLeave={(e) => { if (!active) e.currentTarget.style.color = 'var(--white2)'; }}
+              >{label}</a>
+            );
+          })}
           <a href="/offerte-aanvragen" onClick={closeMenu}
             style={{ background: 'var(--teal)', color: '#FFFFFF', padding: '0.9rem 2.5rem', borderRadius: 999, textDecoration: 'none', fontFamily: 'var(--font-outfit)', fontWeight: 700, fontSize: '1rem', marginTop: '0.75rem' }}
           >{t[lang].hero.quoteCta}</a>
