@@ -11,7 +11,18 @@ enum Role {
   SUPER_ADMIN
   PROJECTS_EDITOR
   CONTENT_EDITOR
-  GALLERY_EDITOR
+}
+
+enum LeadSource {
+  CONTACT
+  QUOTE
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  WON
+  ARCHIVED
 }
 
 model User {
@@ -24,30 +35,26 @@ model User {
   updatedAt DateTime @updatedAt
 }
 
-model GalleryItem {
-  id        String   @id @default(cuid())
-  url       String
-  caption   String?
-  order     Int      @default(0)
-  createdAt DateTime @default(now())
-}
-
 model Content {
   id    String @id @default(cuid())
   key   String @unique
   value String
 }
 
-model Settings {
-  id       String @id @default(cuid())
-  language String @default("nl")
-}
+/// An enquiry captured from the public contact form or quote wizard.
+model Lead {
+  id        String     @id @default(cuid())
+  name      String
+  email     String?
+  phone     String?
+  service   String?
+  message   String
+  source    LeadSource @default(CONTACT)
+  status    LeadStatus @default(NEW)
+  createdAt DateTime   @default(now())
 
-model AdminUser {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
+  @@index([status])
+  @@index([createdAt])
 }
 
 model Project {

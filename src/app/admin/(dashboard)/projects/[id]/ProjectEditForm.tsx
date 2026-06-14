@@ -30,11 +30,13 @@ export default function ProjectEditForm({
   defaultTitle,
   defaultSlug,
   defaultDescription,
+  defaultBentoSlot,
   action,
 }: {
   defaultTitle: string
   defaultSlug: string
   defaultDescription: string
+  defaultBentoSlot: number
   action: SaveAction
 }) {
   const [state, formAction, pending] = useActionState(action, null)
@@ -66,6 +68,18 @@ export default function ProjectEditForm({
           defaultValue={defaultDescription}
           style={{ ...inputStyle, resize: 'vertical', lineHeight: 1.65 }}
         />
+      </div>
+      <div>
+        <label style={labelStyle}>Homepage gallery slot</label>
+        <select name="bentoSlot" defaultValue={String(defaultBentoSlot)} style={inputStyle}>
+          <option value="-1">Not featured on homepage</option>
+          {Array.from({ length: 7 }, (_, i) => (
+            <option key={i} value={String(i)}>Slot {i + 1}</option>
+          ))}
+        </select>
+        <p style={{ fontSize: '0.7rem', color: '#97A0AC', marginTop: '0.35rem' }}>
+          Featured projects fill the bento grid on the homepage. Each slot holds one project.
+        </p>
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>

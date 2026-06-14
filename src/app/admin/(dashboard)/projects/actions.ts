@@ -50,20 +50,33 @@ export async function saveProject(
   const rawSlug = ((formData.get('slug') as string) ?? '').trim()
   const slug = slugify(rawSlug || title) || 'project'
 
+  // Homepage bento grid has 7 slots (0–6); -1 means "not featured".
+  const parsedSlot = parseInt((formData.get('bentoSlot') as string) ?? '-1', 10)
+  const bentoSlot = Number.isInteger(parsedSlot) && parsedSlot >= 0 && parsedSlot <= 6 ? parsedSlot : -1
+
   const existing = await prisma.project.findUnique({ where: { slug } })
   if (existing && existing.id !== id) {
     return { ok: false, error: 'Slug is already taken by another project.' }
   }
 
+  // A bento slot can only hold one project — free it from any other project first.
+  if (bentoSlot >= 0) {
+    await prisma.project.updateMany({
+      where: { bentoSlot, id: { not: id } },
+      data: { bentoSlot: -1 },
+    })
+  }
+
   await prisma.project.update({
     where: { id },
-    data: { title, description, slug },
+    data: { title, description, slug, bentoSlot },
   })
 
   revalidatePath('/admin/projects')
   revalidatePath('/admin/projects/' + id)
   revalidatePath('/projects')
   revalidatePath('/projects/' + slug)
+  revalidatePath('/') // homepage bento grid
   return { ok: true }
 }
 

@@ -18,7 +18,6 @@ const ROLE_LABELS: Record<Role, string> = {
   SUPER_ADMIN: 'Super Admin',
   PROJECTS_EDITOR: 'Projects Editor',
   CONTENT_EDITOR: 'Content Editor',
-  GALLERY_EDITOR: 'Gallery Editor',
 };
 
 const inputStyle: React.CSSProperties = {

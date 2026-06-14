@@ -41,6 +41,7 @@ export default async function ProjectEditPage({ params }: { params: Promise<{ id
           defaultTitle={project.title}
           defaultSlug={project.slug}
           defaultDescription={project.description ?? ''}
+          defaultBentoSlot={project.bentoSlot}
           action={boundSave}
         />
       </section>
