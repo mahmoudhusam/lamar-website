@@ -128,7 +128,7 @@ export default function QuoteWizard({ whatsappNumber, introText }: { whatsappNum
   const toggleDate = (iso: string) =>
     setDates((prev) => (prev.includes(iso) ? prev.filter((x) => x !== iso) : [...prev, iso].sort()))
 
-  function buildMessage(): string {
+  function buildLines(): string[] {
     const woningLabel = WONINGEN.find((w) => w.key === woning)?.label ?? '—'
     const lines: string[] = []
     lines.push('Hallo LAMAR, ik wil graag een offerte aanvragen.', '')
@@ -146,13 +146,40 @@ export default function QuoteWizard({ whatsappNumber, introText }: { whatsappNum
     lines.push('', `Naam: ${details.naam}`, `E-mail: ${details.email}`, `Telefoon: ${details.telefoon}`)
     lines.push(`Adres: ${details.straat}, ${details.postcode} ${details.plaats}`)
     if (photos.length) lines.push('', `(${photos.length} foto's beschikbaar — die stuur ik los in deze chat.)`)
-    return encodeURIComponent(lines.join('\n'))
+    return lines
   }
 
-  function handleSubmit() {
+  const [waUrl, setWaUrl] = useState('')
+
+  async function handleSubmit() {
     if (!gegevensDone) return
-    // ── SWAP POINT: replace this with an API POST / email when the channel is decided ──
-    window.open(`https://wa.me/${whatsappNumber}?text=${buildMessage()}`, '_blank', 'noopener,noreferrer')
+
+    const lines = buildLines()
+    const serviceLabels = selected
+      .map((k) => KLUS_OPTIONS.find((o) => o.key === k)?.label)
+      .filter(Boolean)
+      .join(', ')
+
+    // Persist the enquiry to the admin Leads inbox (best-effort — never blocks WhatsApp).
+    try {
+      await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: details.naam,
+          email: details.email,
+          phone: details.telefoon,
+          service: serviceLabels,
+          message: lines.join('\n'),
+        }),
+      })
+    } catch {
+      /* ignore — the WhatsApp hand-off below is the primary channel */
+    }
+
+    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(lines.join('\n'))}`
+    setWaUrl(url)
+    window.open(url, '_blank', 'noopener,noreferrer')
     setSubmitted(true)
   }
 
@@ -165,8 +192,16 @@ export default function QuoteWizard({ whatsappNumber, introText }: { whatsappNum
           <div style={{ width: 64, height: 64, borderRadius: '50%', background: 'var(--teal)', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem', fontSize: '1.75rem' }}>✓</div>
           <h2 style={{ fontFamily: 'var(--font-archivo)', fontWeight: 800, fontSize: '1.6rem', color: 'var(--white)', marginBottom: '0.75rem' }}>Aanvraag verzonden!</h2>
           <p style={{ fontSize: '1rem', lineHeight: 1.7, color: 'var(--white2)', fontWeight: 300, marginBottom: '2rem' }}>
-            Bedankt voor uw aanvraag. We openen WhatsApp zodat u uw gegevens direct kunt versturen — we reageren snel met een heldere offerte.
+            Bedankt voor uw aanvraag — wij hebben deze ontvangen en reageren snel met een heldere offerte. We openen WhatsApp zodat u eventuele foto&apos;s direct kunt meesturen.
           </p>
+          {waUrl && (
+            <p style={{ fontSize: '0.85rem', color: 'var(--white2)', marginBottom: '1.5rem' }}>
+              WhatsApp niet geopend?{' '}
+              <a href={waUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--teal)', fontWeight: 700 }}>
+                Klik hier om te openen
+              </a>
+            </p>
+          )}
           <a href="/" style={{ background: 'var(--teal)', color: '#FFFFFF', padding: '0.85rem 2rem', borderRadius: 999, fontSize: '0.85rem', fontWeight: 700, textDecoration: 'none', fontFamily: 'var(--font-outfit)' }}>Terug naar home</a>
         </div>
       </Shell>
