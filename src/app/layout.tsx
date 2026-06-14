@@ -3,6 +3,7 @@ import { Archivo, Outfit } from 'next/font/google'
 import './globals.css'
 import FloatingWhatsApp from '@/components/public/FloatingWhatsApp'
 import { getContent } from '@/lib/content'
+import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, absoluteUrl } from '@/lib/site'
 
 const archivo = Archivo({
   subsets: ['latin'],
@@ -25,18 +26,30 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  alternates: { canonical: '/' },
   icons: {
     icon: '/lamar_icon.svg',
     shortcut: '/lamar_icon.svg',
   },
-  title: 'LAMAR Stukadoor en Onderhoud | Gipswerk, Decoratie & Renovatie',
-  description: 'Professioneel stukadoorswerk, interieurafwerking, schilderwerk en woningrenovatie door LAMAR. Meer dan 200 projecten voltooid in Nederland. Kwaliteit die spreekt voor zich.',
+  title: {
+    default: 'LAMAR Stukadoor en Onderhoud | Gipswerk, Decoratie & Renovatie',
+    template: '%s | LAMAR Stukadoor en Onderhoud',
+  },
+  description: SITE_DESCRIPTION,
   keywords: 'stukadoor, gipswerk, interieurafwerking, schilderwerk, woningrenovatie, decoratie, Nederland, LAMAR',
   openGraph: {
-    title: 'LAMAR Stukadoor en Onderhoud',
+    title: SITE_NAME,
     description: 'Professioneel stukadoorswerk, interieurafwerking en woningrenovatie in Nederland.',
     type: 'website',
     locale: 'nl_NL',
+    url: SITE_URL,
+    siteName: SITE_NAME,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: SITE_NAME,
+    description: 'Professioneel stukadoorswerk, interieurafwerking en woningrenovatie in Nederland.',
   },
   robots: { index: true, follow: true },
 }
@@ -45,9 +58,31 @@ export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const wa = await getContent('whatsapp_number', '31684054528')
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'HomeAndConstructionBusiness',
+    '@id': absoluteUrl('/#business'),
+    name: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    image: absoluteUrl('/opengraph-image'),
+    telephone: `+${wa}`,
+    areaServed: { '@type': 'Country', name: 'Netherlands' },
+    address: { '@type': 'PostalAddress', addressCountry: 'NL' },
+    knowsAbout: ['Stucwerk', 'Gipswerk', 'Interieurafwerking', 'Schilderwerk', 'Woningrenovatie'],
+  }
+
   return (
     <html lang="nl" className={`${archivo.variable} ${outfit.variable}`} data-scroll-behavior="smooth">
-      <body>{children}<FloatingWhatsApp number={wa} /></body>
+      <body>
+        {children}
+        <FloatingWhatsApp number={wa} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </body>
     </html>
   )
 }

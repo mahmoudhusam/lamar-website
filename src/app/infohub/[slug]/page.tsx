@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { articles } from '@/lib/infohub'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -10,6 +11,23 @@ export const revalidate = 3600
 
 export function generateStaticParams() {
   return articles.map((a) => ({ slug: a.slug }))
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const article = articles.find((a) => a.slug === slug)
+  if (!article) return { title: 'Artikel niet gevonden' }
+  return {
+    title: article.title,
+    description: article.excerpt,
+    alternates: { canonical: `/infohub/${slug}` },
+    openGraph: {
+      title: article.title,
+      description: article.excerpt,
+      type: 'article',
+      url: `/infohub/${slug}`,
+    },
+  }
 }
 
 export default async function InfohubArticlePage({ params }: { params: Promise<{ slug: string }> }) {

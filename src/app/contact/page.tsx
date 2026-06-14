@@ -6,6 +6,12 @@ import RevealObserver from '@/components/public/RevealObserver'
 
 export const revalidate = 3600
 
+export const metadata = {
+  title: 'Contact',
+  description: 'Neem contact op met LAMAR Stukadoor en Onderhoud voor stucwerk, interieurafwerking en renovatie. Vraag vrijblijvend een offerte aan.',
+  alternates: { canonical: '/contact' },
+}
+
 export default function ContactPage() {
   const lang = 'nl' as const
   return (

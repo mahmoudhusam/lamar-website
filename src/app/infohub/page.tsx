@@ -7,6 +7,12 @@ import RevealObserver from '@/components/public/RevealObserver'
 
 export const revalidate = 3600
 
+export const metadata = {
+  title: 'Infohub',
+  description: 'Praktische uitleg over stucwerk, plafonds, sausklaar afwerken en renovatie. Antwoorden op de meestgestelde vragen van LAMAR.',
+  alternates: { canonical: '/infohub' },
+}
+
 const HERO_IMG = 'https://images.pexels.com/photos/5691660/pexels-photo-5691660.jpeg?auto=compress&cs=tinysrgb&w=1400&h=800&fit=crop'
 
 export default function InfohubPage() {

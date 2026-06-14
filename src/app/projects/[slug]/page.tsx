@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { prisma } from '@/lib/prisma'
 import { t } from '@/lib/i18n'
 import { notFound } from 'next/navigation'
@@ -7,6 +8,29 @@ import Footer from '@/components/public/Footer'
 import ProjectGallery from './ProjectGallery'
 
 export const revalidate = 3600
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const project = await prisma.project
+    .findUnique({ where: { slug, published: true }, select: { title: true, description: true, coverImageUrl: true } })
+    .catch(() => null)
+
+  if (!project) return { title: 'Project niet gevonden' }
+
+  const description = project.description ?? `Bekijk het project "${project.title}" van LAMAR Stukadoor en Onderhoud.`
+  return {
+    title: project.title,
+    description,
+    alternates: { canonical: `/projects/${slug}` },
+    openGraph: {
+      title: project.title,
+      description,
+      type: 'article',
+      url: `/projects/${slug}`,
+      images: project.coverImageUrl ? [{ url: project.coverImageUrl }] : undefined,
+    },
+  }
+}
 
 export async function generateStaticParams() {
   const projects = await prisma.project.findMany({

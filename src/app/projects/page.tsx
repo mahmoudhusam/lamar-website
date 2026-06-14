@@ -6,6 +6,12 @@ import Link from 'next/link'
 
 export const revalidate = 3600
 
+export const metadata = {
+  title: 'Projecten',
+  description: 'Een selectie van afgeronde stukadoors-, afwerkings- en renovatieprojecten van LAMAR door heel Nederland.',
+  alternates: { canonical: '/projects' },
+}
+
 export default async function ProjectsPage() {
   const lang = 'nl' as const
   const tr = t[lang].projectsPage
