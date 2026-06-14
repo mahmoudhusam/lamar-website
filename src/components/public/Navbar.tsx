@@ -21,6 +21,7 @@ export default function Navbar({ lang }: { lang: Lang }) {
   const toggleMenu = () => { const next = !menuOpen; setMenuOpen(next); document.body.style.overflow = next ? 'hidden' : ''; };
 
   const desktopLinks = [
+    { label: 'Home', href: '/' },
     { label: tr.about, href: '/over-ons' },
     { label: tr.projects, href: '/projects' },
     { label: tr.infohub, href: '/infohub' },
