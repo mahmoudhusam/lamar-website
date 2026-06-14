@@ -15,6 +15,7 @@ export default async function AdminLayout({
   if (!session) redirect('/admin/login')
 
   const navLinks = [
+    { href: '/admin/leads', label: 'Leads' },
     { href: '/admin/projects', label: 'Projects' },
     { href: '/admin/about', label: 'About' },
     { href: '/admin/werkwijze', label: 'Process' },
