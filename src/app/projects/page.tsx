@@ -72,6 +72,8 @@ export default async function ProjectsPage() {
                         <img
                           src={cover}
                           alt={project.title}
+                          loading="lazy"
+                          decoding="async"
                           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.5s ease' }}
                           className="project-cover-img"
                         />

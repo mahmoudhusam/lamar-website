@@ -186,6 +186,7 @@ export default async function HeroSection({ lang }: { lang: Lang }) {
             loop
             playsInline
             preload="metadata"
+            poster="https://images.pexels.com/photos/2736139/pexels-photo-2736139.jpeg?auto=compress&cs=tinysrgb&w=560&h=560&fit=crop"
             style={{
               position: 'absolute',
               inset: 0,

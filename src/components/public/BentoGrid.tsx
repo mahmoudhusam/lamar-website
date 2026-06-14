@@ -142,7 +142,7 @@ export default function BentoGrid({ slots, specialtyLabel, specialtyText, ctaLab
                     {popupImages.slice(0, 2).map((img) => (
                       <div key={img.id} style={{ aspectRatio: '16/9', borderRadius: 6, overflow: 'hidden', background: 'var(--bg2)' }}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={img.url} alt={img.caption ?? ''} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                        <img src={img.url} alt={img.caption ?? ''} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                       </div>
                     ))}
                   </div>
