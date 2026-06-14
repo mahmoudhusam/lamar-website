@@ -1,7 +1,8 @@
 'use server';
 
-import { prisma } from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
+import { setContentKeys } from '@/lib/content';
+import { requireAccess } from '@/lib/guards';
 
 const KEYS = [
   'contact_phone',
@@ -16,14 +17,9 @@ export async function saveContact(
   _prev: State,
   formData: FormData,
 ): Promise<State> {
-  await prisma.$transaction(
-    KEYS.map((key) =>
-      prisma.content.upsert({
-        where: { key },
-        update: { value: (formData.get(key) as string) ?? '' },
-        create: { key, value: (formData.get(key) as string) ?? '' },
-      }),
-    ),
+  await requireAccess('/admin/contact');
+  await setContentKeys(
+    Object.fromEntries(KEYS.map((key) => [key, (formData.get(key) as string) ?? ''])),
   );
   revalidatePath('/admin/contact');
   revalidatePath('/', 'layout');
