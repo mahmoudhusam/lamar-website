@@ -6,6 +6,12 @@ import Link from 'next/link'
 
 export const revalidate = 3600
 
+export const metadata = {
+  title: 'Projecten',
+  description: 'Een selectie van afgeronde stukadoors-, afwerkings- en renovatieprojecten van LAMAR door heel Nederland.',
+  alternates: { canonical: '/projects' },
+}
+
 export default async function ProjectsPage() {
   const lang = 'nl' as const
   const tr = t[lang].projectsPage
@@ -66,6 +72,8 @@ export default async function ProjectsPage() {
                         <img
                           src={cover}
                           alt={project.title}
+                          loading="lazy"
+                          decoding="async"
                           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.5s ease' }}
                           className="project-cover-img"
                         />

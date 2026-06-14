@@ -13,14 +13,30 @@ export default async function AdminDashboard({
   const denied = params.denied === '1'
 
   const session = await getServerSession(authOptions)
+  const role = session?.user?.role
+  const canSeeLeads = !role || canAccess(role, '/admin/leads')
 
-  const [projectCount, totalProjects, contentCount] = await Promise.all([
+  // eslint-disable-next-line react-hooks/purity -- server component renders once per request
+  const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+
+  const [
+    publishedProjects,
+    totalProjects,
+    newLeads,
+    leadsThisWeek,
+    totalLeads,
+    recentLeads,
+  ] = await Promise.all([
     prisma.project.count({ where: { published: true } }),
     prisma.project.count(),
-    prisma.content.count(),
-  ]).catch(() => [0, 0, 0] as const)
+    canSeeLeads ? prisma.lead.count({ where: { status: 'NEW' } }) : Promise.resolve(0),
+    canSeeLeads ? prisma.lead.count({ where: { createdAt: { gte: weekAgo } } }) : Promise.resolve(0),
+    canSeeLeads ? prisma.lead.count() : Promise.resolve(0),
+    canSeeLeads
+      ? prisma.lead.findMany({ orderBy: { createdAt: 'desc' }, take: 5 })
+      : Promise.resolve([]),
+  ]).catch(() => [0, 0, 0, 0, 0, []] as const)
 
-  const role = session?.user?.role
   const quickActions = [
     { href: '/admin/projects',     emoji: '🏗️', title: 'Manage Projects', sub: 'Add, edit & publish your portfolio' },
     { href: '/admin/about',        emoji: '📝', title: 'Edit About',      sub: 'Update your about (Over ons) page text' },
@@ -48,11 +64,52 @@ export default async function AdminDashboard({
       </div>
 
       {/* Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', marginBottom: '2.5rem' }}>
-        <StatCard label="Published Projects" value={String(projectCount)} teal />
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', marginBottom: canSeeLeads ? '1.5rem' : '2.5rem' }}>
+        {canSeeLeads && <StatCard label="New Leads" value={String(newLeads)} teal />}
+        {canSeeLeads && <StatCard label="Leads (7 days)" value={String(leadsThisWeek)} />}
+        <StatCard label="Published Projects" value={String(publishedProjects)} />
         <StatCard label="Total Projects" value={String(totalProjects)} />
-        <StatCard label="Content Blocks" value={String(contentCount)} />
       </div>
+
+      {/* Recent leads */}
+      {canSeeLeads && (
+        <div style={{ background: '#FFFFFF', border: '1px solid rgba(20,24,29,0.10)', borderRadius: 8, padding: '1.25rem 1.5rem', marginBottom: '2.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.85rem' }}>
+            <p style={{ color: '#5B6470', fontSize: '0.72rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Recent Leads</p>
+            <Link href="/admin/leads" style={{ color: '#1A6B60', fontSize: '0.78rem', textDecoration: 'none' }}>
+              View all ({totalLeads}) →
+            </Link>
+          </div>
+          {recentLeads.length === 0 ? (
+            <p style={{ color: '#97A0AC', fontSize: '0.82rem' }}>No enquiries yet — they&apos;ll appear here as they come in.</p>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              {recentLeads.map((lead, i) => (
+                <Link
+                  key={lead.id}
+                  href="/admin/leads"
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', padding: '0.6rem 0', textDecoration: 'none', borderTop: i === 0 ? 'none' : '1px solid rgba(20,24,29,0.07)' }}
+                >
+                  <div style={{ minWidth: 0 }}>
+                    <span style={{ color: '#14181D', fontWeight: 600, fontSize: '0.85rem' }}>{lead.name}</span>
+                    <span style={{ color: '#97A0AC', fontSize: '0.78rem', marginLeft: '0.6rem' }}>
+                      {lead.source === 'QUOTE' ? '🧾 Offerte' : '📞 Contact'}
+                    </span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', flexShrink: 0 }}>
+                    {lead.status === 'NEW' && (
+                      <span style={{ fontSize: '0.66rem', fontWeight: 700, color: '#1A6B60', background: 'rgba(42,191,168,0.14)', borderRadius: 999, padding: '0.12rem 0.55rem' }}>Nieuw</span>
+                    )}
+                    <span style={{ color: '#97A0AC', fontSize: '0.74rem' }}>
+                      {new Intl.DateTimeFormat('nl-NL', { day: 'numeric', month: 'short' }).format(new Date(lead.createdAt))}
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Quick actions */}
       <div style={{ marginBottom: '1rem' }}>

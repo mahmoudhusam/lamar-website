@@ -26,14 +26,6 @@ async function main() {
   })
 
   console.log(`Super admin ready: ${user.email}`)
-
-  await prisma.settings.upsert({
-    where: { id: 'default' },
-    update: {},
-    create: { id: 'default', language: 'nl' },
-  })
-
-  console.log('Default settings ready.')
 }
 
 main()

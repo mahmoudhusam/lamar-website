@@ -2,6 +2,7 @@
 
 import { prisma } from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
+import { requireAccess } from '@/lib/guards';
 
 type State = { ok: boolean } | null;
 
@@ -10,6 +11,7 @@ export async function saveTestimonial(
   _prev: State,
   formData: FormData,
 ): Promise<State> {
+  await requireAccess('/admin/testimonials');
   const quote = formData.get('quote') as string;
   const name = formData.get('name') as string;
   const location = formData.get('location') as string;

@@ -1,7 +1,8 @@
 'use server';
 
-import { prisma } from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
+import { setContentKeys } from '@/lib/content';
+import { requireAccess } from '@/lib/guards';
 
 const SOCIAL_KEYS = [
   'social_facebook',
@@ -16,14 +17,9 @@ export async function saveSocialLinks(
   _prev: State,
   formData: FormData,
 ): Promise<State> {
-  await prisma.$transaction(
-    SOCIAL_KEYS.map((key) =>
-      prisma.content.upsert({
-        where: { key },
-        update: { value: (formData.get(key) as string) ?? '' },
-        create: { key, value: (formData.get(key) as string) ?? '' },
-      }),
-    ),
+  await requireAccess('/admin/settings');
+  await setContentKeys(
+    Object.fromEntries(SOCIAL_KEYS.map((key) => [key, (formData.get(key) as string) ?? ''])),
   );
   revalidatePath('/admin/settings');
   revalidatePath('/', 'layout'); // footer is global

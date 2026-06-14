@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { Resend } from 'resend'
 import { getContent } from '@/lib/content'
+import { createLead } from '@/lib/leads'
 
 const schema = z.object({
   name:    z.string().min(1, 'Name is required'),
@@ -26,6 +27,9 @@ export async function POST(req: NextRequest) {
   }
 
   const { name, phone, email, service, message } = parsed.data
+
+  // Persist the enquiry so it shows up in the admin Leads inbox (best-effort).
+  await createLead({ name, email, phone, service, message, source: 'CONTACT' })
 
   const toEmail = await getContent(
     'contact_email',

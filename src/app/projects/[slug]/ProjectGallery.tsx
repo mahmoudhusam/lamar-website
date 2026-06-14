@@ -57,6 +57,8 @@ export default function ProjectGallery({ images }: { images: Image[] }) {
             <img
               src={img.url}
               alt={img.caption ?? ''}
+              loading="lazy"
+              decoding="async"
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.4s ease' }}
               className="gallery-thumb-img"
             />

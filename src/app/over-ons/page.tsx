@@ -8,6 +8,12 @@ import RevealObserver from '@/components/public/RevealObserver'
 
 export const revalidate = 3600
 
+export const metadata = {
+  title: 'Over ons',
+  description: 'Leer LAMAR Stukadoor en Onderhoud kennen: vakmanschap in stucwerk, afwerking en renovatie met meer dan 200 voltooide projecten in Nederland.',
+  alternates: { canonical: '/over-ons' },
+}
+
 const IMG = 'https://images.pexels.com/photos/5493654/pexels-photo-5493654.jpeg?auto=compress&cs=tinysrgb&w=800&h=1150&fit=crop'
 const SHADES = ['#2ABFA8', '#23A18F', '#1D8576', '#166B5E']
 const FALLBACK_NL = `Met meer dan tien jaar praktijkervaring in Nederland en daarbuiten brengen wij precisie en creatieve visie in elk project. Of het nu gaat om een volledige woningtransformatie of gedetailleerd gipswerk, ons team behandelt elke ruimte alsof het hun eigen is.
