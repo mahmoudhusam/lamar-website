@@ -63,7 +63,9 @@ section, footer, nav {
   #process                         { padding: 4rem 1.25rem !important; }
   #benefits                        { padding: 4rem 1.25rem !important; }
   #benefits .ben-img               { height: 320px !important; }
-  #process .proc-grid              { grid-template-columns: 1fr !important; }
+  /* Process: compact 2×2 grid on mobile (matches the reference design) */
+  #process .proc-grid              { grid-template-columns: repeat(2, 1fr) !important; gap: 0.85rem !important; }
+  #process .proc-card              { padding: 1.5rem 0.75rem !important; border-radius: 14px !important; gap: 0.35rem !important; }
   .process-line                    { display: none !important; }
 
   /* Gallery: flat 2-col, reset all bento positioning */
