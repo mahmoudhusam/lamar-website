@@ -3,6 +3,7 @@ import { Archivo, Outfit } from 'next/font/google'
 import './globals.css'
 import FloatingWhatsApp from '@/components/public/FloatingWhatsApp'
 import { getContent } from '@/lib/content'
+import { getTheme } from '@/lib/themeServer'
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, absoluteUrl } from '@/lib/site'
 
 const archivo = Archivo({
@@ -58,6 +59,7 @@ export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const wa = await getContent('whatsapp_number', '31684054528')
+  const theme = await getTheme()
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -74,7 +76,12 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="nl" className={`${archivo.variable} ${outfit.variable}`} data-scroll-behavior="smooth">
+    <html
+      lang="nl"
+      className={`${archivo.variable} ${outfit.variable}`}
+      data-scroll-behavior="smooth"
+      style={{ '--teal': theme.primary, '--teal2': theme.accent } as React.CSSProperties}
+    >
       <body>
         {children}
         <FloatingWhatsApp number={wa} />

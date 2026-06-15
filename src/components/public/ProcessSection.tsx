@@ -1,4 +1,5 @@
 import { t, type Lang } from '@/lib/i18n'
+import { getSiteText } from '@/lib/siteText'
 
 function Icon({ name }: { name: string }) {
   const p = { width: 30, height: 30, viewBox: '0 0 24 24', fill: 'none', stroke: 'var(--teal2)', strokeWidth: 2, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const }
@@ -8,8 +9,9 @@ function Icon({ name }: { name: string }) {
   return (<svg {...p}><path d="M14.7 6.3a4 4 0 0 0-5.6 5.6L3 18l3 3 6.1-6.1a4 4 0 0 0 5.6-5.6l-2.6 2.6-2.1-.4-.4-2.1z"/></svg>)
 }
 
-export default function ProcessSection({ lang }: { lang: Lang }) {
+export default async function ProcessSection({ lang }: { lang: Lang }) {
   const tr = t[lang].werkwijze
+  const tx = await getSiteText()
 
   return (
     <section id="process" style={{ background: 'var(--bg)', padding: '7rem 3.5rem' }}>
@@ -17,9 +19,9 @@ export default function ProcessSection({ lang }: { lang: Lang }) {
 
       <div className="rv" style={{ textAlign: 'center', maxWidth: 680, margin: '0 auto 3rem' }}>
         <h2 style={{ fontFamily: 'var(--font-archivo)', fontWeight: 800, fontSize: 'clamp(2rem,3.6vw,3.1rem)', lineHeight: 1.06, letterSpacing: '-0.01em', color: 'var(--white)', marginBottom: '1rem' }}>
-          {tr.headingA}<br />{tr.headingB} <span style={{ color: 'var(--teal2)' }}>{tr.headingAccent}</span>
+          {tx('home_process_heading_a')}<br />{tx('home_process_heading_b')} <span style={{ color: 'var(--teal2)' }}>{tx('home_process_heading_accent')}</span>
         </h2>
-        <p style={{ fontSize: '1rem', lineHeight: 1.7, color: 'var(--white2)', fontWeight: 300 }}>{tr.sub}</p>
+        <p style={{ fontSize: '1rem', lineHeight: 1.7, color: 'var(--white2)', fontWeight: 300 }}>{tx('home_process_sub')}</p>
       </div>
 
       <div className="proc-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem', maxWidth: 760, margin: '0 auto' }}>

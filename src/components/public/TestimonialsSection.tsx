@@ -1,5 +1,6 @@
 import { getContentMany } from '@/lib/content'
-import { t, type Lang } from '@/lib/i18n'
+import { type Lang } from '@/lib/i18n'
+import { getSiteText } from '@/lib/siteText'
 
 interface Testimonial {
   quote: string
@@ -35,8 +36,8 @@ function GoogleG() {
   )
 }
 
-export default async function TestimonialsSection({ lang, headingA, headingAccent, headingB, sub }: { lang: Lang; headingA?: string; headingAccent?: string; headingB?: string; sub?: string }) {
-  const tr = t[lang].testimonials
+export default async function TestimonialsSection({ headingA, headingAccent, headingB, sub }: { lang?: Lang; headingA?: string; headingAccent?: string; headingB?: string; sub?: string }) {
+  const tx = await getSiteText()
   const content = await getContentMany(['testimonial_1', 'testimonial_2', 'testimonial_3'])
   const testimonials = [
     parse(content['testimonial_1'], fallbacks[0]),
@@ -48,9 +49,9 @@ export default async function TestimonialsSection({ lang, headingA, headingAccen
     <section id="testimonials" style={{ padding: '8rem 3.5rem', background: 'var(--bg)' }}>
       <div className="rv" style={{ maxWidth: 1200, margin: '0 auto 3.5rem' }}>
         <h2 style={{ fontFamily: 'var(--font-archivo)', fontWeight: 800, fontSize: 'clamp(2rem,3.6vw,3.2rem)', lineHeight: 1.06, letterSpacing: '-0.01em', color: 'var(--white)', marginBottom: '1rem' }}>
-          {headingA ?? tr.heading} <span style={{ color: 'var(--teal2)' }}>{headingAccent ?? tr.headingTeal}</span>{headingB ? ` ${headingB}` : ''}
+          {headingA ?? tx('home_testimonials_heading')} <span style={{ color: 'var(--teal2)' }}>{headingAccent ?? tx('home_testimonials_heading_accent')}</span>{headingB ? ` ${headingB}` : ''}
         </h2>
-        <p style={{ fontSize: '1rem', lineHeight: 1.7, color: 'var(--white2)', fontWeight: 300, maxWidth: 640 }}>{sub ?? tr.sub}</p>
+        <p style={{ fontSize: '1rem', lineHeight: 1.7, color: 'var(--white2)', fontWeight: 300, maxWidth: 640 }}>{sub ?? tx('home_testimonials_sub')}</p>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem', maxWidth: 1200, margin: '0 auto' }}>
