@@ -1,5 +1,7 @@
 import { getContentMany } from '@/lib/content';
+import { getTheme } from '@/lib/themeServer';
 import SocialLinksForm from './SocialLinksForm';
+import ThemeForm from './ThemeForm';
 
 export default async function SettingsPage() {
   const ifoRows = [
@@ -29,6 +31,8 @@ export default async function SettingsPage() {
   const socialDefaults = Object.fromEntries(
     socialKeys.map((k) => [k, savedSocials[k] ?? SOCIAL_FALLBACKS[k]]),
   );
+
+  const theme = await getTheme();
 
   return (
     <div>
@@ -111,6 +115,35 @@ export default async function SettingsPage() {
             )}
           </div>
         ))}
+      </div>
+
+      {/* Theme colours card */}
+      <div
+        style={{
+          background: '#FFFFFF',
+          border: '1px solid rgba(20,24,29,0.10)',
+          borderRadius: 8,
+          padding: '1.75rem',
+          marginBottom: '2rem',
+        }}
+      >
+        <div style={{ marginBottom: '1.5rem' }}>
+          <h2
+            style={{
+              fontFamily: 'var(--font-archivo)',
+              color: '#14181D',
+              fontSize: '1.15rem',
+              fontWeight: 800,
+              marginBottom: '0.25rem',
+            }}
+          >
+            Themakleur
+          </h2>
+          <p style={{ color: '#97A0AC', fontSize: '0.85rem' }}>
+            Verandert de accentkleur op de hele website. Wijzigingen zijn direct zichtbaar.
+          </p>
+        </div>
+        <ThemeForm current={theme} />
       </div>
 
       {/* Social Media Links card */}
