@@ -1,8 +1,10 @@
 import { t, type Lang } from '@/lib/i18n';
 import { getContent } from '@/lib/content';
+import { getSiteText } from '@/lib/siteText';
 
 export default async function HeroSection({ lang }: { lang: Lang }) {
   const tr = t[lang].hero;
+  const tx = await getSiteText();
   const wa = await getContent('whatsapp_number', '31684054528');
 
   return (
@@ -58,7 +60,7 @@ export default async function HeroSection({ lang }: { lang: Lang }) {
                 fontWeight: 500,
               }}
             >
-              {tr.trustBadge}
+              {tx('home_hero_trust')}
             </span>
           </div>
 
@@ -75,9 +77,9 @@ export default async function HeroSection({ lang }: { lang: Lang }) {
               marginBottom: '1.5rem',
             }}
           >
-            {tr.headlineA}
+            {tx('home_hero_headline_a')}
             <br />
-            <span style={{ color: 'var(--teal2)' }}>{tr.headlineB}</span>
+            <span style={{ color: 'var(--teal2)' }}>{tx('home_hero_headline_b')}</span>
           </h1>
 
           {/* Sub */}
@@ -93,7 +95,7 @@ export default async function HeroSection({ lang }: { lang: Lang }) {
               marginBottom: '2.25rem',
             }}
           >
-            {tr.sub}
+            {tx('home_hero_sub')}
           </p>
 
           {/* CTAs */}
@@ -123,7 +125,7 @@ export default async function HeroSection({ lang }: { lang: Lang }) {
                 transition: 'background 0.2s',
               }}
             >
-              {tr.quoteCta}
+              {tx('home_hero_cta_quote')}
             </a>
             <a
               href="/werkwijze"
@@ -142,7 +144,7 @@ export default async function HeroSection({ lang }: { lang: Lang }) {
                 transition: 'border-color 0.2s, color 0.2s',
               }}
             >
-              {tr.processCta}
+              {tx('home_hero_cta_process')}
             </a>
           </div>
 

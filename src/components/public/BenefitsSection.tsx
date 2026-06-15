@@ -1,4 +1,5 @@
 import { t, type Lang } from '@/lib/i18n'
+import { getSiteText } from '@/lib/siteText'
 
 const IMG = 'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=800&h=1150&fit=crop'
 
@@ -34,17 +35,18 @@ function NestedCard({ items, idx }: { items: BItem[]; idx: number }) {
   )
 }
 
-export default function BenefitsSection({ lang }: { lang: Lang }) {
+export default async function BenefitsSection({ lang }: { lang: Lang }) {
   const tr = t[lang].benefits
+  const tx = await getSiteText()
 
   return (
     <section id="benefits" style={{ background: 'var(--bg2)', padding: '7rem 3.5rem' }}>
       <div className="ben-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3.5rem', maxWidth: 1200, margin: '0 auto', alignItems: 'center' }}>
         <div className="rv">
           <h2 style={{ fontFamily: 'var(--font-archivo)', fontWeight: 800, fontSize: 'clamp(2rem,3.4vw,3rem)', lineHeight: 1.08, letterSpacing: '-0.01em', color: 'var(--white)', marginBottom: '1rem' }}>
-            {tr.headingA} <span style={{ color: 'var(--teal2)' }}>{tr.headingAccent}</span><br />{tr.headingB}
+            {tx('home_benefits_heading_a')} <span style={{ color: 'var(--teal2)' }}>{tx('home_benefits_heading_accent')}</span><br />{tx('home_benefits_heading_b')}
           </h2>
-          <p style={{ fontSize: '1rem', lineHeight: 1.7, color: 'var(--white2)', fontWeight: 300, maxWidth: 460, marginBottom: '2rem' }}>{tr.sub}</p>
+          <p style={{ fontSize: '1rem', lineHeight: 1.7, color: 'var(--white2)', fontWeight: 300, maxWidth: 460, marginBottom: '2rem' }}>{tx('home_benefits_sub')}</p>
 
           <NestedCard items={tr.items} idx={0} />
         </div>
