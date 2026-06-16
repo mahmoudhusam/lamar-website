@@ -14,18 +14,37 @@ export default async function AdminLayout({
 
   if (!session) redirect('/admin/login')
 
-  const navLinks = [
-    { href: '/admin/leads', label: 'Leads' },
-    { href: '/admin/projects', label: 'Projects' },
-    { href: '/admin/teksten', label: 'Texts' },
-    { href: '/admin/about', label: 'About' },
-    { href: '/admin/werkwijze', label: 'Process' },
-    { href: '/admin/offerte', label: 'Quote' },
-    { href: '/admin/testimonials', label: 'Reviews' },
-    { href: '/admin/contact', label: 'Contact' },
-    { href: '/admin/settings', label: 'Settings' },
-    { href: '/admin/users', label: 'Users' },
-  ].filter((link) => canAccess(session.user.role, link.href))
+  const role = session.user.role
+  const navGroups = [
+    { links: [{ href: '/admin', label: 'Dashboard' }] },
+    {
+      label: 'Overview',
+      links: [
+        { href: '/admin/leads', label: 'Leads' },
+        { href: '/admin/projects', label: 'Projects' },
+      ],
+    },
+    {
+      label: 'Website',
+      links: [
+        { href: '/admin/teksten', label: 'Texts' },
+        { href: '/admin/about', label: 'About' },
+        { href: '/admin/werkwijze', label: 'Process' },
+        { href: '/admin/offerte', label: 'Quote' },
+        { href: '/admin/testimonials', label: 'Reviews' },
+        { href: '/admin/contact', label: 'Contact' },
+      ],
+    },
+    {
+      label: 'System',
+      links: [
+        { href: '/admin/settings', label: 'Settings' },
+        { href: '/admin/users', label: 'Users' },
+      ],
+    },
+  ]
+    .map((group) => ({ ...group, links: group.links.filter((link) => canAccess(role, link.href)) }))
+    .filter((group) => group.links.length > 0)
 
   return (
     <div className="flex min-h-screen" style={{ backgroundColor: '#F2F5F8' }}>
@@ -40,7 +59,7 @@ export default async function AdminLayout({
             <p className="text-xs" style={{ color: '#97A0AC' }}>Admin</p>
           </div>
 
-          <SidebarNav navLinks={navLinks} />
+          <SidebarNav groups={navGroups} />
         </div>
 
         <div className="space-y-2 px-0">
