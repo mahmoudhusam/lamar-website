@@ -15,6 +15,7 @@ export default async function AdminDashboard({
   const session = await getServerSession(authOptions)
   const role = session?.user?.role
   const canSeeLeads = !role || canAccess(role, '/admin/leads')
+  const canSeeProjects = !role || canAccess(role, '/admin/projects')
 
   // eslint-disable-next-line react-hooks/purity -- server component renders once per request
   const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
@@ -37,15 +38,6 @@ export default async function AdminDashboard({
       : Promise.resolve([]),
   ]).catch(() => [0, 0, 0, 0, 0, []] as const)
 
-  const quickActions = [
-    { href: '/admin/projects',     emoji: '🏗️', title: 'Manage Projects', sub: 'Add, edit & publish your portfolio' },
-    { href: '/admin/about',        emoji: '📝', title: 'Edit About',      sub: 'Update your about (Over ons) page text' },
-    { href: '/admin/werkwijze',    emoji: '🛠️', title: 'Edit Process',    sub: 'Steps, headings & banner of the Werkwijze page' },
-    { href: '/admin/offerte',      emoji: '💬', title: 'Edit Quote',      sub: 'WhatsApp number & Offerte page intro' },
-    { href: '/admin/testimonials', emoji: '⭐', title: 'Edit Reviews',     sub: 'Manage customer testimonials' },
-    { href: '/admin/contact',      emoji: '📞', title: 'Edit Contact',     sub: 'Update phone, email & location' },
-  ].filter((a) => !role || canAccess(role, a.href))
-
   return (
     <div>
       {denied && (
@@ -54,26 +46,37 @@ export default async function AdminDashboard({
         </div>
       )}
 
-      <div style={{ marginBottom: '2rem' }}>
-        <h1 style={{ fontFamily: 'var(--font-archivo)', color: '#14181D', fontSize: '1.5rem', fontWeight: 800, marginBottom: '0.25rem' }}>
-          Dashboard
-        </h1>
-        <p style={{ color: '#97A0AC', fontSize: '0.85rem' }}>
-          Welcome back, {session?.user?.name ?? session?.user?.email}
-        </p>
+      {/* Header */}
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem', marginBottom: '2rem' }}>
+        <div>
+          <h1 style={{ fontFamily: 'var(--font-archivo)', color: '#14181D', fontSize: '1.5rem', fontWeight: 800, marginBottom: '0.25rem' }}>
+            Dashboard
+          </h1>
+          <p style={{ color: '#97A0AC', fontSize: '0.85rem' }}>
+            Welcome back, {session?.user?.name ?? session?.user?.email}
+          </p>
+        </div>
+        {canSeeProjects && (
+          <Link
+            href="/admin/projects/new"
+            style={{ flexShrink: 0, background: '#1A6B60', color: '#FFFFFF', textDecoration: 'none', borderRadius: 6, padding: '0.6rem 1.1rem', fontSize: '0.82rem', fontWeight: 700 }}
+          >
+            + New Project
+          </Link>
+        )}
       </div>
 
       {/* Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', marginBottom: canSeeLeads ? '1.5rem' : '2.5rem' }}>
-        {canSeeLeads && <StatCard label="New Leads" value={String(newLeads)} teal />}
-        {canSeeLeads && <StatCard label="Leads (7 days)" value={String(leadsThisWeek)} />}
-        <StatCard label="Published Projects" value={String(publishedProjects)} />
-        <StatCard label="Total Projects" value={String(totalProjects)} />
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', marginBottom: canSeeLeads ? '1.5rem' : 0 }}>
+        {canSeeLeads && <StatCard label="New Leads" value={String(newLeads)} href="/admin/leads?status=NEW" teal />}
+        {canSeeLeads && <StatCard label="Leads (7 days)" value={String(leadsThisWeek)} href="/admin/leads" />}
+        <StatCard label="Published Projects" value={String(publishedProjects)} href={canSeeProjects ? '/admin/projects' : undefined} />
+        <StatCard label="Total Projects" value={String(totalProjects)} href={canSeeProjects ? '/admin/projects' : undefined} />
       </div>
 
       {/* Recent leads */}
       {canSeeLeads && (
-        <div style={{ background: '#FFFFFF', border: '1px solid rgba(20,24,29,0.10)', borderRadius: 8, padding: '1.25rem 1.5rem', marginBottom: '2.5rem' }}>
+        <div style={{ background: '#FFFFFF', border: '1px solid rgba(20,24,29,0.10)', borderRadius: 8, padding: '1.25rem 1.5rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.85rem' }}>
             <p style={{ color: '#5B6470', fontSize: '0.72rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Recent Leads</p>
             <Link href="/admin/leads" style={{ color: '#1A6B60', fontSize: '0.78rem', textDecoration: 'none' }}>
@@ -110,60 +113,35 @@ export default async function AdminDashboard({
           )}
         </div>
       )}
-
-      {/* Quick actions */}
-      <div style={{ marginBottom: '1rem' }}>
-        <p style={{ color: '#5B6470', fontSize: '0.72rem', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1rem' }}>
-          Quick Actions
-        </p>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem' }}>
-          {quickActions.map((a) => (
-            <Link
-              key={a.href}
-              href={a.href}
-              style={{
-                background: '#F2F5F8',
-                border: '1px solid rgba(20,24,29,0.10)',
-                borderRadius: 8,
-                padding: '1.25rem 1.5rem',
-                textDecoration: 'none',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '1rem',
-                transition: 'border-color 0.2s',
-              }}
-              className="quick-action-card"
-            >
-              <span style={{ fontSize: '1.5rem', flexShrink: 0 }}>{a.emoji}</span>
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ color: '#14181D', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.2rem' }}>
-                  {a.title}
-                </div>
-                <div style={{ color: '#97A0AC', fontSize: '0.78rem' }}>{a.sub}</div>
-              </div>
-              <span style={{ color: '#1A6B60', fontSize: '1.1rem', flexShrink: 0 }}>→</span>
-            </Link>
-          ))}
-        </div>
-      </div>
     </div>
   )
 }
 
-function StatCard({ label, value, teal }: { label: string; value: string; teal?: boolean }) {
-  return (
-    <div
-      style={{
-        background: '#FFFFFF',
-        border: '1px solid rgba(20,24,29,0.10)',
-        borderRadius: 8,
-        padding: '1.5rem',
-      }}
-    >
+function StatCard({ label, value, href, teal }: { label: string; value: string; href?: string; teal?: boolean }) {
+  const inner = (
+    <>
       <p style={{ fontSize: '1.75rem', fontWeight: 700, color: teal ? '#2ABFA8' : '#14181D', marginBottom: '0.35rem' }}>
         {value}
       </p>
       <p style={{ fontSize: '0.82rem', color: '#97A0AC' }}>{label}</p>
-    </div>
+    </>
+  )
+
+  const cardStyle: React.CSSProperties = {
+    display: 'block',
+    background: '#FFFFFF',
+    border: '1px solid rgba(20,24,29,0.10)',
+    borderRadius: 8,
+    padding: '1.5rem',
+    textDecoration: 'none',
+    transition: 'border-color 0.2s',
+  }
+
+  if (!href) return <div style={cardStyle}>{inner}</div>
+
+  return (
+    <Link href={href} className="quick-action-card" style={cardStyle}>
+      {inner}
+    </Link>
   )
 }
