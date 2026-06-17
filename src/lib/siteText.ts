@@ -13,6 +13,30 @@ const nl = t.nl
 export type TextField = { key: string; label: string; fallback: string; multiline?: boolean }
 export type TextGroup = { id: string; label: string; fields: TextField[] }
 
+// Generated, index-aligned fields for the repeating list sections so they stay
+// in sync with the i18n source arrays.
+const benefitItemFields: TextField[] = nl.benefits.items.flatMap((it, i) => [
+  { key: `home_benefits_item${i + 1}_title`, label: `Voordeel ${i + 1} — titel`, fallback: it.title },
+  { key: `home_benefits_item${i + 1}_text`, label: `Voordeel ${i + 1} — tekst`, fallback: it.text, multiline: true },
+])
+
+const processStepFields: TextField[] = nl.werkwijze.steps.map((s, i) => ({
+  key: `home_process_step${i + 1}`,
+  label: `Stap ${i + 1} — titel`,
+  fallback: s.title,
+}))
+
+const faqFields: TextField[] = nl.faq.items.flatMap((it, i) => [
+  { key: `home_faq_q${i + 1}`, label: `Vraag ${i + 1}`, fallback: it.q },
+  { key: `home_faq_a${i + 1}`, label: `Antwoord ${i + 1}`, fallback: it.a, multiline: true },
+])
+
+const contactCardFields: TextField[] = nl.contactCards.cards.flatMap((card, i) => [
+  { key: `home_contact_card${i + 1}_title`, label: `Kaart ${i + 1} — titel`, fallback: card.title },
+  { key: `home_contact_card${i + 1}_text`, label: `Kaart ${i + 1} — tekst`, fallback: card.text, multiline: true },
+  { key: `home_contact_card${i + 1}_btn`, label: `Kaart ${i + 1} — knop`, fallback: card.btn },
+])
+
 export const TEXT_GROUPS: TextGroup[] = [
   {
     id: 'hero',
@@ -27,6 +51,14 @@ export const TEXT_GROUPS: TextGroup[] = [
     ],
   },
   {
+    id: 'whatsapp',
+    label: 'WhatsApp-sectie',
+    fields: [
+      { key: 'home_whatsapp_heading', label: 'Titel', fallback: nl.chat.heading },
+      { key: 'home_whatsapp_heading_accent', label: 'Titel — accentwoord', fallback: nl.chat.headingTeal },
+    ],
+  },
+  {
     id: 'process',
     label: 'Werkwijze / Proces',
     fields: [
@@ -34,6 +66,7 @@ export const TEXT_GROUPS: TextGroup[] = [
       { key: 'home_process_heading_b', label: 'Titel — regel 2', fallback: nl.werkwijze.headingB },
       { key: 'home_process_heading_accent', label: 'Titel — accentwoord', fallback: nl.werkwijze.headingAccent },
       { key: 'home_process_sub', label: 'Subtekst', fallback: nl.werkwijze.sub, multiline: true },
+      ...processStepFields,
     ],
   },
   {
@@ -44,6 +77,7 @@ export const TEXT_GROUPS: TextGroup[] = [
       { key: 'home_benefits_heading_accent', label: 'Titel — accentwoord', fallback: nl.benefits.headingAccent },
       { key: 'home_benefits_heading_b', label: 'Titel — deel 2', fallback: nl.benefits.headingB },
       { key: 'home_benefits_sub', label: 'Subtekst', fallback: nl.benefits.sub, multiline: true },
+      ...benefitItemFields,
     ],
   },
   {
@@ -56,12 +90,28 @@ export const TEXT_GROUPS: TextGroup[] = [
     ],
   },
   {
+    id: 'faq',
+    label: 'Veelgestelde vragen',
+    fields: [
+      { key: 'home_faq_heading', label: 'Titel', fallback: nl.faq.heading },
+      ...faqFields,
+    ],
+  },
+  {
     id: 'contact',
     label: 'Contact',
     fields: [
       { key: 'home_contact_quote', label: 'Quote-band', fallback: nl.contactCards.quote, multiline: true },
       { key: 'home_contact_heading', label: 'Titel', fallback: nl.contactCards.heading },
       { key: 'home_contact_sub', label: 'Subtekst', fallback: nl.contactCards.sub, multiline: true },
+      ...contactCardFields,
+    ],
+  },
+  {
+    id: 'footer',
+    label: 'Footer',
+    fields: [
+      { key: 'footer_copy', label: 'Copyright-tekst (jaartal wordt automatisch toegevoegd)', fallback: 'LAMAR Stukadoor en Onderhoud. Alle rechten voorbehouden.' },
     ],
   },
 ]

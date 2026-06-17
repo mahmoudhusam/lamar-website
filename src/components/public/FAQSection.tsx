@@ -3,19 +3,29 @@
 import { useState } from 'react'
 import { t, type Lang } from '@/lib/i18n'
 
-export default function FAQSection({ lang }: { lang: Lang }) {
+export default function FAQSection({
+  lang,
+  heading,
+  items,
+}: {
+  lang: Lang
+  heading?: string
+  items?: { q: string; a: string }[]
+}) {
   const tr = t[lang].faq
+  const faqHeading = heading ?? tr.heading
+  const faqItems = items ?? tr.items
   const [open, setOpen] = useState<number | null>(0)
 
   return (
     <section id="faq" style={{ background: 'linear-gradient(120deg, var(--teal2) 0%, var(--teal) 100%)', padding: '7rem 3.5rem' }}>
       <div className="faq-grid" style={{ display: 'grid', gridTemplateColumns: '0.8fr 1.2fr', gap: '4rem', maxWidth: 1200, margin: '0 auto', alignItems: 'center' }}>
         <h2 className="rv" style={{ fontFamily: 'var(--font-archivo)', fontWeight: 800, fontSize: 'clamp(2.2rem,4vw,3.6rem)', lineHeight: 1.05, letterSpacing: '-0.01em', color: '#FFFFFF', margin: 0 }}>
-          {tr.heading}
+          {faqHeading}
         </h2>
 
         <div className="rv">
-          {tr.items.map((it, i) => {
+          {faqItems.map((it, i) => {
             const isOpen = open === i
             return (
               <div key={i} style={{ borderBottom: '1px solid rgba(255,255,255,0.25)' }}>

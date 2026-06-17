@@ -1,4 +1,5 @@
 import { getContentMany } from '@/lib/content';
+import { getSiteText } from '@/lib/siteText';
 import { t, type Lang } from '@/lib/i18n';
 
 const fallbacks: Record<string, string> = {
@@ -28,6 +29,7 @@ const circle: React.CSSProperties = {
 
 export default async function Footer({ lang }: { lang: Lang }) {
   const tr = t[lang].footer;
+  const tx = await getSiteText();
   const c = await getContentMany(Object.keys(fallbacks));
   const get = (k: string) => c[k] || fallbacks[k];
   const year = new Date().getFullYear();
@@ -256,7 +258,7 @@ export default async function Footer({ lang }: { lang: Lang }) {
           color: 'var(--white3)',
         }}
       >
-        © {year} LAMAR Stukadoor en Onderhoud. Alle rechten voorbehouden.
+        © {year} {tx('footer_copy')}
       </div>
     </footer>
   );

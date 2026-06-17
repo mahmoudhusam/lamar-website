@@ -41,9 +41,9 @@ export default async function ContactSection({ lang, quote }: { lang: Lang; quot
           {tr.cards.map((card, i) => (
             <div key={i} style={{ background: '#FFFFFF', borderRadius: 18, padding: '2rem 1.5rem', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <span style={{ marginBottom: '0.9rem' }}><CIcon name={card.icon} /></span>
-              <div style={{ fontFamily: 'var(--font-archivo)', fontWeight: 800, fontSize: '1.05rem', color: 'var(--white)', marginBottom: '0.5rem' }}>{card.title}</div>
-              <div style={{ fontSize: '0.85rem', lineHeight: 1.5, color: 'var(--white2)', fontWeight: 300, marginBottom: '1.5rem', flex: 1 }}>{card.text}</div>
-              <a href={hrefs[i]} style={{ background: 'var(--teal)', color: '#FFFFFF', padding: '0.55rem 1.4rem', borderRadius: 999, fontSize: '0.78rem', fontWeight: 700, textDecoration: 'none', fontFamily: 'var(--font-outfit)' }}>{card.btn}</a>
+              <div style={{ fontFamily: 'var(--font-archivo)', fontWeight: 800, fontSize: '1.05rem', color: 'var(--white)', marginBottom: '0.5rem' }}>{tx(`home_contact_card${i + 1}_title`)}</div>
+              <div style={{ fontSize: '0.85rem', lineHeight: 1.5, color: 'var(--white2)', fontWeight: 300, marginBottom: '1.5rem', flex: 1 }}>{tx(`home_contact_card${i + 1}_text`)}</div>
+              <a href={hrefs[i]} style={{ background: 'var(--teal)', color: '#FFFFFF', padding: '0.55rem 1.4rem', borderRadius: 999, fontSize: '0.78rem', fontWeight: 700, textDecoration: 'none', fontFamily: 'var(--font-outfit)' }}>{tx(`home_contact_card${i + 1}_btn`)}</a>
             </div>
           ))}
         </div>
