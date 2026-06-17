@@ -137,10 +137,10 @@ export default async function SettingsPage() {
               marginBottom: '0.25rem',
             }}
           >
-            Themakleur
+            Theme colour (Themakleur)
           </h2>
           <p style={{ color: '#97A0AC', fontSize: '0.85rem' }}>
-            Verandert de accentkleur op de hele website. Wijzigingen zijn direct zichtbaar.
+            Changes the accent colour across the whole website. Updates are visible instantly.
           </p>
         </div>
         <ThemeForm current={theme} />

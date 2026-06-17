@@ -39,9 +39,20 @@ export default function TextsForm({
     <form action={formAction} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: 720 }}>
       {groups.map((group) => (
         <section key={group.id} style={{ background: '#FFFFFF', border: '1px solid rgba(20,24,29,0.10)', borderRadius: 8, padding: '1.5rem' }}>
-          <p style={{ color: '#5B6470', fontSize: '0.72rem', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1.1rem', fontWeight: 600 }}>
-            {group.label}
-          </p>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', marginBottom: '1.1rem' }}>
+            <p style={{ color: '#5B6470', fontSize: '0.72rem', letterSpacing: '0.08em', textTransform: 'uppercase', fontWeight: 600 }}>
+              {group.label}
+            </p>
+            <a
+              href={`/${group.anchor}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Open this section on the live site in a new tab"
+              style={{ flexShrink: 0, fontSize: '0.72rem', fontWeight: 600, color: '#1A6B60', textDecoration: 'none', border: '1px solid rgba(42,191,168,0.35)', borderRadius: 6, padding: '0.3rem 0.65rem', whiteSpace: 'nowrap' }}
+            >
+              View on site ↗
+            </a>
+          </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {group.fields.map((field) => (
               <div key={field.key}>
@@ -66,7 +77,7 @@ export default function TextsForm({
                   />
                 )}
                 <p style={{ fontSize: '0.68rem', color: '#97A0AC', marginTop: '0.25rem' }}>
-                  Leeg laten = standaardtekst: &ldquo;{field.fallback}&rdquo;
+                  Leave empty for the default: &ldquo;{field.fallback}&rdquo;
                 </p>
               </div>
             ))}
@@ -80,9 +91,9 @@ export default function TextsForm({
           disabled={pending}
           style={{ background: '#1A6B60', color: '#FFFFFF', border: 'none', borderRadius: 6, padding: '0.6rem 1.5rem', fontSize: '0.83rem', fontWeight: 700, cursor: pending ? 'not-allowed' : 'pointer', opacity: pending ? 0.65 : 1 }}
         >
-          {pending ? 'Opslaan…' : 'Teksten opslaan'}
+          {pending ? 'Saving…' : 'Save texts'}
         </button>
-        {showSuccess && <span style={{ fontSize: '0.78rem', color: '#1A6B60' }}>Opgeslagen ✓</span>}
+        {showSuccess && <span style={{ fontSize: '0.78rem', color: '#1A6B60' }}>Saved ✓</span>}
       </div>
     </form>
   )

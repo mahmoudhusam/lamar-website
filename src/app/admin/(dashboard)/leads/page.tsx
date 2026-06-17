@@ -6,11 +6,11 @@ import LeadsClient, { type LeadRow } from './LeadsClient'
 export const dynamic = 'force-dynamic'
 
 const FILTERS: { key: 'ALL' | LeadStatus; label: string }[] = [
-  { key: 'ALL', label: 'Alle' },
-  { key: 'NEW', label: 'Nieuw' },
-  { key: 'CONTACTED', label: 'Gecontacteerd' },
-  { key: 'WON', label: 'Gewonnen' },
-  { key: 'ARCHIVED', label: 'Archief' },
+  { key: 'ALL', label: 'All' },
+  { key: 'NEW', label: 'New (Nieuw)' },
+  { key: 'CONTACTED', label: 'Contacted (Gecontacteerd)' },
+  { key: 'WON', label: 'Won (Gewonnen)' },
+  { key: 'ARCHIVED', label: 'Archived (Archief)' },
 ]
 
 function isStatus(v: string | undefined): v is LeadStatus {
@@ -41,10 +41,10 @@ export default async function LeadsPage({
     <div>
       <div style={{ marginBottom: '1.5rem' }}>
         <h1 style={{ fontFamily: 'var(--font-archivo)', color: '#14181D', fontSize: '1.5rem', fontWeight: 800, marginBottom: '0.25rem' }}>
-          Aanvragen
+          Leads <span style={{ color: '#97A0AC', fontWeight: 400 }}>(Aanvragen)</span>
         </h1>
         <p style={{ color: '#97A0AC', fontSize: '0.85rem' }}>
-          Alle binnenkomende aanvragen via het contactformulier en de offerte-wizard.
+          All enquiries from the contact form and the quote wizard.
         </p>
       </div>
 
