@@ -29,7 +29,7 @@ export default async function ProcessSection({ lang }: { lang: Lang }) {
           <div key={i} className={`proc-card rv${i > 1 ? ' d1' : ''}`} style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: 18, padding: '2.25rem 1.5rem', boxShadow: '0 10px 30px rgba(20,24,29,0.06)', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.55rem' }}>
             <span style={{ marginBottom: '0.4rem' }}><Icon name={s.icon} /></span>
             <div style={{ fontFamily: 'var(--font-archivo)', fontWeight: 800, fontSize: '1.05rem', color: 'var(--white)' }}>{s.step}</div>
-            <div style={{ fontSize: '0.9rem', color: 'var(--white2)', fontWeight: 300 }}>{s.title}</div>
+            <div style={{ fontSize: '0.9rem', color: 'var(--white2)', fontWeight: 300 }}>{tx(`home_process_step${i + 1}`)}</div>
           </div>
         ))}
       </div>

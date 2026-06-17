@@ -38,6 +38,11 @@ function NestedCard({ items, idx }: { items: BItem[]; idx: number }) {
 export default async function BenefitsSection({ lang }: { lang: Lang }) {
   const tr = t[lang].benefits
   const tx = await getSiteText()
+  const items = tr.items.map((it, i) => ({
+    icon: it.icon,
+    title: tx(`home_benefits_item${i + 1}_title`),
+    text: tx(`home_benefits_item${i + 1}_text`),
+  }))
 
   return (
     <section id="benefits" style={{ background: 'var(--bg2)', padding: '7rem 3.5rem' }}>
@@ -48,7 +53,7 @@ export default async function BenefitsSection({ lang }: { lang: Lang }) {
           </h2>
           <p style={{ fontSize: '1rem', lineHeight: 1.7, color: 'var(--white2)', fontWeight: 300, maxWidth: 460, marginBottom: '2rem' }}>{tx('home_benefits_sub')}</p>
 
-          <NestedCard items={tr.items} idx={0} />
+          <NestedCard items={items} idx={0} />
         </div>
 
         <div className="ben-img rv" style={{ width: '100%', height: 640, borderRadius: 28, overflow: 'hidden', boxShadow: '0 30px 60px rgba(20,24,29,0.18)', backgroundImage: `url('${IMG}')`, backgroundSize: 'cover', backgroundPosition: 'center' }} />

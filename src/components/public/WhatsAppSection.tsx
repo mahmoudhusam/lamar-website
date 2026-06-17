@@ -186,7 +186,15 @@ function BubbleCard({
   );
 }
 
-export default function WhatsAppSection({ lang }: { lang: Lang }) {
+export default function WhatsAppSection({
+  lang,
+  heading,
+  headingAccent,
+}: {
+  lang: Lang;
+  heading?: string;
+  headingAccent?: string;
+}) {
   const tr = t[lang].chat;
   const [on, setOn] = useState(false);
   const ref = useRef<HTMLElement>(null);
@@ -355,8 +363,8 @@ export default function WhatsAppSection({ lang }: { lang: Lang }) {
               margin: 0,
             }}
           >
-            {tr.heading}{' '}
-            <span style={{ color: 'var(--teal2)' }}>{tr.headingTeal}</span>
+            {heading ?? tr.heading}{' '}
+            <span style={{ color: 'var(--teal2)' }}>{headingAccent ?? tr.headingTeal}</span>
           </h2>
         </div>
 
