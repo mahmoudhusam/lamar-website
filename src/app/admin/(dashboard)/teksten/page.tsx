@@ -11,10 +11,10 @@ export default async function TekstenPage() {
     <div>
       <div style={{ marginBottom: '1.5rem' }}>
         <h1 style={{ fontFamily: 'var(--font-archivo)', color: '#14181D', fontSize: '1.5rem', fontWeight: 800, marginBottom: '0.25rem' }}>
-          Teksten
+          Texts <span style={{ color: '#97A0AC', fontWeight: 400 }}>(Teksten)</span>
         </h1>
         <p style={{ color: '#97A0AC', fontSize: '0.85rem' }}>
-          Pas de teksten van de homepage aan. Laat een veld leeg om de standaardtekst te gebruiken.
+          Edit the homepage text. Leave a field empty to use the default. Use “View on site” to see each section live.
         </p>
       </div>
 

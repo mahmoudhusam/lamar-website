@@ -96,12 +96,12 @@ export default async function AdminDashboard({
                   <div style={{ minWidth: 0 }}>
                     <span style={{ color: '#14181D', fontWeight: 600, fontSize: '0.85rem' }}>{lead.name}</span>
                     <span style={{ color: '#97A0AC', fontSize: '0.78rem', marginLeft: '0.6rem' }}>
-                      {lead.source === 'QUOTE' ? '🧾 Offerte' : '📞 Contact'}
+                      {lead.source === 'QUOTE' ? '🧾 Quote' : '📞 Contact'}
                     </span>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', flexShrink: 0 }}>
                     {lead.status === 'NEW' && (
-                      <span style={{ fontSize: '0.66rem', fontWeight: 700, color: '#1A6B60', background: 'rgba(42,191,168,0.14)', borderRadius: 999, padding: '0.12rem 0.55rem' }}>Nieuw</span>
+                      <span style={{ fontSize: '0.66rem', fontWeight: 700, color: '#1A6B60', background: 'rgba(42,191,168,0.14)', borderRadius: 999, padding: '0.12rem 0.55rem' }}>New</span>
                     )}
                     <span style={{ color: '#97A0AC', fontSize: '0.74rem' }}>
                       {new Intl.DateTimeFormat('nl-NL', { day: 'numeric', month: 'short' }).format(new Date(lead.createdAt))}

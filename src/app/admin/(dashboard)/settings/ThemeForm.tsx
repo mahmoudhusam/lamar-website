@@ -62,7 +62,7 @@ export default function ThemeForm({ current }: { current: Theme }) {
     <form action={formAction} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       {/* Presets */}
       <div>
-        <p style={{ fontSize: '0.72rem', color: '#5B6470', marginBottom: '0.6rem' }}>Snelle paletten</p>
+        <p style={{ fontSize: '0.72rem', color: '#5B6470', marginBottom: '0.6rem' }}>Quick palettes</p>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
           {THEME_PRESETS.map((p) => (
             <button
@@ -84,19 +84,19 @@ export default function ThemeForm({ current }: { current: Theme }) {
 
       {/* Pickers */}
       <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-        <ColorField label="Hoofdkleur (donker)" name="theme_primary" value={primary} onChange={setPrimary} />
-        <ColorField label="Accentkleur (helder)" name="theme_accent" value={accent} onChange={setAccent} />
+        <ColorField label="Primary colour — dark (Hoofdkleur)" name="theme_primary" value={primary} onChange={setPrimary} />
+        <ColorField label="Accent colour — bright (Accentkleur)" name="theme_accent" value={accent} onChange={setAccent} />
       </div>
 
       {/* Live preview */}
       <div style={{ border: '1px solid rgba(20,24,29,0.10)', borderRadius: 10, overflow: 'hidden', maxWidth: 360 }}>
         <div style={{ background: `linear-gradient(120deg, ${HEX.test(accent) ? accent : '#ccc'} 0%, ${HEX.test(primary) ? primary : '#999'} 100%)`, padding: '1.5rem', color: '#FFFFFF' }}>
-          <div style={{ fontFamily: 'var(--font-archivo)', fontWeight: 800, fontSize: '1.1rem' }}>Voorbeeld</div>
-          <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>Zo ziet de accentkleur eruit op de site.</div>
+          <div style={{ fontFamily: 'var(--font-archivo)', fontWeight: 800, fontSize: '1.1rem' }}>Preview</div>
+          <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>How the accent colours look on the site.</div>
         </div>
         <div style={{ background: '#FFFFFF', padding: '0.85rem 1.5rem', display: 'flex', gap: '0.6rem', alignItems: 'center' }}>
-          <span style={{ background: HEX.test(primary) ? primary : '#999', color: '#FFFFFF', padding: '0.4rem 1rem', borderRadius: 999, fontSize: '0.75rem', fontWeight: 700 }}>Knop</span>
-          <span style={{ color: HEX.test(accent) ? accent : '#999', fontSize: '0.8rem', fontWeight: 600 }}>Accent tekst</span>
+          <span style={{ background: HEX.test(primary) ? primary : '#999', color: '#FFFFFF', padding: '0.4rem 1rem', borderRadius: 999, fontSize: '0.75rem', fontWeight: 700 }}>Button</span>
+          <span style={{ color: HEX.test(accent) ? accent : '#999', fontSize: '0.8rem', fontWeight: 600 }}>Accent text</span>
         </div>
       </div>
 
@@ -106,17 +106,17 @@ export default function ThemeForm({ current }: { current: Theme }) {
           disabled={pending || !valid}
           style={{ background: '#1A6B60', color: '#FFFFFF', border: 'none', borderRadius: 6, padding: '0.6rem 1.5rem', fontSize: '0.83rem', fontWeight: 700, cursor: pending || !valid ? 'not-allowed' : 'pointer', opacity: pending || !valid ? 0.6 : 1 }}
         >
-          {pending ? 'Opslaan…' : 'Kleuren opslaan'}
+          {pending ? 'Saving…' : 'Save colours'}
         </button>
         <button
           type="button"
           onClick={() => { setPrimary(THEME_DEFAULTS.primary); setAccent(THEME_DEFAULTS.accent) }}
           style={{ background: 'none', border: 'none', color: '#97A0AC', fontSize: '0.78rem', cursor: 'pointer' }}
         >
-          Standaard herstellen
+          Reset to default
         </button>
-        {!valid && <span style={{ fontSize: '0.76rem', color: '#E05C5C' }}>Gebruik een geldige hex-kleur (#RRGGBB).</span>}
-        {showSuccess && <span style={{ fontSize: '0.78rem', color: '#1A6B60' }}>Opgeslagen ✓</span>}
+        {!valid && <span style={{ fontSize: '0.76rem', color: '#E05C5C' }}>Enter a valid hex colour (#RRGGBB).</span>}
+        {showSuccess && <span style={{ fontSize: '0.78rem', color: '#1A6B60' }}>Saved ✓</span>}
       </div>
     </form>
   )

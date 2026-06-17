@@ -17,15 +17,15 @@ export type LeadRow = {
 }
 
 const STATUS_META: Record<LeadStatus, { label: string; color: string; bg: string }> = {
-  NEW:       { label: 'Nieuw',         color: '#1A6B60', bg: 'rgba(42,191,168,0.14)' },
-  CONTACTED: { label: 'Gecontacteerd', color: '#B7791F', bg: 'rgba(214,158,46,0.16)' },
-  WON:       { label: 'Gewonnen',      color: '#2F855A', bg: 'rgba(72,187,120,0.16)' },
-  ARCHIVED:  { label: 'Archief',       color: '#5B6470', bg: 'rgba(91,100,112,0.12)' },
+  NEW:       { label: 'New',       color: '#1A6B60', bg: 'rgba(42,191,168,0.14)' },
+  CONTACTED: { label: 'Contacted', color: '#B7791F', bg: 'rgba(214,158,46,0.16)' },
+  WON:       { label: 'Won',       color: '#2F855A', bg: 'rgba(72,187,120,0.16)' },
+  ARCHIVED:  { label: 'Archived',  color: '#5B6470', bg: 'rgba(91,100,112,0.12)' },
 }
 
 const SOURCE_META: Record<LeadSource, { label: string; emoji: string }> = {
-  CONTACT: { label: 'Contactformulier', emoji: '📞' },
-  QUOTE:   { label: 'Offerte-aanvraag', emoji: '🧾' },
+  CONTACT: { label: 'Contact form', emoji: '📞' },
+  QUOTE:   { label: 'Quote request', emoji: '🧾' },
 }
 
 const STATUS_ORDER: LeadStatus[] = ['NEW', 'CONTACTED', 'WON', 'ARCHIVED']
@@ -38,7 +38,7 @@ export default function LeadsClient({ leads }: { leads: LeadRow[] }) {
   if (leads.length === 0) {
     return (
       <div style={{ background: '#FFFFFF', border: '1px dashed rgba(20,24,29,0.18)', borderRadius: 8, padding: '3rem', textAlign: 'center', color: '#97A0AC', fontSize: '0.9rem' }}>
-        Nog geen aanvragen in deze weergave.
+        No leads in this view yet.
       </div>
     )
   }
@@ -79,7 +79,7 @@ function LeadCard({ lead }: { lead: LeadRow }) {
 
       {lead.service && (
         <div style={{ fontSize: '0.78rem', color: '#5B6470', marginBottom: '0.5rem' }}>
-          <strong style={{ color: '#14181D' }}>Werk:</strong> {lead.service}
+          <strong style={{ color: '#14181D' }}>Service:</strong> {lead.service}
         </div>
       )}
 
@@ -103,12 +103,12 @@ function LeadCard({ lead }: { lead: LeadRow }) {
 
         {confirmDelete ? (
           <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.72rem' }}>
-            <span style={{ color: '#5B6470' }}>Verwijderen?</span>
-            <button disabled={pending} onClick={() => startTransition(() => deleteLead(lead.id))} style={{ fontSize: '0.72rem', fontWeight: 700, color: '#FFFFFF', background: '#E05C5C', border: 'none', borderRadius: 6, padding: '0.35rem 0.7rem', cursor: 'pointer' }}>Ja</button>
-            <button onClick={() => setConfirmDelete(false)} style={{ fontSize: '0.72rem', color: '#5B6470', background: 'none', border: 'none', cursor: 'pointer' }}>Nee</button>
+            <span style={{ color: '#5B6470' }}>Delete?</span>
+            <button disabled={pending} onClick={() => startTransition(() => deleteLead(lead.id))} style={{ fontSize: '0.72rem', fontWeight: 700, color: '#FFFFFF', background: '#E05C5C', border: 'none', borderRadius: 6, padding: '0.35rem 0.7rem', cursor: 'pointer' }}>Yes</button>
+            <button onClick={() => setConfirmDelete(false)} style={{ fontSize: '0.72rem', color: '#5B6470', background: 'none', border: 'none', cursor: 'pointer' }}>No</button>
           </span>
         ) : (
-          <button onClick={() => setConfirmDelete(true)} style={{ fontSize: '0.72rem', color: '#97A0AC', background: 'none', border: 'none', cursor: 'pointer' }}>Verwijderen</button>
+          <button onClick={() => setConfirmDelete(true)} style={{ fontSize: '0.72rem', color: '#97A0AC', background: 'none', border: 'none', cursor: 'pointer' }}>Delete</button>
         )}
       </div>
     </div>

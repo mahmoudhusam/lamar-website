@@ -15,10 +15,10 @@ export type Theme = { primary: string; accent: string }
 
 /** A few one-click palettes for the admin. */
 export const THEME_PRESETS: { name: string; primary: string; accent: string }[] = [
-  { name: 'Teal (standaard)', primary: '#1A6B60', accent: '#2ABFA8' },
-  { name: 'Blauw',            primary: '#1E5A8A', accent: '#3B9BD8' },
-  { name: 'Groen',            primary: '#2F6B34', accent: '#5FB85F' },
-  { name: 'Oranje',           primary: '#B5531F', accent: '#F08A3C' },
-  { name: 'Paars',            primary: '#5B3A8A', accent: '#9B6FD8' },
-  { name: 'Antraciet',        primary: '#2A2F36', accent: '#6B7785' },
+  { name: 'Teal (default)', primary: '#1A6B60', accent: '#2ABFA8' },
+  { name: 'Blue',           primary: '#1E5A8A', accent: '#3B9BD8' },
+  { name: 'Green',          primary: '#2F6B34', accent: '#5FB85F' },
+  { name: 'Orange',         primary: '#B5531F', accent: '#F08A3C' },
+  { name: 'Purple',         primary: '#5B3A8A', accent: '#9B6FD8' },
+  { name: 'Anthracite',     primary: '#2A2F36', accent: '#6B7785' },
 ]
