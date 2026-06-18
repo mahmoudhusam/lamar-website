@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { createLead } from '@/lib/leads'
+import { rateLimit, clientIp } from '@/lib/rateLimit'
 
 const schema = z.object({
   name:    z.string().min(1, 'Name is required'),
@@ -12,6 +13,10 @@ const schema = z.object({
 
 /** Captures quote-wizard enquiries into the admin Leads inbox. */
 export async function POST(req: NextRequest) {
+  if (!rateLimit(`lead:${clientIp(req)}`, 5, 60_000)) {
+    return NextResponse.json({ error: 'Te veel aanvragen. Probeer het zo opnieuw.' }, { status: 429 })
+  }
+
   let body: unknown
   try {
     body = await req.json()

@@ -1,5 +1,14 @@
 import { prisma } from '@/lib/prisma'
 
+/**
+ * Default Dutch "Over ons" / About copy. Shared between the public page and the
+ * admin editor so the editor never pre-fills (and risks saving) a different
+ * language than the site shows.
+ */
+export const ABOUT_FALLBACK = `Met meer dan tien jaar praktijkervaring in Nederland en daarbuiten brengen wij precisie en creatieve visie in elk project. Of het nu gaat om een volledige woningtransformatie of gedetailleerd gipswerk, ons team behandelt elke ruimte alsof het hun eigen is.
+
+Wij zijn gespecialiseerd in gipswerk, interieurafwerking, schilderwerk en volledige woningrenovatie — met resultaten die de verwachtingen overtreffen, op tijd en binnen budget.`
+
 export async function getContent(key: string, fallback: string): Promise<string> {
   try {
     const row = await prisma.content.findUnique({ where: { key } })
