@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
+import Link from 'next/link'
 
 type KlusKey = 'stucwerk' | 'latex' | 'sauswerk' | 'lijstwerk'
 
@@ -202,7 +203,7 @@ export default function QuoteWizard({ whatsappNumber, introText }: { whatsappNum
               </a>
             </p>
           )}
-          <a href="/" style={{ background: 'var(--teal)', color: '#FFFFFF', padding: '0.85rem 2rem', borderRadius: 999, fontSize: '0.85rem', fontWeight: 700, textDecoration: 'none', fontFamily: 'var(--font-outfit)' }}>Terug naar home</a>
+          <Link href="/" style={{ background: 'var(--teal)', color: '#FFFFFF', padding: '0.85rem 2rem', borderRadius: 999, fontSize: '0.85rem', fontWeight: 700, textDecoration: 'none', fontFamily: 'var(--font-outfit)' }}>Terug naar home</Link>
         </div>
       </Shell>
     )
@@ -495,14 +496,14 @@ function Shell({ children }: { children: React.ReactNode }) {
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)' }}>
       <header style={{ padding: '1.75rem', display: 'flex', justifyContent: 'center', borderBottom: '1px solid var(--border)' }}>
-        <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/lamar_icon.svg" alt="" style={{ height: 40, width: 'auto', display: 'block' }} />
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <span style={{ fontFamily: 'var(--font-archivo)', fontWeight: 800, fontSize: '1.3rem', letterSpacing: '0.06em', color: 'var(--white)', lineHeight: 1 }}>Lamar</span>
             <span style={{ fontFamily: 'var(--font-archivo)', fontWeight: 300, fontSize: '0.56rem', letterSpacing: '0.34em', textTransform: 'uppercase', color: 'var(--white2)', lineHeight: 1, marginTop: 3 }}>Stukadoor en Onderhoud</span>
           </div>
-        </a>
+        </Link>
       </header>
       <main id="offerte-top" style={{ padding: '3.5rem 3.5rem 6rem' }}>{children}</main>
     </div>

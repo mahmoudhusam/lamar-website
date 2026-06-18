@@ -1,9 +1,10 @@
 'use client'
 import { type CSSProperties } from 'react'
+import Link from 'next/link'
 
 export default function GalleryCTA({ style, label }: { style: CSSProperties; label: string }) {
   return (
-    <a
+    <Link
       href="/projects"
       style={{
         ...style,
@@ -26,6 +27,6 @@ export default function GalleryCTA({ style, label }: { style: CSSProperties; lab
       <div style={{ fontFamily: 'var(--font-archivo)', fontWeight: 900, fontSize: '3.5rem', color: 'var(--white)', lineHeight: 1 }}>
         →
       </div>
-    </a>
+    </Link>
   )
 }

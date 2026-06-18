@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import { t, type Lang } from '@/lib/i18n';
 import BentoGrid from './BentoGrid';
@@ -145,7 +146,7 @@ export default async function GallerySection({ lang }: { lang: Lang }) {
             {tr.heading}
           </h2>
         </div>
-        <a
+        <Link
           href="/projects"
           className="view-all"
           style={{
@@ -163,7 +164,7 @@ export default async function GallerySection({ lang }: { lang: Lang }) {
           }}
         >
           {tr.viewAll}
-        </a>
+        </Link>
       </div>
 
       {/* BentoGrid — client component handles hover/interaction */}
