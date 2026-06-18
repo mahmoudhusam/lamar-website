@@ -39,7 +39,7 @@ const labelStyle: React.CSSProperties = {
 }
 
 export default function ContactForm({ tr }: { tr: ContactFormTr }) {
-  const [form, setForm] = useState({ name: '', phone: '', email: '', service: '', message: '' })
+  const [form, setForm] = useState({ name: '', phone: '', email: '', service: '', message: '', company: '' })
   const [status, setStatus] = useState<Status>('idle')
   const [errorMsg, setErrorMsg] = useState('')
 
@@ -102,6 +102,17 @@ export default function ContactForm({ tr }: { tr: ContactFormTr }) {
 
   return (
     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+      {/* Honeypot: hidden from real users; bots that fill it are silently dropped server-side. */}
+      <input
+        type="text"
+        name="company"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        value={form.company}
+        onChange={set('company')}
+        style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+      />
       <div className="contact-name-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
         <div>
           <label style={labelStyle}>{tr.nameLbl}</label>

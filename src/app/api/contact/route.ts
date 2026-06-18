@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { Resend } from 'resend'
 import { getContent } from '@/lib/content'
 import { createLead } from '@/lib/leads'
+import { rateLimit, clientIp } from '@/lib/rateLimit'
 
 const schema = z.object({
   name:    z.string().min(1, 'Name is required'),
@@ -10,9 +11,14 @@ const schema = z.object({
   email:   z.email('Invalid email address'),
   service: z.string().optional(),
   message: z.string().min(1, 'Message is required'),
+  company: z.string().optional(), // honeypot — real users never fill this
 })
 
 export async function POST(req: NextRequest) {
+  if (!rateLimit(`contact:${clientIp(req)}`, 5, 60_000)) {
+    return NextResponse.json({ error: 'Te veel aanvragen. Probeer het zo opnieuw.' }, { status: 429 })
+  }
+
   let body: unknown
   try {
     body = await req.json()
@@ -26,7 +32,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: msg }, { status: 422 })
   }
 
-  const { name, phone, email, service, message } = parsed.data
+  const { name, phone, email, service, message, company } = parsed.data
+
+  // Honeypot tripped → silently accept without storing or emailing.
+  if (company && company.trim() !== '') {
+    return NextResponse.json({ success: true })
+  }
 
   // Persist the enquiry so it shows up in the admin Leads inbox (best-effort).
   await createLead({ name, email, phone, service, message, source: 'CONTACT' })
@@ -43,8 +54,11 @@ export async function POST(req: NextRequest) {
 
   const resend = new Resend(process.env.RESEND_API_KEY)
 
+  // In production set CONTACT_FROM to a sender on your Resend-verified domain
+  // (e.g. "LAMAR <offerte@lamar-renovatie.nl>"). The onboarding@resend.dev
+  // sandbox sender only delivers to the Resend account owner's own address.
   const { error } = await resend.emails.send({
-    from:    'LAMAR Website <onboarding@resend.dev>',
+    from:    process.env.CONTACT_FROM ?? 'LAMAR Website <onboarding@resend.dev>',
     to:      [toEmail],
     subject: `New enquiry from ${name}`,
     text: [

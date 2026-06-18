@@ -1,4 +1,4 @@
-import { getContent } from '@/lib/content'
+import { getContent, ABOUT_FALLBACK } from '@/lib/content'
 import { t } from '@/lib/i18n'
 import Navbar from '@/components/public/Navbar'
 import Footer from '@/components/public/Footer'
@@ -16,9 +16,6 @@ export const metadata = {
 
 const IMG = 'https://images.pexels.com/photos/5493654/pexels-photo-5493654.jpeg?auto=compress&cs=tinysrgb&w=800&h=1150&fit=crop'
 const SHADES = ['#2ABFA8', '#23A18F', '#1D8576', '#166B5E']
-const FALLBACK_NL = `Met meer dan tien jaar praktijkervaring in Nederland en daarbuiten brengen wij precisie en creatieve visie in elk project. Of het nu gaat om een volledige woningtransformatie of gedetailleerd gipswerk, ons team behandelt elke ruimte alsof het hun eigen is.
-
-Wij zijn gespecialiseerd in gipswerk, interieurafwerking, schilderwerk en volledige woningrenovatie — met resultaten die de verwachtingen overtreffen, op tijd en binnen budget.`
 
 type Principle = { title: string; text: string }
 
@@ -40,7 +37,7 @@ function NestedPrinciple({ items, idx }: { items: Principle[]; idx: number }) {
 export default async function OverOnsPage() {
   const lang = 'nl' as const
   const tr = t[lang].overOns
-  const aboutText = await getContent('about_text', FALLBACK_NL)
+  const aboutText = await getContent('about_text', ABOUT_FALLBACK)
   const paragraphs = aboutText.split('\n\n').filter(Boolean)
 
   return (

@@ -1,12 +1,8 @@
-import { getContent } from '@/lib/content'
+import { getContent, ABOUT_FALLBACK } from '@/lib/content'
 import AboutForm from './AboutForm'
 
-const FALLBACK = `With over a decade of hands-on experience across the Netherlands and beyond, we bring precision and creative vision to every project. Whether a full home transformation or detailed gypsum decoration, our team treats every space as if it were their own.
-
-We specialise in gypsum work, interior decoration, painting, and complete house restoration — delivering results that exceed expectations, on time and on budget.`
-
 export default async function AboutPage() {
-  const currentText = await getContent('about_text', FALLBACK)
+  const currentText = await getContent('about_text', ABOUT_FALLBACK)
 
   return (
     <div>
