@@ -1,5 +1,6 @@
 import Navbar from '@/components/public/Navbar';
 import HeroSection from '@/components/public/HeroSection';
+import ReviewBadges from '@/components/public/ReviewBadges';
 import WhatsAppSection from '@/components/public/WhatsAppSection';
 import ProcessSection from '@/components/public/ProcessSection';
 import BenefitsSection from '@/components/public/BenefitsSection';
@@ -30,6 +31,7 @@ export default async function Home() {
       <Navbar lang={lang} />
       <main>
         <HeroSection lang={lang} />
+        <ReviewBadges />
         <WhatsAppSection
           lang={lang}
           heading={tx('home_whatsapp_heading')}
