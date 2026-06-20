@@ -1,7 +1,7 @@
 import Navbar from '@/components/public/Navbar';
 import HeroSection from '@/components/public/HeroSection';
 import ReviewBadges from '@/components/public/ReviewBadges';
-import WhatsAppSection from '@/components/public/WhatsAppSection';
+// import WhatsAppSection from '@/components/public/WhatsAppSection';
 import ProcessSection from '@/components/public/ProcessSection';
 import BenefitsSection from '@/components/public/BenefitsSection';
 import TestimonialsSection from '@/components/public/TestimonialsSection';
@@ -17,7 +17,7 @@ import { getSiteText } from '@/lib/siteText';
 // import AboutSection from '@/components/public/AboutSection';
 // import GallerySection from '@/components/public/GallerySection';
 
-export const revalidate = 3600
+export const revalidate = 3600;
 
 export default async function Home() {
   const lang = 'nl' as const;
@@ -32,15 +32,19 @@ export default async function Home() {
       <main>
         <HeroSection lang={lang} />
         <ReviewBadges />
-        <WhatsAppSection
+        {/* <WhatsAppSection
           lang={lang}
           heading={tx('home_whatsapp_heading')}
           headingAccent={tx('home_whatsapp_heading_accent')}
-        />
+        /> */}
         <ProcessSection lang={lang} />
         <BenefitsSection lang={lang} />
         <TestimonialsSection lang={lang} />
-        <FAQSection lang={lang} heading={tx('home_faq_heading')} items={faqItems} />
+        <FAQSection
+          lang={lang}
+          heading={tx('home_faq_heading')}
+          items={faqItems}
+        />
         <ContactSection lang={lang} />
       </main>
       <Footer lang={lang} />
