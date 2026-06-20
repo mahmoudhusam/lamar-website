@@ -8,6 +8,7 @@ export const ROLE_PERMISSIONS: Record<Role, string[]> = {
 
 export function canAccess(role: Role, path: string): boolean {
   const perms = ROLE_PERMISSIONS[role]
+  if (!perms) return false // unknown / cleared role → deny
   if (perms.includes('*')) return true
   // Always allow the dashboard root and account page for all roles
   if (path === '/admin' || path === '/admin/account') return true

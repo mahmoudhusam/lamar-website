@@ -57,14 +57,36 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async jwt({ token, user }) {
+      // Initial sign-in: trust the freshly-authenticated user.
       if (user) {
         token.id = user.id
         token.role = user.role
+        return token
+      }
+      // Subsequent calls: re-read the user so role changes and deletions take
+      // effect immediately, instead of waiting for the JWT to expire.
+      if (token.id) {
+        try {
+          const dbUser = await prisma.user.findUnique({
+            where: { id: token.id },
+            select: { role: true },
+          })
+          if (dbUser) {
+            token.role = dbUser.role
+          } else {
+            // User was deleted → invalidate the token identity.
+            token.id = ''
+          }
+        } catch {
+          // DB temporarily unavailable — keep the existing token rather than
+          // locking everyone out on a transient blip.
+        }
       }
       return token
     },
     async session({ session, token }) {
       if (session.user) {
+        // Empty id signals a deleted user; guards/layout reject on missing id.
         session.user.id = token.id
         session.user.role = token.role
       }

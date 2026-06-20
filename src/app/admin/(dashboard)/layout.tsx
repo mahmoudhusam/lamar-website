@@ -12,7 +12,8 @@ export default async function AdminLayout({
 }) {
   const session = await getServerSession(authOptions)
 
-  if (!session) redirect('/admin/login')
+  // No session, or a deleted user whose id was cleared by the jwt callback.
+  if (!session?.user?.id) redirect('/admin/login')
 
   const role = session.user.role
   const navGroups = [
