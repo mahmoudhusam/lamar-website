@@ -29,6 +29,7 @@ export default async function AdminLayout({
       label: 'Website',
       links: [
         { href: '/admin/teksten', label: 'Texts' },
+        { href: '/admin/reviews-bar', label: 'Rating Badges' },
         { href: '/admin/about', label: 'About' },
         { href: '/admin/werkwijze', label: 'Process' },
         { href: '/admin/offerte', label: 'Quote' },
