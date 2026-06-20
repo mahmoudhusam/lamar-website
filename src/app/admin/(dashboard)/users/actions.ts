@@ -83,7 +83,7 @@ export async function changePassword(
   newPassword: string
 ) {
   const session = await getServerSession(authOptions)
-  if (!session) throw new Error('Not authenticated')
+  if (!session?.user?.id) throw new Error('Not authenticated')
 
   if (session.user.id !== id) throw new Error('You can only change your own password.')
 
@@ -104,7 +104,7 @@ export async function changePassword(
 
 export async function updateOwnProfile(data: { name: string; email: string }) {
   const session = await getServerSession(authOptions)
-  if (!session) throw new Error('Not authenticated')
+  if (!session?.user?.id) throw new Error('Not authenticated')
 
   const name = data.name.trim()
   if (!name) throw new Error('Name is required.')
