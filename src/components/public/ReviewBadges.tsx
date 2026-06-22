@@ -82,56 +82,65 @@ export default async function ReviewBadges() {
     badges = []
   }
 
+  // A badge shows once it's enabled and has a score. URL and review count are
+  // optional — without a URL the card simply isn't a link.
   const visible = badges
     .filter(
       (b) =>
         b &&
         b.enabled === true &&
         typeof b.rating === 'string' &&
-        b.rating.trim() !== '' &&
-        typeof b.url === 'string' &&
-        b.url.trim() !== ''
+        b.rating.trim() !== ''
     )
     .sort((a, b) => ORDER.indexOf(a.platform) - ORDER.indexOf(b.platform))
 
   if (visible.length === 0) return null
 
+  const cardStyle: React.CSSProperties = {
+    background: '#FFFFFF',
+    border: '1px solid var(--border)',
+    borderRadius: 16,
+    boxShadow: '0 10px 30px rgba(20,24,29,0.05)',
+    padding: '1.25rem 1.75rem',
+    textDecoration: 'none',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '0.4rem',
+    minWidth: 130,
+    flex: '0 1 150px',
+  }
+
   return (
     <section style={{ background: 'var(--bg)', padding: '2.5rem 1.5rem' }}>
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem', maxWidth: 1000, margin: '0 auto' }}>
-        {visible.map((b) => (
-          <a
-            key={b.platform}
-            href={b.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              background: '#FFFFFF',
-              border: '1px solid var(--border)',
-              borderRadius: 16,
-              boxShadow: '0 10px 30px rgba(20,24,29,0.05)',
-              padding: '1.25rem 1.75rem',
-              textDecoration: 'none',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '0.4rem',
-              minWidth: 130,
-              flex: '0 1 150px',
-            }}
-          >
-            <Logo platform={b.platform} />
-            <span style={{ fontFamily: 'var(--font-archivo)', fontWeight: 800, fontSize: '1.5rem', color: 'var(--white)', lineHeight: 1.1 }}>
-              {b.rating}
-            </span>
-            <Stars />
-            {b.reviews.trim() !== '' && (
-              <span style={{ fontSize: '0.72rem', color: 'var(--white3)', fontWeight: 400 }}>
-                {b.reviews} reviews
+        {visible.map((b) => {
+          const hasUrl = typeof b.url === 'string' && b.url.trim() !== ''
+          const inner = (
+            <>
+              <Logo platform={b.platform} />
+              <span style={{ fontFamily: 'var(--font-archivo)', fontWeight: 800, fontSize: '1.5rem', color: 'var(--white)', lineHeight: 1.1 }}>
+                {b.rating}
               </span>
-            )}
-          </a>
-        ))}
+              <Stars />
+              {b.reviews.trim() !== '' && (
+                <span style={{ fontSize: '0.72rem', color: 'var(--white3)', fontWeight: 400 }}>
+                  {b.reviews} reviews
+                </span>
+              )}
+            </>
+          )
+
+          return hasUrl ? (
+            <a key={b.platform} href={b.url} target="_blank" rel="noopener noreferrer" style={cardStyle}>
+              {inner}
+            </a>
+          ) : (
+            <div key={b.platform} style={cardStyle}>
+              {inner}
+            </div>
+          )
+        })}
       </div>
     </section>
   )
